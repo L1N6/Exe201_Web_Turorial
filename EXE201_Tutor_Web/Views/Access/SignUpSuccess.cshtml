@@ -1,3 +1,57 @@
-﻿<div class="NgKThNhCNg" style="width: 364px; height: 70px; left: 42%; top: 872px; position: absolute; text-align: center; color: #1700A8; font-size: 36px; font-family: Inter; font-weight: 700; word-wrap: break-word">Đăng ký thành công </div>
-<div class="QuayVTrangCh" style="width: 216px; height: 38px; left: 47%; top: 933px; position: absolute; color: #614DE1; font-size: 24px; font-family: Inter; font-weight: 500; word-wrap: break-word">Quay về trang chủ </div>
-<img class="Rectangle44" style="width: 844px; height: 600px; left: 25%; top: 300px; position: absolute" src="~/img/happy_student.png" />
+﻿<style>
+    .pic-2 {
+        position: relative;
+        width: calc(844 * var(--rpx));
+        height: calc(572 * var(--rpx));
+        margin: calc(14 * var(--rpx)) 0 0 calc(268 * var(--rpx));
+        background: url(./assets/images/a6e65ca4ac5a7e9ff3e5d649f4abd21e8fc4b059.png) no-repeat center;
+        background-size: cover;
+        z-index: 20;
+    }
+
+    .text-a {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: relative;
+        width: calc(364 * var(--rpx));
+        height: calc(70 * var(--rpx));
+        margin: 0 0 0 calc(522 * var(--rpx));
+        color: #1700a7;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(36 * var(--rpx));
+        font-weight: 700;
+        line-height: calc(43.568180084228516 * var(--rpx));
+        text-align: center;
+        z-index: 18;
+    }
+
+    .text-b {
+        display: inline-block;
+        position: relative;
+        height: calc(38 * var(--rpx));
+        margin: calc(-9 * var(--rpx)) 0 0 calc(598 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(24 * var(--rpx));
+        font-weight: 500;
+        line-height: calc(29.045454025268555 * var(--rpx));
+        text-align: left;
+        white-space: nowrap;
+        z-index: 19;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+        .text-b:hover {
+            background-color: #e6edff;
+            color: #614ce0;
+        }
+
+</style>
+
+<div class="pic-2">
+    <img style="width:100%; height:100%" src="~/img/happy_student.png" />
+</div>
+<span class="text-a">Đăng ký thành công </span>
+<a href="@Url.Action("SignIn", "Access")" class="text-b">Đăng nhập ngay </a>

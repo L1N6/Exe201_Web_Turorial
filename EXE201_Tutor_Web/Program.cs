@@ -1,3 +1,5 @@
+using EXE201_Tutor_Web.Models;
+
 namespace EXE201_Tutor_Web
 {
     public class Program
@@ -8,7 +10,7 @@ namespace EXE201_Tutor_Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddSession();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -17,6 +19,8 @@ namespace EXE201_Tutor_Web
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

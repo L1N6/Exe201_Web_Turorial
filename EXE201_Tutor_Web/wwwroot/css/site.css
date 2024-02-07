@@ -2,8 +2,12 @@
     text-decoration: none;
 }
 
-a:hover {
-    border-bottom: none;
+    a:hover {
+        border-bottom: none;
+    }
+
+.logo-image {
+    width: 100%;
 }
 
 img {
@@ -49,6 +53,8 @@ button {
     z-index: 3;
 }
 
+
+
 .rectangle-1 {
     position: absolute;
     width: calc(186 * var(--rpx));
@@ -58,6 +64,24 @@ button {
     background: url(./assets/images/f320e5b87670af47b6423ae7f46b3e590336986e.png) no-repeat center;
     background-size: cover;
     z-index: 5;
+}
+
+.text-demo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    height: calc(21 * var(--rpx));
+    top: calc(39 * var(--rpx));
+    left: calc(330 * var(--rpx));
+    color: #fdb600;
+    font-family: Inter, var(--default-font-family);
+    font-size: calc(24 * var(--rpx));
+    font-weight: 600;
+    line-height: calc(21 * var(--rpx));
+    text-align: left;
+    white-space: nowrap;
+    z-index: 13;
 }
 
 .bombastic-learning-hub {

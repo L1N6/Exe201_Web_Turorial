@@ -31,7 +31,7 @@
         height: calc(27.87233275074027 * var(--rpx));
         top: calc(44.72837525707223 * var(--rpx));
         left: calc(1035.748380316752 * var(--rpx));
-        background: url(./assets/images/5c13a47a-9388-4f6b-831d-1914b05c5abf.png) no-repeat center;
+        background: url(../img/course_choice/Ellipse.png) no-repeat center;
         background-size: cover;
         z-index: 26;
     }
@@ -42,7 +42,7 @@
         height: calc(54.351318359375 * var(--rpx));
         top: calc(56.685302734375 * var(--rpx));
         left: calc(1059.153564453125 * var(--rpx));
-        background: url(./assets/images/68c59609-6bd4-4fb1-a792-3ef0972877d1.png) no-repeat center;
+        background: url(../img/course_choice/Vector.png) no-repeat center;
         background-size: cover;
         z-index: 28;
     }
@@ -116,7 +116,7 @@
         width: calc(131.541259765625 * var(--rpx));
         height: calc(58.8193359375 * var(--rpx));
         margin: calc(0.2804456882258819 * var(--rpx)) 0 0 calc(15.596346245748009 * var(--rpx));
-        background: url(./assets/images/96a69f9c-6f38-4107-bd4f-ac3931df6dd4.png) no-repeat center;
+        background: url(../img/course_choice/Vector_8.png) no-repeat center;
         background-size: cover;
         z-index: 27;
     }
@@ -126,7 +126,7 @@
         width: calc(28.11616654714271 * var(--rpx));
         height: calc(27.872332750740497 * var(--rpx));
         margin: calc(-0.04371946949049743 * var(--rpx)) 0 0 0;
-        background: url(./assets/images/cfa4dfb5-a3e9-4329-9e10-40c9cb5ade13.png) no-repeat center;
+        background: url(../img/course_choice/Ellipse_a.png) no-repeat center;
         background-size: cover;
         z-index: 25;
     }
@@ -173,7 +173,6 @@
         position: relative;
         width: calc(613 * var(--rpx));
         height: calc(88 * var(--rpx));
-        font-size: 0px;
         background: #e6edff;
         z-index: 34;
         border-radius: calc(37 * var(--rpx));
@@ -209,7 +208,6 @@
         width: calc(318 * var(--rpx));
         height: calc(88 * var(--rpx));
         cursor: pointer;
-        font-size: 0px;
         background: #e6edff;
         border: none;
         z-index: 35;
@@ -293,7 +291,6 @@
         height: calc(163 * var(--rpx));
         top: 0;
         left: 0;
-        font-size: 0px;
         background: #e6edff;
         z-index: 39;
         border-radius: calc(37 * var(--rpx));
@@ -460,7 +457,7 @@
         height: calc(38.666748046875 * var(--rpx));
         top: calc(912.333251953125 * var(--rpx));
         left: calc(95 * var(--rpx));
-        background: url(./assets/images/62ce6559-9c6e-4168-8721-3e1010b33ca1.png) no-repeat center;
+        background: url(../img/course_choice/tutor_register/Vector_div.png) no-repeat center;
         background-size: cover;
         z-index: 32;
     }
@@ -480,7 +477,7 @@
         height: calc(31 * var(--rpx));
         top: 0;
         left: calc(707 * var(--rpx));
-        background: url(./assets/images/e8b17075-7595-4649-9b61-8bab15b00c0a.png) no-repeat center;
+        background: url(../img/course_choice/tutor_register/Ellipse_div.png) no-repeat center;
         background-size: cover;
         z-index: 30;
         border-radius: 50%;
@@ -495,6 +492,7 @@
         background: url(./assets/images/bb3da089-3661-40eb-9237-1508f37be31d.png) no-repeat center;
         background-size: cover;
         z-index: 29;
+        background-color: #E3E9FF
     }
 
     .vector-div-15 {
@@ -503,10 +501,41 @@
         height: calc(39.666748046875 * var(--rpx));
         top: calc(14 * var(--rpx));
         left: calc(233 * var(--rpx));
-        background: url(./assets/images/dff0ddf9-78a2-46d6-8fc2-c5c9af2713a8.png) no-repeat center;
+        background: url(../img/course_choice/tutor_register/Vector_div_15.png) no-repeat center;
         background-size: cover;
         z-index: 31;
     }
+
+    .div-rectangle-9 input,
+    .div-flex-row-d input,
+    .rectangle-f input,
+    .rectangle-10 input,
+    .rectangle-11 input,
+    .rectangle-13 input {
+        width: 100%;
+        height: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+        font-size: calc(18 * var(--rpx));
+        color: #614ce0;
+    }
+
+    .rectangle-13 {
+        width: 100%;
+        max-width: 500px; 
+    }
+
+        .rectangle-13 input {
+            width: 100%;
+            box-sizing: border-box; /* Đảm bảo width bao gồm cả padding và border */
+            white-space: normal; /* Cho phép xuống dòng tự động */
+            word-wrap: break-word; /* Tự động xuống dòng khi cần */
+            font-size: calc(18 * var(--rpx));
+        color: #614ce0;
+        }
+
 </style>
 <div class="flex-row-b">
     <div class="rectangle-7">
@@ -514,7 +543,9 @@
         <div class="ellipse"></div>
         <div class="vector"></div>
         <div class="flex-column-ac">
-            <span class="gia-su-online">Gia Sư Online</span><span class="hinh-thuc-lop-hoc-vien">Hình thức: 1 lớp 15 học viên</span><span class="thoi-gian-theo-lich-dang-ky-cua-hoc-vien">
+            <span class="gia-su-online">Gia Sư Online</span>
+            <span class="hinh-thuc-lop-hoc-vien">Hình thức: 1 lớp 15 học viên</span>
+            <span class="thoi-gian-theo-lich-dang-ky-cua-hoc-vien">
                 Thời gian: theo lịch đăng ký của học viên.
             </span>
         </div>
@@ -523,33 +554,53 @@
             <div class="div-ellipse"></div>
         </div>
     </div>
-    <div class="div-vector-8"></div>
+    <div class="div-vector-8">
+        <svg class="vector-1" width="100%" height="100%" viewBox="0 0 541 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.2567 10.6736C22.2569 4.78261 17.4813 0.00687106 11.5903 0.00673381C5.69929 0.00659657 0.923541 4.78211 0.923401 10.6732C0.923261 16.5642 5.69878 21.3399 11.5898 21.3401C17.4808 21.3402 22.2566 16.5647 22.2567 10.6736ZM543.429 8.68579L11.5901 8.6734L11.59 12.6734L543.429 12.6858L543.429 8.68579Z" fill="#AEC3FA" />
+        </svg>
+    </div>
 </div>
 <span class="span-dang-ky-lop">Đăng Ký Lớp </span>
 <div class="div-flex-row-a">
     <div class="div-rectangle">
         <span class="span-ten-cua-ban">Tên của bạn </span>
-        <div class="div-rectangle-9"></div>
+        <div class="div-rectangle-9">
+            <input type="text" />
+        </div>
     </div>
-    <button class="button-rectangle">
+    <div class="button-rectangle">
         <span class="span-ngay-thang-nam-sinh">Ngày/ Tháng/Năm Sinh </span>
         <div class="div-flex-row-d">
-            <div class="div-rectangle-a"></div>
-            <div class="rectangle-b"></div>
-            <div class="rectangle-c"><div class="vector-d"></div></div>
+            <div class="div-rectangle-a">
+                <input type="datetime" />
+            </div>
+            <div class="rectangle-b">
+                <input type="datetime" />
+            </div>
+            <div class="rectangle-c">
+                <input type="datetime" />
+            </div>
         </div>
-    </button>
+    </div>
 </div>
 <div class="flex-row-ca">
     <div class="rectangle-e">
         <span class="lich-hoc-dang-ky">Lịch học đăng ký </span>
         <div class="flex-row">
-            <div class="rectangle-f"></div>
-            <div class="rectangle-10"></div>
-            <div class="rectangle-11"><div class="vector-12"></div></div>
+            <div class="rectangle-f">
+                <input type="datetime" />
+            </div>
+            <div class="rectangle-10">
+                <input type="datetime" />
+            </div>
+            <div class="rectangle-11">
+                <input type="datetime" />
+            </div>
         </div>
         <span class="mong-muon-cua-ban">Mong muốn của bạn</span>
-        <div class="rectangle-13"></div>
+        <div class="rectangle-13">
+            <input type="text" />
+        </div>
     </div>
     <button class="rectangle-button">
         <span class="send-span">Gửi </span>
@@ -558,6 +609,7 @@
 <div class="vector-div"></div>
 <div class="flex-row-e-div">
     <div class="ellipse-div"></div>
-    <div class="vector-div-14"></div>
+    <div class="vector-div-14">
+    </div>
     <div class="vector-div-15"></div>
 </div>

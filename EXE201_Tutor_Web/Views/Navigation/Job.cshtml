@@ -279,7 +279,6 @@
         height: calc(330 * var(--rpx));
         top: calc(108 * var(--rpx));
         left: calc(507 * var(--rpx));
-        font-size: 0px;
         background: #e6edff;
         z-index: 20;
         border-radius: calc(37 * var(--rpx));
@@ -458,6 +457,28 @@
         white-space: nowrap;
         z-index: 8;
     }
+
+    .rectangle-b input,
+    .rectangle-c input,
+    .rectangle-d input,
+    .rectangle-e input {
+        width: 100%;
+        height:100%
+
+    }
+
+    .rectangle-7 input[type="checkbox"] {
+        height: 100%;
+        margin-right:10px
+    }
+
+    .rectangle-e input[type="text"] {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        white-space: pre-line;
+    }
+
 </style>
 <form asp-action="AfterRegister" asp-controller="TutorJob">
     <div class="div-flex-row-c">
@@ -500,17 +521,24 @@
         </div>
         <div class="rectangle-a">
             <span class="ten-cua-ban">Tên của bạn </span>
-            <input type="text" id="ten-cua-ban" name="tenCuaBan" class="rectangle-b" />
+            <div class="rectangle-b">
+                <input type="text"/>
+            </div>
 
             <span class="nam-sinh">Năm sinh</span>
-            <input type="date" id="nam-sinh" name="namSinh" class="rectangle-c" />
+            <div class="rectangle-c">
+                <input type="date"  />
+            </div>
 
             <span class="cv-ban">CV của bạn</span>
-            <input type="file" id="cv-ban" name="cvBan" class="rectangle-d" />
+            <div class="rectangle-d">
+                <input type="file"  />
+            </div>
 
             <span class="mong-muon-ban">Mong muốn của bạn</span>
-            <input type="text" id="mong-muon-ban" name="mongMuonBan" class="rectangle-e" />
-            
+            <div class="rectangle-e">
+                <input type="text" />
+            </div>
         </div>
         <span class="text-hotline">Hotline: 000-XXX-XXX </span>
         <span class="email">Email: Bombasticlearninghub@gmail.com</span>

@@ -1,3 +1,4 @@
 ﻿@{
-    Layout = "_Layout";
+    var layoutType = TempData["LayoutType"] as string;
+    Layout = layoutType == "Layout_2" ? "_Layout-2" : "_Layout";
 }

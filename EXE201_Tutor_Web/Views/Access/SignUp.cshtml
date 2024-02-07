@@ -204,7 +204,16 @@
         text-align: left;
         white-space: nowrap;
         z-index: 32;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
     }
+
+        .cap-nhat-anh-dai-dien:hover {
+            border-radius: calc(11 * var(--rpx));
+            background-color: #e6edff; /* Màu nền khi hover */
+            color: #614ce0; /* Màu chữ khi hover */
+        }
+
 
     .rectangle-e {
         position: absolute;
@@ -237,20 +246,90 @@
         white-space: nowrap;
         z-index: 9;
     }
+
+    form {
+        max-width: 400px; /* Đặt chiều rộng tối đa của form */
+        margin: 0 auto; /* Để canh giữa form trong trang */
+    }
+
+    .rectangle-8 input,
+    .rectangle-a input,
+    .rectangle-b input,
+    .rectangle-c input,
+    .rectangle-d input,
+    .rectangle-9 input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none; /* Đặt đường viền thành none */
+        border-radius: calc(28 * var(--rpx));
+        outline: none; /* Tắt đường viền xung quanh khi focus */
+        font-size: calc(18 * var(--rpx));
+        color: #614ce0;
+        margin-left: 15px
+        
+    }
+
+    input[type="file"] {
+        display: none; /* Ẩn input kiểu file mặc định */
+    }
+
+    
+
 </style>
 <form asp-action="SignUpProcess" asp-controller="Access">
     <div class="material-symbols-search"></div>
-    <span class="dang-ky-7">ĐĂNG KÝ</span><span class="e-mail">E-mail</span>
-    <div class="rectangle-8"></div>
-    <div class="rectangle-9"></div>
-    <span class="ho-va-ten">Họ và tên</span><button class="rectangle-a"></button><span class="ten-dang-nhap">Tên đăng nhập</span>
-    <div class="rectangle-b"></div>
+    <span class="dang-ky-7">ĐĂNG KÝ</span>
+
+    <span class="e-mail">E-mail</span>
+    <div class="rectangle-8">
+        <input type="text"/>
+    </div>
+
+    <span class="ho-va-ten">Họ và tên</span>
+    <div class="rectangle-a">
+        <input type="text" />
+    </div>
+
+    <span class="ten-dang-nhap">Tên đăng nhập</span>
+    <div class="rectangle-b">
+        <input type="text" />
+    </div>
+
     <span class="mat-khau">Mật khẩu</span>
-    <div class="rectangle-c"></div>
+    <div class="rectangle-c">
+        <input type="password" />
+    </div>
+
     <span class="xac-nhan-mat-khau">Xác nhận mật khẩu</span>
-    <div class="rectangle-d"></div>
-    <span class="cap-nhat-anh-dai-dien">Cập nhật ảnh đại diện</span>
+    <div class="rectangle-d">
+        <input type="password" />
+    </div>
+
+    <div class="rectangle-9">
+        <img src="../img/desktop-computer-pana.jpg" />
+        <input type="file" id="fileInput" style="display: none;" onchange="displaySelectedFileName()" />
+    </div>
+
+    <span class="cap-nhat-anh-dai-dien" onclick="openFileInput()">Cập nhật ảnh đại diện</span>
+
     <button type="submit" class="rectangle-e">
         <span class="dang-ky-f">Đăng ký</span>
     </button>
 </form>
+
+<script>
+    function openFileInput() {
+        document.getElementById('fileInput').click();
+    }
+    function displaySelectedFileName() {
+        const fileInput = document.getElementById('fileInput');
+        const fileNameSpan = document.querySelector('.cap-nhat-anh-dai-dien');
+
+        if (fileInput.files.length > 0) {
+            fileNameSpan.textContent = `${fileInput.files[0].name}`;
+        } else {
+            fileNameSpan.textContent = 'Cập nhật ảnh đại diện';
+        }
+    }
+</script>

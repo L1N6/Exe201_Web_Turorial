@@ -1,0 +1,595 @@
+﻿<style>
+    .flex-row-a {
+        position: relative;
+        width: calc(1210 * var(--rpx));
+        height: calc(124 * var(--rpx));
+        margin: calc(32 * var(--rpx)) 0 0 calc(115 * var(--rpx));
+        z-index: 50;
+    }
+
+    .rectangle-4 {
+        position: absolute;
+        width: calc(1210 * var(--rpx));
+        height: calc(110 * var(--rpx));
+        top: 0;
+        left: 0;
+        background: #cdd8ff;
+        z-index: 47;
+        border-radius: calc(28 * var(--rpx));
+    }
+
+    .time {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        height: calc(31 * var(--rpx));
+        top: calc(23 * var(--rpx));
+        left: calc(27 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(20 * var(--rpx));
+        font-weight: 800;
+        line-height: calc(24.204544067382812 * var(--rpx));
+        text-align: left;
+        white-space: nowrap;
+        z-index: 49;
+    }
+
+    .khoa-hoc-bao-gom {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        width: calc(1163 * var(--rpx));
+        height: calc(56 * var(--rpx));
+        top: calc(68 * var(--rpx));
+        left: calc(27 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(20 * var(--rpx));
+        font-weight: 500;
+        line-height: calc(24.204544067382812 * var(--rpx));
+        text-align: left;
+        z-index: 50;
+    }
+
+    .flex-row-ef {
+        position: relative;
+        width: calc(990.0000038146973 * var(--rpx));
+        height: calc(50.000003814697266 * var(--rpx));
+        margin: calc(34.999996185302734 * var(--rpx)) 0 0 calc(224 * var(--rpx));
+        z-index: 17;
+    }
+
+    .group {
+        position: absolute;
+        width: calc(48.000003814697266 * var(--rpx));
+        height: calc(48.000003814697266 * var(--rpx));
+        top: 0;
+        left: calc(942 * var(--rpx));
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 16;
+    }
+
+    .group-5 {
+        position: absolute;
+        width: calc(48.000003814697266 * var(--rpx));
+        height: calc(48.000003814697266 * var(--rpx));
+        top: calc(1 * var(--rpx));
+        left: calc(317 * var(--rpx));
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 14;
+    }
+
+    .group-6 {
+        position: absolute;
+        width: calc(48.000003814697266 * var(--rpx));
+        height: calc(48.000003814697266 * var(--rpx));
+        top: calc(1 * var(--rpx));
+        left: calc(645 * var(--rpx));
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 15;
+    }
+
+    .group-7 {
+        position: absolute;
+        width: calc(48.000003814697266 * var(--rpx));
+        height: calc(48.000003814697266 * var(--rpx));
+        top: calc(2 * var(--rpx));
+        left: 0;
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 17;
+    }
+
+    .line {
+        position: absolute;
+        width: calc(941 * var(--rpx));
+        height: calc(2 * var(--rpx));
+        top: calc(23.000003814697266 * var(--rpx));
+        left: calc(24 * var(--rpx));
+        background: url(./assets/images/d4352b5f-23f9-4b94-8779-b911c8b67697.png) no-repeat center;
+        background-size: cover;
+        z-index: 13;
+        background-color: #3420B3;
+    }
+
+    .flex-row {
+        position: relative;
+        width: calc(1110 * var(--rpx));
+        height: calc(39 * var(--rpx));
+        margin: calc(33 * var(--rpx)) 0 0 calc(165 * var(--rpx));
+        z-index: 12;
+    }
+
+    .group-8 {
+        position: absolute;
+        width: calc(115 * var(--rpx));
+        height: calc(39 * var(--rpx));
+        top: 0;
+        left: calc(27 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 2;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .group-9 {
+        position: absolute;
+        width: calc(115 * var(--rpx));
+        height: calc(39 * var(--rpx));
+        top: 0;
+        left: calc(342 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 5;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .group-a {
+        position: absolute;
+        width: calc(115 * var(--rpx));
+        height: calc(39 * var(--rpx));
+        top: 0;
+        left: calc(671 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 8;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .group-b {
+        position: absolute;
+        width: calc(115 * var(--rpx));
+        height: calc(39 * var(--rpx));
+        top: 0;
+        left: calc(971 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 11;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .tuan-2 {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(165 * var(--rpx));
+        height: calc(21 * var(--rpx));
+        top: calc(2 * var(--rpx));
+        left: calc(316 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(21 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 6;
+    }
+
+    .tuan-1 {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(165 * var(--rpx));
+        height: calc(21 * var(--rpx));
+        top: calc(3 * var(--rpx));
+        left: 0;
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(21 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 3;
+    }
+
+    .tuan-3 {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(165 * var(--rpx));
+        height: calc(21 * var(--rpx));
+        top: calc(3 * var(--rpx));
+        left: calc(645 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(21 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 9;
+    }
+
+    .tuan-4 {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(165 * var(--rpx));
+        height: calc(21 * var(--rpx));
+        top: calc(3 * var(--rpx));
+        left: calc(945 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(21 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 12;
+    }
+
+    .rectangle-c {
+        position: relative;
+        width: calc(1210 * var(--rpx));
+        height: calc(108 * var(--rpx));
+        margin: calc(41 * var(--rpx)) 0 0 calc(116 * var(--rpx));
+        background: #cdd8ff;
+        z-index: 51;
+        border-radius: calc(28 * var(--rpx));
+    }
+
+    .span {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        position: absolute;
+        width: calc(1163 * var(--rpx));
+        height: calc(84 * var(--rpx));
+        top: calc(19 * var(--rpx));
+        left: calc(22 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(20 * var(--rpx));
+        font-weight: 500;
+        line-height: calc(24.204544067382812 * var(--rpx));
+        text-align: left;
+        z-index: 51;
+    }
+
+    .flex-row-cc {
+        position: relative;
+        width: calc(991.5859909057617 * var(--rpx));
+        height: calc(53.68169403076172 * var(--rpx));
+        margin: calc(30.99994659423828 * var(--rpx)) 0 0 calc(225.99994659423828 * var(--rpx));
+        z-index: 31;
+    }
+
+    .group-d {
+        position: absolute;
+        width: calc(52.58599090576172 * var(--rpx));
+        height: calc(52.58599090576172 * var(--rpx));
+        top: 0;
+        left: calc(317 * var(--rpx));
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 28;
+    }
+
+    .group-e {
+        position: absolute;
+        width: calc(52.58599090576172 * var(--rpx));
+        height: calc(52.58599090576172 * var(--rpx));
+        top: 0;
+        left: calc(643 * var(--rpx));
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 29;
+    }
+
+    .group-f {
+        position: absolute;
+        width: calc(52.58599090576172 * var(--rpx));
+        height: calc(52.58599090576172 * var(--rpx));
+        top: 0;
+        left: calc(939 * var(--rpx));
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 30;
+    }
+
+    .group-10 {
+        position: absolute;
+        width: calc(52.58599090576172 * var(--rpx));
+        height: calc(52.58599090576172 * var(--rpx));
+        top: calc(1.095703125 * var(--rpx));
+        left: 0;
+        background: url(../img/course/Circle.png) no-repeat center;
+        background-size: cover;
+        z-index: 31;
+    }
+
+    .line-11 {
+        position: absolute;
+        width: calc(928 * var(--rpx));
+        height: calc(2 * var(--rpx));
+        top: calc(25.00005340576172 * var(--rpx));
+        left: calc(35.00005340576172 * var(--rpx));
+        background: url(./assets/images/1b1d7cc1-af23-4ae7-8605-c106b3e2ea1a.png) no-repeat center;
+        background-size: cover;
+        z-index: 27;
+        background-color: #3420B3;
+    }
+
+    .flex-row-f {
+        position: relative;
+        width: calc(1122.6942596435547 * var(--rpx));
+        height: calc(43.00004196166992 * var(--rpx));
+        margin: calc(31.318359375 * var(--rpx)) 0 0 calc(160.070068359375 * var(--rpx));
+        z-index: 34;
+    }
+
+    .button-12 {
+        position: absolute;
+        width: calc(123.79618072509766 * var(--rpx));
+        height: calc(42.72611618041992 * var(--rpx));
+        top: 0;
+        left: calc(972.605224609375 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 33;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .button-13 {
+        position: absolute;
+        width: calc(125.98725891113281 * var(--rpx));
+        height: calc(42.72611618041992 * var(--rpx));
+        top: calc(0.27392578125 * var(--rpx));
+        left: calc(27.3885498046875 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 19;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .group-14 {
+        position: absolute;
+        width: calc(207.0573272705078 * var(--rpx));
+        height: calc(42.72611618041992 * var(--rpx));
+        top: calc(0.27392578125 * var(--rpx));
+        left: calc(308.929931640625 * var(--rpx));
+        background: url(./assets/images/f03970e7-a76d-4938-99c7-53d0a5f9ead2.png) no-repeat center;
+        background-size: cover;
+        z-index: 22;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .documents {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(180.7643280029297 * var(--rpx));
+        height: calc(23.00636863708496 * var(--rpx));
+        top: calc(2.191162109375 * var(--rpx));
+        left: calc(14.241943359375 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(23.00636863708496 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 23;
+    }
+
+    .group-15 {
+        position: absolute;
+        width: calc(123.79618072509766 * var(--rpx));
+        height: calc(42.72611618041992 * var(--rpx));
+        top: calc(0.27392578125 * var(--rpx));
+        left: calc(676.108154296875 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 25;
+        border-radius: calc(37 * var(--rpx));
+    }
+
+    .test {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(180.7643280029297 * var(--rpx));
+        height: calc(23.00636863708496 * var(--rpx));
+        top: calc(3.28662109375 * var(--rpx));
+        left: calc(941.929931640625 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(23.00636863708496 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 34;
+    }
+
+    .video {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(180.7643280029297 * var(--rpx));
+        height: calc(23.00636863708496 * var(--rpx));
+        top: calc(3.560546875 * var(--rpx));
+        left: 0;
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(23.00636863708496 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 20;
+    }
+
+    .quiz {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(180.7643280029297 * var(--rpx));
+        height: calc(23.00636863708496 * var(--rpx));
+        top: calc(3.560546875 * var(--rpx));
+        left: calc(645.43310546875 * var(--rpx));
+        color: #614ce0;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(23.00636863708496 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 26;
+    }
+
+    .flex-row-16 {
+        position: relative;
+        width: calc(165 * var(--rpx));
+        height: calc(53 * var(--rpx));
+        margin: calc(49.99995803833008 * var(--rpx)) 0 0 calc(1161 * var(--rpx));
+        z-index: 53;
+    }
+
+    .group-17 {
+        position: absolute;
+        width: calc(156.2820587158203 * var(--rpx));
+        height: calc(53 * var(--rpx));
+        top: 0;
+        left: calc(5 * var(--rpx));
+        cursor: pointer;
+        background: transparent;
+        background: no-repeat center;
+        background-size: cover;
+        border: none;
+        z-index: 52;
+        border-radius: calc(37 * var(--rpx));
+        background-color: #614ce0;
+    }
+
+    .bat-dau {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        width: calc(165 * var(--rpx));
+        height: calc(21 * var(--rpx));
+        top: calc(15 * var(--rpx));
+        left: 0;
+        color: #ffffff;
+        font-family: Inter, var(--default-font-family);
+        font-size: calc(27 * var(--rpx));
+        font-weight: 600;
+        line-height: calc(21 * var(--rpx));
+        text-align: center;
+        white-space: nowrap;
+        z-index: 53;
+    }
+</style>
+
+<div class="flex-row-a">
+    <div class="rectangle-4">
+        <span class="time">Time: 07/Th06 - 07/Th07</span>
+    </div>
+    <span class="khoa-hoc-bao-gom">
+        Khóa học bao gồm 4 tuần học cơ bản. Tuần 1: Từ vựng - Tuần 2: Cụm
+        động từ - Tuần 3: Ngữ pháp - Tuần 4: Kiểm tra.<br />
+    </span>
+</div>
+<div class="flex-row-ef">
+    <div class="group"></div>
+    <div class="group-5"></div>
+    <div class="group-6"></div>
+    <div class="group-7"></div>
+    <div class="line"></div>
+</div>
+<div class="flex-row">
+    <button class="group-8">
+    </button>
+    <button class="group-9">
+    </button>
+    <button class="group-a">
+    </button>
+    <button class="group-b">
+    </button>
+    <span class="tuan-2">Tuần 2</span>
+    <span class="tuan-1">Tuần 1</span>
+    <span class="tuan-3">Tuần 3</span>
+    <span class="tuan-4">Tuần 4</span>
+</div>
+<div class="rectangle-c">
+    <span class="span">
+        Khóa học có 4 tuần.<br />Từ tuần 1 - 3 sẽ gồm 4 nội dung: video, tài
+        liệu, trắc nghiệm. Riêng tuần 4 chỉ có 1 nội dung: Bài kiểm tra cuối
+        khóa học. <br />
+    </span>
+</div>
+<div class="flex-row-cc">
+    <div class="group-d"></div>
+    <div class="group-e"></div>
+    <div class="group-f"></div>
+    <div class="group-10"></div>
+    <div class="line-11"></div>
+</div>
+<div class="flex-row-f">
+    <button class="button-12"></button><button class="button-13"></button>
+    <div class="group-14"><span class="documents">Documents</span></div>
+    <div class="group-15"></div><span class="test">Test</span><span class="video">Video</span><span class="quiz">Quiz</span>
+</div>
+<div class="flex-row-16">
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeek", "Course")" class="group-17">
+        <span class="bat-dau">Bắt đầu</span>
+    </a>
+</div>

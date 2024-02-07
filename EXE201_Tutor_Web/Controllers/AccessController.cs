@@ -17,6 +17,10 @@ namespace EXE201_Tutor_Web.Controllers
         public IActionResult SignUpProcess()
         {
             return View("SignUpSuccess");
+        } 
+        public IActionResult ForgotPassword()
+        {
+            return View();
         }
     }
 }
