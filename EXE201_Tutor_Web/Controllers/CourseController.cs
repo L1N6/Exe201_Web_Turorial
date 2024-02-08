@@ -30,6 +30,7 @@ namespace EXE201_Tutor_Web.Controllers
             TempData["LayoutType"] = "Layout_2";
             return View("University/English/Schedule");
         }
+
         //FirstWeek
         public IActionResult UniversityEnglishCourseFirstWeek()
         {
@@ -42,7 +43,7 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/English/FirstWeek/Video/Index");
         }
 
-        public IActionResult UniversityEnglishCourseFirstWeekLessonVideo()
+        public IActionResult UniversityEnglishCourseFirstWeekLessonVideo(string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
             return View("University/English/FirstWeek/Video/LessonVideo");
@@ -70,7 +71,7 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/English/SecondWeek/Video/Index");
         }
 
-        public IActionResult UniversityEnglishCourseSecondWeekLessonVideo()
+        public IActionResult UniversityEnglishCourseSecondWeekLessonVideo(string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
             return View("University/English/SecondWeek/Video/LessonVideo");
@@ -98,7 +99,7 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/English/ThirdWeek/Video/Index");
         }
 
-        public IActionResult UniversityEnglishCourseThirdWeekLessonVideo()
+        public IActionResult UniversityEnglishCourseThirdWeekLessonVideo(string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
             return View("University/English/ThirdWeek/Video/LessonVideo");

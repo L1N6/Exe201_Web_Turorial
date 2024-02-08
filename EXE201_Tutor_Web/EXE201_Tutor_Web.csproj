@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\video\english\week_3\" />
+    <Folder Include="wwwroot\video\english\week_2\" />
+  </ItemGroup>
+
 </Project>
