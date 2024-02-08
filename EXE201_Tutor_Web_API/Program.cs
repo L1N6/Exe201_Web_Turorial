@@ -1,37 +1,21 @@
-using EXE201_Tutor_Web_API.Base;
-using Microsoft.Extensions.Configuration;
+using EXE201_Tutor_Web_API;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
-namespace EXE201_Tutor_Web_API
+namespace Extension
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            //services.AddDbContext<YourDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("YourConnectionString")));
-
-            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-
-        }
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
