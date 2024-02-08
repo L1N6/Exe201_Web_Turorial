@@ -11,7 +11,7 @@ namespace EXE201_Tutor_Web_API.Base.Repository
 
         public Repository(DbContext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             _dbSet = context.Set<TEntity>();
         }
 
@@ -25,15 +25,17 @@ namespace EXE201_Tutor_Web_API.Base.Repository
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
+            await SaveChangesAsync(); // Ensure changes are saved immediately after adding
+            return entity;
         }
 
-        public Task UpdateAsync(TEntity entity)
+        public Task<TEntity> UpdateAsync(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            return Task.CompletedTask;
+            return Task.FromResult(entity); // Return the entity as it is after modification
         }
 
         public async Task DeleteByIdAsync(TPrimaryKey id)
@@ -41,11 +43,13 @@ namespace EXE201_Tutor_Web_API.Base.Repository
             var entity = await _dbSet.FindAsync(id);
             if (entity != null)
                 _dbSet.Remove(entity);
+
+            await SaveChangesAsync(); // Ensure changes are saved immediately after deletion
         }
 
-        public async Task SaveChangesAsync()
+        public async Task<int> SaveChangesAsync()
         {
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
     }
 }

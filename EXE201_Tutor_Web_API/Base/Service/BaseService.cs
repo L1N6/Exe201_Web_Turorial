@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EXE201_Tutor_Web_API.Base.Repository;
@@ -10,30 +11,31 @@ namespace EXE201_Tutor_Web_API.Base.Service
         where TEntityDto : class
     {
         private readonly IRepository<TEntity, TPrimaryKey> _repository;
+        private readonly IMapper _mapper;
 
-        public BaseService(IRepository<TEntity, TPrimaryKey> repository)
+        public BaseService(IRepository<TEntity, TPrimaryKey> repository, IMapper mapper)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<IEnumerable<TEntityDto>> GetAll()
         {
             var entities = await _repository.GetAllAsync();
-            // You would need to map your entities to DTOs here before returning.
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<TEntityDto>>(entities);
         }
 
         public async Task<TEntityDto> GetById(TPrimaryKey id)
         {
             var entity = await _repository.GetByIdAsync(id);
-            // You would need to map your entity to DTO here before returning.
-            throw new NotImplementedException();
+            return _mapper.Map<TEntityDto>(entity);
         }
 
         public async Task<TEntityDto> Create(TEntityDto entityDto)
         {
-            // You would need to map your DTO to entity here before passing it to the repository.
-            throw new NotImplementedException();
+            var entity = _mapper.Map<TEntity>(entityDto);
+            var createdEntity = await _repository.AddAsync(entity);
+            return _mapper.Map<TEntityDto>(createdEntity);
         }
 
         public async Task<TEntityDto> Update(TPrimaryKey id, TEntityDto entityDto)
@@ -42,12 +44,17 @@ namespace EXE201_Tutor_Web_API.Base.Service
             if (existingEntity == null)
                 throw new KeyNotFoundException($"Entity with ID {id} not found.");
 
-            // You would need to update the existing entity with data from the DTO and save changes.
-            throw new NotImplementedException();
+            _mapper.Map(entityDto, existingEntity); // Update existing entity with data from DTO
+            var updatedEntity = await _repository.UpdateAsync(existingEntity);
+            return _mapper.Map<TEntityDto>(updatedEntity);
         }
 
         public async Task DeleteById(TPrimaryKey id)
         {
+            var entity = await _repository.GetByIdAsync(id);
+            if (entity == null)
+                throw new KeyNotFoundException($"Entity with ID {id} not found.");
+
             await _repository.DeleteByIdAsync(id);
         }
     }
