@@ -29,7 +29,6 @@ namespace EXE201_Tutor_Web_API
             {
                 mc.AddProfile(new MappingProfile());
             });
-
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));

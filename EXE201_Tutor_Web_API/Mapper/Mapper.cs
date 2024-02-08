@@ -8,8 +8,6 @@ namespace EXE201_Tutor_Web_API.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<TEntity, TEntityDto>().ReverseMap();
-
             CreateMap<Student, StudentDTO>(); // Configure mapping from Source to Destination
             CreateMap<StudentDTO, Student>(); // Configure mapping from Destination to Source
         }
