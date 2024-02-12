@@ -46,6 +46,7 @@ namespace EXE201_Tutor_Web.Controllers
         public IActionResult UniversityEnglishCourseFirstWeekLessonVideo(string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
+            ViewData["VideoName"] = videoName;
             return View("University/English/FirstWeek/Video/LessonVideo");
         }
 
