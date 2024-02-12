@@ -1,15 +1,16 @@
 ﻿using System.Threading.Tasks;
 using EXE201_Tutor_Web_API.Base.Repository;
+using EXE201_Tutor_Web_API.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace EXE201_Tutor_Web_API.Base.Repository
 {
     public class Repository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : class
     {
-        private readonly DbContext _context;
+        private readonly Exe201_Tutor_Context _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(DbContext context)
+        public Repository(Exe201_Tutor_Context context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _dbSet = context.Set<TEntity>();

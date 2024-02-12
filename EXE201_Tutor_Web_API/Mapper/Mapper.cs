@@ -10,6 +10,8 @@ namespace EXE201_Tutor_Web_API.Mapper
         {
             //CreateMap<Student, StudentDTO>(); // Configure mapping from Source to Destination
             //CreateMap<StudentDTO, Student>(); // Configure mapping from Destination to Source
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
         }
     }
 }
