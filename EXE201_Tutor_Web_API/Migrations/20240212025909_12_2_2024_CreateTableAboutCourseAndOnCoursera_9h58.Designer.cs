@@ -4,6 +4,7 @@ using EXE201_Tutor_Web_API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EXE201_Tutor_Web_API.Migrations
 {
     [DbContext(typeof(Exe201_Tutor_Context))]
-    partial class Exe201_Tutor_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240212025909_12_2_2024_CreateTableAboutCourseAndOnCoursera_9h58")]
+    partial class _12_2_2024_CreateTableAboutCourseAndOnCoursera_9h58
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,14 +32,19 @@ namespace EXE201_Tutor_Web_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseraId"), 1L, 1);
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("CourseraId");
 
@@ -55,13 +62,15 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Property<int>("CourseraId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseraDetailId");
@@ -82,13 +91,14 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Property<int>("CourseraDetailId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MinScore")
+                    b.Property<int>("MinScore")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MoocId");
@@ -107,24 +117,27 @@ namespace EXE201_Tutor_Web_API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MoocDetailId"), 1L, 1);
 
                     b.Property<string>("Answer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("MoocId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Score")
+                    b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TypeId")
+                    b.Property<int>("TypeId")
                         .HasColumnType("int");
 
                     b.HasKey("MoocDetailId");
@@ -132,35 +145,6 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.HasIndex("MoocId");
 
                     b.ToTable("MoocDetail");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourse", b =>
-                {
-                    b.Property<int>("OnCourseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OnCourseId"), 1L, 1);
-
-                    b.Property<int?>("CourseraId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("OnCourseId");
-
-                    b.HasIndex("CourseraId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("OnCourse");
                 });
 
             modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseDetail", b =>
@@ -171,23 +155,20 @@ namespace EXE201_Tutor_Web_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OnCourseDetailId"), 1L, 1);
 
-                    b.Property<int?>("CourseraDetailId")
+                    b.Property<int>("CourseraDetailId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("OnCourseId")
+                    b.Property<int>("OnCourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OnCourseDetailId");
-
-                    b.HasIndex("CourseraDetailId");
-
-                    b.HasIndex("OnCourseId");
 
                     b.ToTable("OnCourseDetail");
                 });
@@ -200,26 +181,23 @@ namespace EXE201_Tutor_Web_API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OnMoocId"), 1L, 1);
 
-                    b.Property<DateTime?>("DateSuccess")
+                    b.Property<DateTime>("DateSuccess")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MoocId")
+                    b.Property<int>("MoocId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OnCourseDetailId")
+                    b.Property<int>("OnCourseDetailId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TotalScore")
+                    b.Property<int>("TotalScore")
                         .HasColumnType("int");
 
                     b.HasKey("OnMoocId");
-
-                    b.HasIndex("MoocId");
-
-                    b.HasIndex("OnCourseDetailId");
 
                     b.ToTable("OnMooc");
                 });
@@ -233,36 +211,34 @@ namespace EXE201_Tutor_Web_API.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OnMoocDetailId"), 1L, 1);
 
                     b.Property<string>("Answer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MoocDetailId")
+                    b.Property<int>("MoocDetailId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OnMoocId")
+                    b.Property<int>("OnMoocId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Score")
+                    b.Property<int>("Score")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OnMoocDetailId");
-
-                    b.HasIndex("MoocDetailId");
-
-                    b.HasIndex("OnMoocId");
 
                     b.ToTable("OnMoocDetail");
                 });
 
             modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -291,7 +267,7 @@ namespace EXE201_Tutor_Web_API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("User");
                 });
@@ -299,7 +275,7 @@ namespace EXE201_Tutor_Web_API.Migrations
             modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.CourseraDetail", b =>
                 {
                     b.HasOne("EXE201_Tutor_Web_API.Entites.Coursera", "Coursera")
-                        .WithMany("CourseraDetails")
+                        .WithMany()
                         .HasForeignKey("CourseraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -310,7 +286,7 @@ namespace EXE201_Tutor_Web_API.Migrations
             modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Mooc", b =>
                 {
                     b.HasOne("EXE201_Tutor_Web_API.Entites.CourseraDetail", "CourseraDetail")
-                        .WithMany("Moocs")
+                        .WithMany()
                         .HasForeignKey("CourseraDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -321,113 +297,12 @@ namespace EXE201_Tutor_Web_API.Migrations
             modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.MoocDetail", b =>
                 {
                     b.HasOne("EXE201_Tutor_Web_API.Entites.Mooc", "Mooc")
-                        .WithMany("MoocDetails")
+                        .WithMany()
                         .HasForeignKey("MoocId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Mooc");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourse", b =>
-                {
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.Coursera", "Coursera")
-                        .WithMany("OnCourses")
-                        .HasForeignKey("CourseraId");
-
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Coursera");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseDetail", b =>
-                {
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.CourseraDetail", "CourseraDetail")
-                        .WithMany("OnCourseDetails")
-                        .HasForeignKey("CourseraDetailId");
-
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.OnCourse", "OnCourse")
-                        .WithMany("OnCourseDetails")
-                        .HasForeignKey("OnCourseId");
-
-                    b.Navigation("CourseraDetail");
-
-                    b.Navigation("OnCourse");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnMooc", b =>
-                {
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.Mooc", "Mooc")
-                        .WithMany("OnMoocs")
-                        .HasForeignKey("MoocId");
-
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.OnCourseDetail", "OnCourseDetail")
-                        .WithMany("OnMoocs")
-                        .HasForeignKey("OnCourseDetailId");
-
-                    b.Navigation("Mooc");
-
-                    b.Navigation("OnCourseDetail");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnMoocDetail", b =>
-                {
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.MoocDetail", "MoocDetail")
-                        .WithMany("OnMoocDetails")
-                        .HasForeignKey("MoocDetailId");
-
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.OnMooc", "OnMooc")
-                        .WithMany("OnMoocDetails")
-                        .HasForeignKey("OnMoocId");
-
-                    b.Navigation("MoocDetail");
-
-                    b.Navigation("OnMooc");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Coursera", b =>
-                {
-                    b.Navigation("CourseraDetails");
-
-                    b.Navigation("OnCourses");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.CourseraDetail", b =>
-                {
-                    b.Navigation("Moocs");
-
-                    b.Navigation("OnCourseDetails");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Mooc", b =>
-                {
-                    b.Navigation("MoocDetails");
-
-                    b.Navigation("OnMoocs");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.MoocDetail", b =>
-                {
-                    b.Navigation("OnMoocDetails");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourse", b =>
-                {
-                    b.Navigation("OnCourseDetails");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseDetail", b =>
-                {
-                    b.Navigation("OnMoocs");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnMooc", b =>
-                {
-                    b.Navigation("OnMoocDetails");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,6 +4,7 @@ using EXE201_Tutor_Web_API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EXE201_Tutor_Web_API.Migrations
 {
     [DbContext(typeof(Exe201_Tutor_Context))]
-    partial class Exe201_Tutor_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240212040305_Update_Database_12022024_11h02")]
+    partial class Update_Database_12022024_11h02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

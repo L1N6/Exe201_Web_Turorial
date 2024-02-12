@@ -15,20 +15,7 @@ namespace EXE201_Tutor_Web_API.Controllers
         public AccessController(IMapper mapper) {
             _mapper = mapper;
         }
-        [HttpGet]
       
-        public IActionResult getAccount()
-        {
-            Student s = new Student
-            {
-                BirthDay = DateTime.Now,
-                Name = "DoThanh",
-                Age = 12
-            };
-
-            _mapper.Map<StudentDTO>(s);
-
-            return Ok(s);
-        }
+      
     }
 }
