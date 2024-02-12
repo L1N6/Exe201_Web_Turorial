@@ -113,24 +113,44 @@
         a, a:hover {
             text-decoration: none;
         }
-    </style>
 
+        .banner-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 227px; /* Adjust height according to your design */
+        }
+
+        .banner {
+            display: none;
+            width: 100%;
+        }
+
+            .banner img {
+                width: 100%;
+            }
+
+        .active {
+            display: block;
+        }
+
+        .render-body-content {
+            margin-top: calc(400 * var(--rpx));
+            height: 400px;
+        }
+        .rectangle-6 {
+    position: relative;
+    width: calc(1440 * var(--rpx));
+    height: calc(59 * var(--rpx));
+    margin: 0 0 0 0;
+    background: #aec3fa;
+    z-index: 4;
+    overflow: hidden; /* Hide overflow to crop images */
+}
+
+    </style>
 </head>
 <body>
-    <div class="chat-popup" onclick="toggleChat(event)">
-        <span>Chat with us</span>
-        <div class="chat-box" id="chatBox" onclick="stopPropagation(event)">
-            <div class="close-btn" onclick="toggleChat(event)">&times;</div>
-            <div class="chat-content">
-                <p>Welcome! How can we assist you today?</p>
-            </div>
-            <div class="input-box">
-                <input type="text" placeholder="Type your message..." />
-                <button onclick="sendMessage()">Send</button>
-            </div>
-        </div>
-    </div>
-
     <div class="main-container">
         <div class="rectangle">
             <a href="@Url.Action("Index", "Home")" class="rectangle-1" >
@@ -149,16 +169,29 @@
             <div class="rectangle-4"><img src="../img/header/avatar.jpg" alt=""></div>
             <div class="rectangle-5"><img src="../img/header/login.png" alt=""></div>
         </div>
-        <div class="rectangle-6">
+        <div class="rectangle-6" ">
             <a href="#" class="hotline">HOTLINE: 000-XXX-XXX</a>
             <a href="@Url.Action("Index", "Home")" class="trang-chu">Trang chủ</a>
             <a href="@Url.Action("Detail", "Navigation")" class="thong-tin-chi-tiet">Thông tin chi tiết</a>
             <a href="@Url.Action("Student", "Navigation")" class="hoc-vien">Học viên</a>
-            <a href="@Url.Action("Job", "Navigation")" class="cong-viec">Công việc</a>
+            <a href="@Url.Action("Job", "Navigation")" class="cong-viec">Công việc</a>   
         </div>
-         @RenderBody()
+        @RenderBody()
     </div>
     <footer>
+        <div class="chat-popup" onclick="toggleChat(event)">
+            <span>Chat with us</span>
+            <div class="chat-box" id="chatBox" onclick="stopPropagation(event)">
+                <div class="close-btn" onclick="toggleChat(event)">&times;</div>
+                <div class="chat-content">
+                    <p>Welcome! How can we assist you today?</p>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder="Type your message..." />
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -195,4 +228,55 @@
         event.stopPropagation();
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".banner");
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => {
+                slide.style.display = "none";
+            });
+            slides[n].style.display = "block";
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        const prevButton = document.createElement("button");
+        prevButton.textContent = "Previous";
+        prevButton.addEventListener("click", prevSlide);
+
+        const nextButton = document.createElement("button");
+        nextButton.textContent = "Next";
+        nextButton.addEventListener("click", nextSlide);
+
+        const controls = document.createElement("div");
+        controls.classList.add("banner-controls");
+        controls.appendChild(prevButton);
+        controls.appendChild(nextButton);
+
+        document.querySelector(".banner-container").appendChild(controls);
+
+        showSlide(currentSlide);
+    });
+    // Lưu trạng thái của trang
+    window.addEventListener('scroll', function () {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
+    });
+
+    // Phục hồi trạng thái của trang
+    window.addEventListener('DOMContentLoaded', function () {
+        const scrollPosition = sessionStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+        }
+    });
 </script>
