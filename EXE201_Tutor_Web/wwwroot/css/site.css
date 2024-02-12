@@ -37,8 +37,8 @@ button {
 
 .main-container {
     position: relative;
-    width: calc(1440 * var(--rpx));
-    height: calc(997 * var(--rpx));
+    width: 100vw; /* Độ rộng bằng với viewport width */
+    height: calc(997 * var(--rpx)); /* Giữ nguyên chiều cao */
     margin: 0 auto;
     background: #ffffff;
     overflow: hidden;
@@ -287,4 +287,26 @@ button {
     text-align: center;
     white-space: nowrap;
     z-index: 13;
+}
+@keyframes slide {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+@media (max-width: 768px) {
+    .slide img {
+        width: 100%;
+    }
 }

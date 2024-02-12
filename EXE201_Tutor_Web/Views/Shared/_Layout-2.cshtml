@@ -113,8 +113,8 @@
         a, a:hover {
             text-decoration: none;
         }
-    </style>
 
+    </style>
 </head>
 <body>
     <div class="chat-popup" onclick="toggleChat(event)">
@@ -186,9 +186,19 @@
             inputBox.value = '';
         }
     }
-
     function stopPropagation(event) {
         event.stopPropagation();
     }
+    // Lưu trạng thái của trang
+    window.addEventListener('scroll', function () {
+        sessionStorage.setItem('scrollPosition', window.scrollY);
+    });
 
+    // Phục hồi trạng thái của trang
+    window.addEventListener('DOMContentLoaded', function () {
+        const scrollPosition = sessionStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            window.scrollTo(0, scrollPosition);
+        }
+    });
 </script>
