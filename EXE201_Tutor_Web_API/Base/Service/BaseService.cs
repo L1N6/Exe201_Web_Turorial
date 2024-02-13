@@ -22,15 +22,20 @@ namespace EXE201_Tutor_Web_API.Base.Service
         public async Task<IEnumerable<TEntityDto>> GetAll()
         {
             var entities = await _repository.GetAllAsync();
+            return _mapper.Map<IEnumerable<TEntityDto>>(entities);
         }
 
         public async Task<TEntityDto> GetById(TPrimaryKey id)
         {
             var entity = await _repository.GetByIdAsync(id);
+            return _mapper.Map<TEntityDto>(entity);
         }
 
         public async Task<TEntityDto> Create(TEntityDto entityDto)
         {
+            var entity = _mapper.Map<TEntity>(entityDto);
+            var createdEntity = await _repository.AddAsync(entity);
+            return _mapper.Map<TEntityDto>(createdEntity);
         }
 
         public async Task<TEntityDto> Update(TPrimaryKey id, TEntityDto entityDto)
@@ -39,6 +44,9 @@ namespace EXE201_Tutor_Web_API.Base.Service
             if (existingEntity == null)
                 throw new KeyNotFoundException($"Entity with ID {id} not found.");
 
+            _mapper.Map(entityDto, existingEntity); // Update existing entity with data from DTO
+            var updatedEntity = await _repository.UpdateAsync(existingEntity);
+            return _mapper.Map<TEntityDto>(updatedEntity);
         }
 
         public async Task DeleteById(TPrimaryKey id)

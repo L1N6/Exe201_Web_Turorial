@@ -1,13 +1,13 @@
-﻿using EXE201_Tutor_Web_API.Base;
+﻿using AutoMapper;
+using EXE201_Tutor_Web_API.Base;
 using EXE201_Tutor_Web_API.Base.Repository;
 using EXE201_Tutor_Web_API.Base.Service;
 using EXE201_Tutor_Web_API.Database;
 using EXE201_Tutor_Web_API.Dto;
 using EXE201_Tutor_Web_API.Entites;
 using EXE201_Tutor_Web_API.Mapper;
-using EXE201_Tutor_Web_API.Repositories.Implements;
-using EXE201_Tutor_Web_API.Repositories.Interfaces;
-using EXE201_Tutor_Web_API.Services.Implements;
+using EXE201_Tutor_Web_API.Repositories.UserRepositoryPlace;
+using EXE201_Tutor_Web_API.Services.UserServicePlace;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
