@@ -1,15 +1,15 @@
-﻿namespace EXE201_Tutor_Web_API.Entites
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EXE201_Tutor_Web_API.Entites
 {
     public class User
     {
-        public int Id { get; set; }
+        [Key]
+        public int UserId { get; set; }
         public string Name { get; set; }
-        public string GivenName { get; set; }
-        public string SurName { get; set; }
         public string Email { get; set; }
-
-        public string Phone { get; set; }
-        public DateTime Dob { get; set; }
         public string Address { get; set; }
+        public string Avatar { get; set; }
+        public int Role { get; set; }
     }
 }
