@@ -3,7 +3,7 @@ using EXE201_Tutor_Web_API.Database;
 using EXE201_Tutor_Web_API.Entites;
 using Microsoft.EntityFrameworkCore;
 
-namespace EXE201_Tutor_Web_API.Repositories.Implements
+namespace EXE201_Tutor_Web_API.Repositories.UserRepositoryPlace
 {
     public class UserRepository : Repository<User, int>
     {
