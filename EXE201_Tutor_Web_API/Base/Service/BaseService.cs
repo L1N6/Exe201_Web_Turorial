@@ -19,10 +19,10 @@ namespace EXE201_Tutor_Web_API.Base.Service
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IEnumerable<TEntityDto>> GetAll()
+        public IQueryable<TEntityDto> GetAll()
         {
-            var entities = await _repository.GetAllAsync();
-            return _mapper.Map<IEnumerable<TEntityDto>>(entities);
+            var entities =  _repository.GetAll();
+            return _mapper.Map<IQueryable<TEntityDto>>(entities);
         }
 
         public async Task<TEntityDto> GetById(TPrimaryKey id)
