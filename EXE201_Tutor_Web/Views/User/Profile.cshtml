@@ -40,6 +40,11 @@
         z-index: 14;
     }
 
+    .container-flex-row-cb {
+        display: flex;
+        flex-wrap: wrap; 
+    }
+
     .flex-row-cb {
         position: relative;
         width: calc(1256 * var(--rpx));
@@ -122,10 +127,11 @@
 
     .flex-row-cc {
         position: relative;
+        top: calc(400 * var(--rpx));
         width: calc(1239 * var(--rpx));
         height: calc(186 * var(--rpx));
         margin: calc(29 * var(--rpx)) 0 0 calc(77 * var(--rpx));
-        z-index: 26;
+        z-index: 28;
     }
 
     .ho-va-ten {
@@ -258,6 +264,7 @@
         align-items: center;
         justify-content: center;
         position: relative;
+        top: calc(400 * var(--rpx));
         width: calc(180 * var(--rpx));
         height: calc(59 * var(--rpx));
         margin: calc(32 * var(--rpx)) 0 0 calc(1136 * var(--rpx));
@@ -295,31 +302,48 @@
     }
 </style>
 <div class="ellipse">
-    <img src="../img/header/avatar.jpg"/>
+    <img src="../img/header/avatar.jpg" />
 </div>
+<div class="flex-row-cc">
+    <span class="ho-va-ten">Họ và tên</span>
+    <div class="rectangle-div"></div>
+    <span class="email-span">Email đăng ký</span>
+    <div class="rectangle-div-a"></div>
+</div>
+<button class="rectangle-button">
+    <span class="change-span">Thay đổi</span>
+</button>
 <span class="thanh-tuu">THÀNH TỰU</span>
-<div class="rectangle-5">
-    <div class="flex-row-cb">
-        <div class="rectangle-6"></div>
-        <div class="rectangle-7">
-            <span class="time">Time: 07/Th06 - 07/Th07</span>
+<div class="rectangle-5" id="rectangle-5">
+    <div class="container-flex-row-cb">
+        <div class="flex-row-cb">
+            <div class="rectangle-6"></div>
+            <div class="rectangle-7">
+                <span class="time">Time: 07/Th06 - 07/Th07</span>
+            </div>
+            <span class="ngu-phap-tieng-anh-co-ban">Ngữ Pháp <br />Tiếng Anh Cơ Bản</span>
+            <div class="line"></div>
         </div>
-        <span class="ngu-phap-tieng-anh-co-ban">Ngữ Pháp <br />Tiếng Anh Cơ Bản</span>
-        <div class="line"></div>
-    </div>
-    <div class="flex-row-cc">
-        <span class="ho-va-ten">Họ và tên</span>
-        <div class="section-3">
-            <div class="rectangle-8"></div>
-            <button class="rectangle-9">
-                <span class="c-co-ban">C+++ Cơ bản</span><span class="time-span">Time: 02/Th09 - 02/Th10 </span>
-            </button>
+        <div class="flex-row-cb">
+            <div class="rectangle-6"></div>
+            <div class="rectangle-7">
+                <span class="time">Time: 07/Th06 - 07/Th07</span>
+            </div>
+            <span class="ngu-phap-tieng-anh-co-ban">Ngữ Pháp <br />Tiếng Anh Cơ Bản</span>
+            <div class="line"></div>
         </div>
-        <div class="rectangle-div"></div>
-        <span class="email-span">Email đăng ký</span>
-        <div class="rectangle-div-a"></div>
     </div>
-    <button class="rectangle-button">
-        <span class="change-span">Thay đổi</span>
-    </button>
 </div>
+<script>
+    // Lấy đối tượng .rectangle-5
+    const rectangle5 = document.getElementById('rectangle-5');
+
+    // Lấy số lượng phần tử con .flex-row-cb bên trong .rectangle-5
+    const flexRowCbElements = rectangle5.querySelectorAll('.flex-row-cb');
+    const childCount = flexRowCbElements.length;
+
+    // Tính toán độ cao mới dựa trên số lượng phần tử con và cập nhật độ cao của .rectangle-5
+    const newHeight = childCount * 250; // Giả sử mỗi .flex-row-cb có độ cao 170px
+    rectangle5.style.height = newHeight + 'px';
+
+</script>

@@ -16,9 +16,9 @@ namespace EXE201_Tutor_Web_API.Base.Repository
             _dbSet = context.Set<TEntity>();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public IQueryable<TEntity> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return _dbSet.AsQueryable<TEntity>();
         }
 
         public async Task<TEntity> GetByIdAsync(TPrimaryKey id)

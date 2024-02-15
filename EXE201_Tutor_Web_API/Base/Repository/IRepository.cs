@@ -3,7 +3,7 @@
     public interface IRepository<TEntity, TPrimaryKey>
         where TEntity : class
     {
-        Task<IEnumerable<TEntity>> GetAllAsync();
+        public IQueryable<TEntity> GetAll();
         Task<TEntity> GetByIdAsync(TPrimaryKey id); // Change id type to TPrimaryKey
         Task<TEntity> AddAsync(TEntity entity); // Change return type to Task<TEntity>
         Task<TEntity> UpdateAsync(TEntity entity); // Change return type to Task<TEntity>
