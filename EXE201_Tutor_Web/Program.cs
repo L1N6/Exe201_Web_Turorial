@@ -20,6 +20,8 @@ namespace EXE201_Tutor_Web
                 googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
                 googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
             });
+
+            services.AddHttpClient();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
@@ -35,6 +37,7 @@ namespace EXE201_Tutor_Web
             app.UseSession();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

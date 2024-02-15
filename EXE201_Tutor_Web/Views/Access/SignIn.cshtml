@@ -449,15 +449,40 @@
     }
 </style>
 
+@using Microsoft.AspNetCore.Authentication
+
 <div class="wrapper-2"></div>
 <span class="text-9">ĐĂNG NHẬP </span>
 <div class="group-4">
-    <div class="group-5">
-        <a asp-action="ExternalLogin" asp-controller="User" asp-route-provider="Google" class="pic">
-            <img src="../img/google_icon.png" />
-            <span class="text-a">Sign in with Google</span>
-        </a>
-    </div>
+    @if (!User.Identity.IsAuthenticated)
+    {
+       
+    }
+    else
+    {
+        <p>Hello,sdfsfe!</p>
+
+    }
+    @using Microsoft.AspNetCore.Authentication
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+         <div class="group-5">
+            <a asp-controller="User" asp-action="ExternalLogin" asp-route-provider="Google" class="pic">
+                <img src="../img/google_icon.png" />
+                <span class="text-a">Sign in with Google</span>
+            </a>
+        </div>
+    }
+    else
+    {
+            <p>Hello, @User.Identity.Name!</p>
+            <form asp-action="Logout" asp-controller="Login" method="post">
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+    }
+
+
 
     <span class="text-b">Tên đăng nhập</span>
     <div class="group-6">

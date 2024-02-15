@@ -13,9 +13,8 @@ namespace EXE201_Tutor_Web_API.Controllers
 
         public UserController(IBaseService<User, UserDto, int> baseService, UserService service) : base(baseService)
         {
-            _service = service;
+            _service = service;            
         }
-
 
 
     }

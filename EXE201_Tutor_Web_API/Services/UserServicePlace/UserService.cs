@@ -13,9 +13,11 @@ namespace EXE201_Tutor_Web_API.Services.UserServicePlace
         public UserService(IRepository<User, int> userRepository, IMapper mapper) : base(userRepository, mapper)
         {
             _userRepository = userRepository;
+            
         }
 
         // Now you can use _userRepository in your UserService class
-        // For example, you can define additional methods that utilize _userRepository
+        // For example, you can define additional methods that utilize _userRepositor
+
     }
 }

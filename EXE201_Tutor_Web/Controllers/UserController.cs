@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Http;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -13,32 +14,43 @@ namespace EXE201_Tutor_Web.Controllers
 
         public IActionResult Index() { return View(); }
 
+        private readonly HttpClient _httpClient;
 
-
-        [HttpPost]
-        public async Task<IActionResult> ExternalLogin(string provider)
+        public UserController(IHttpClientFactory httpClientFactory)
         {
-            using (HttpClient client = new HttpClient())
-            {
-              
-                using (HttpResponseMessage res = await client.GetAsync(link))
-                {
-                    if (res.IsSuccessStatusCode)
-                    {
-                        // Đọc nội dung từ phản hồi
-                        string content = await res.Content.ReadAsStringAsync();
+            _httpClient = httpClientFactory.CreateClient();
+        }
 
-                        // Trả về view với nội dung đã đọc
-                        return Content(content); // hoặc PartialView(content) nếu dữ liệu là một phần tử giao diện
-                    }
-                    else
-                    {
-                        // Xử lý khi không thành công
-                        return RedirectToAction("SignIn", "Access");
-                    }
-                }
+        [HttpGet]
+        public IActionResult ExternalLogin(string returnUrl = "/")
+        {
+            // Chuyển hướng đến hành động đăng nhập của API
+            return Redirect("http://localhost:5052/api/Login/google-login?returnUrl=%2F");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> HandleExternalLogin(string returnUrl = "/")
+        {
+            // Gọi API để lấy kết quả
+            HttpResponseMessage response = await _httpClient.GetAsync("https://localhost:7184/api/Login/google-response?ReturnUrl=%2F");
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Đọc nội dung phản hồi
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                // Xử lý kết quả và trả về một trang với dữ liệu từ kết quả API
+                ViewData["Result"] = responseBody;
+                ViewData["ReturnUrl"] = returnUrl;
+                return RedirectToAction("Access", "SignIn");
+            }
+            else
+            {
+                // Xử lý trường hợp API không thành công
+                return View("Error");
             }
         }
+
 
     }
 }
