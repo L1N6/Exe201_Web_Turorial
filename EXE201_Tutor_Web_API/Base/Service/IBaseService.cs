@@ -4,7 +4,7 @@
          where TEntity : class
          where TEntityDto : class
     {
-        Task<IEnumerable<TEntityDto>> GetAll();
+        public IQueryable<TEntityDto> GetAll();
         Task<TEntityDto> GetById(TPrimaryKey id);
         Task<TEntityDto> Create(TEntityDto entityDto);
         Task<TEntityDto> Update(TPrimaryKey id, TEntityDto entityDto);
