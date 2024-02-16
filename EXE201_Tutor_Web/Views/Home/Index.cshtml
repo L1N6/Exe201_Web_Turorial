@@ -27,7 +27,7 @@
     .vector {
         width: calc(113 * var(--rpx));
         height: calc(51 * var(--rpx));
-        top: calc(335 * var(--rpx) + 500px);
+        top: calc(835 * var(--rpx));
         left: calc(127 * var(--rpx));
         background: url(./img/home/Vector.png) no-repeat center;
         background-size: cover;
@@ -36,7 +36,7 @@
     .rectangle-7 {
         width: calc(452 * var(--rpx));
         height: calc(505 * var(--rpx));
-        top: calc(348 * var(--rpx) + 500px);
+        top: calc(848 * var(--rpx));
         left: calc(899 * var(--rpx));
         background: url(./assets/images/d30fd2a4b1ef5feae78a8416ffd596de3324df12.png) no-repeat center;
         background-size: cover;
@@ -45,7 +45,7 @@
     .vector-8 {
         width: calc(465.67108154296875 * var(--rpx));
         height: calc(21.333343505859375 * var(--rpx));
-        top: calc(374.3177032470703 * var(--rpx) + 500px);
+        top: calc(874.3177032470703 * var(--rpx) );
         left: calc(2.99554443359375 * var(--rpx));
         background: url(./assets/images/d30fd2a4b1ef5feae78a8416ffd596de3324df12.png) no-repeat center;
         background-size: cover;
@@ -54,7 +54,7 @@
     .vector-9 {
         width: calc(80 * var(--rpx));
         height: calc(47 * var(--rpx));
-        top: calc(386 * var(--rpx) + 500px);
+        top: calc(886 * var(--rpx));
         left: calc(251 * var(--rpx));
         background: url(./img/home/Vector_9.png) no-repeat center;
         background-size: cover;
@@ -63,7 +63,7 @@
     .ellipse-a {
         width: calc(24 * var(--rpx));
         height: calc(24 * var(--rpx));
-        top: calc(419 * var(--rpx) + 500px);
+        top: calc(919 * var(--rpx));
         left: calc(327 * var(--rpx));
         background: url(./img/home/Ellipse_a.png) no-repeat center;
         background-size: cover;
@@ -72,7 +72,7 @@
 
     .bombastic-learning-hub-b {
         height: calc(102 * var(--rpx));
-        top: calc(449 * var(--rpx) + 500px);
+        top: calc(949 * var(--rpx));
         left: calc(78 * var(--rpx));
         color: #1700a7;
         font-family: Paytone One, var(--default-font-family);
@@ -86,7 +86,7 @@
     .rectangle-c {
         width: calc(496 * var(--rpx));
         height: calc(106 * var(--rpx));
-        top: calc(747 * var(--rpx) + 500px);
+        top: calc(1247 * var(--rpx));
         left: calc(78 * var(--rpx));
         cursor: pointer;
         background: #614ce0;
@@ -111,7 +111,7 @@
     .group {
         width: calc(738 * var(--rpx));
         height: calc(82 * var(--rpx));
-        top: calc(904 * var(--rpx) + 500px);
+        top: calc(1404 * var(--rpx));
         left: calc(3 * var(--rpx));
         background: url(./assets/images/b59ae848-bf90-46c2-9ea3-6f5bd19c2c72.png) no-repeat center;
         background-size: cover;
@@ -120,7 +120,7 @@
     .group-d {
         width: calc(247 * var(--rpx));
         height: calc(43 * var(--rpx));
-        top: calc(927 * var(--rpx) + 500px);
+        top: calc(1427 * var(--rpx));
         left: calc(1002 * var(--rpx));
         background: url(./img/home/Group_1.png) no-repeat center;
         background-size: cover;
@@ -128,11 +128,10 @@
 
     .main-container {
         position: relative;
-        width: 100vw;
-        height: calc(1440 * var(--rpx));
+        height: calc(1550 * var(--rpx));
         margin: 0 auto;
         background: #ffffff;
-        overflow: hidden;
+        overflow: auto;
     }
 
     .carousel-container {
@@ -144,7 +143,7 @@
     .carousel {
         display: flex;
         transition: transform 0.5s ease-in-out;
-        width: calc(100vw * 3); /* Chiều rộng của carousel bằng 100vw nhân với số lượng slide */
+        width: calc(100vm * var(--rpx) * 3); /* Chiều rộng của carousel bằng 100vw nhân với số lượng slide */
     }
 
 
@@ -152,10 +151,16 @@
         position: relative;
         flex: 0 0 100vw; /* Thay đổi từ 100% thành 100vw */
         width: 100vw; /* Sử dụng 100vw cho kích thước chiều rộng */
-        height: 500px; /* Giữ nguyên kích thước chiều cao */
+        height: calc(500 * var(--rpx)); /* Giữ nguyên kích thước chiều cao */
         opacity: 1;
         transition: transform 0.5s ease, opacity 0.5s ease;
     }
+
+        .slide img {
+            width: 100%; /* Đảm bảo rằng hình ảnh sẽ fill với độ rộng của slide */
+            height: 100%; /* Đảm bảo rằng hình ảnh sẽ fill với độ dài của slide */
+            object-fit: cover; /* Căn chỉnh hình ảnh để fill hoàn toàn với kích thước của slide */
+        }
 
 
         .slide.hidden {
@@ -206,6 +211,7 @@
             background-color: #614ce0;
         }
 
+    
 </style>
 <div class="carousel-container">
     <div class="carousel">
@@ -260,27 +266,39 @@
     document.addEventListener("DOMContentLoaded", function () {
         const carousel = document.querySelector('.carousel');
         const slides = document.querySelectorAll('.slide');
-        let counter = 0; // Bắt đầu từ slide đầu tiên
-        const slideWidth = slides[0].clientWidth;
-        let isTransitioning = false; // Biến để kiểm tra xem hiệu ứng chuyển đổi đang diễn ra hay không
-        const indicators = document.querySelectorAll('.indicator'); // Chỉ báo cho các slide
+        let counter = 0;
+        let slideWidth;
 
+        // Hàm tính toán kích thước của slide
+        function calculateSlideWidth() {
+            slideWidth = slides[0].getBoundingClientRect().width;
+        }
+
+        // Gọi hàm tính toán kích thước slide sau khi các ảnh đã được tải xong
+        window.addEventListener('load', calculateSlideWidth);
+
+        // Cập nhật kích thước của slide khi cửa sổ thay đổi kích thước
+        window.addEventListener('resize', calculateSlideWidth);
+
+        // Hàm chuyển slide tiếp theo
         function nextSlide() {
             if (!isTransitioning) {
                 isTransitioning = true;
-                counter = (counter + 1) % slides.length; // Lặp lại từ slide đầu nếu đã đến slide cuối
+                counter = (counter + 1) % slides.length;
                 updateCarousel();
             }
         }
 
+        // Hàm chuyển slide trước đó
         function prevSlide() {
             if (!isTransitioning) {
                 isTransitioning = true;
-                counter = (counter - 1 + slides.length) % slides.length; // Di chuyển đến slide trước đó
+                counter = (counter - 1 + slides.length) % slides.length;
                 updateCarousel();
             }
         }
 
+        // Hàm chuyển đến slide được chỉ định
         function goToSlide(index) {
             if (!isTransitioning && index >= 0 && index < slides.length) {
                 isTransitioning = true;
@@ -289,26 +307,20 @@
             }
         }
 
+        // Hàm cập nhật carousel
         function updateCarousel() {
-            carousel.style.transition = 'transform 0.5s ease-in-out'; // Bật lại hiệu ứng chuyển đổi
+            carousel.style.transition = 'transform 0.5s ease-in-out';
             carousel.style.transform = `translateX(${-slideWidth * counter}px)`;
             setTimeout(() => {
                 isTransitioning = false;
-            }, 500); // Thiết lập thời gian chờ bằng thời gian transition để đảm bảo rằng hiệu ứng chuyển đổi đã kết thúc trước khi cho phép chuyển slide tiếp theo
-            updateIndicators(); // Cập nhật chỉ báo sau khi chuyển slide
+            }, 500);
+            updateIndicators();
         }
 
-        setInterval(() => {
-            nextSlide();
-        }, 5000);
-
+        // Hàm cập nhật chỉ báo
         function updateIndicators() {
             indicators.forEach((indicator, index) => {
-                if (index === counter) {
-                    indicator.classList.add('active');
-                } else {
-                    indicator.classList.remove('active');
-                }
+                indicator.classList.toggle('active', index === counter);
             });
         }
 
@@ -321,11 +333,17 @@
         nextButton.addEventListener('click', nextSlide);
 
         // Thêm sự kiện click cho các chỉ báo
+        const indicators = document.querySelectorAll('.indicator');
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
                 goToSlide(index);
             });
         });
-    });
 
+        // Cài đặt biến isTransitioning để kiểm tra trạng thái hiệu ứng chuyển đổi
+        let isTransitioning = false;
+
+        // Tự động chuyển slide sau một khoảng thời gian
+        setInterval(nextSlide, 5000);
+    });
 </script>

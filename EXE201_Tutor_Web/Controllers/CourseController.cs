@@ -15,6 +15,18 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/Choice");
         }
 
+        public IActionResult SearchPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SearchProcess()
+        {
+            return View("SearchPage");
+        }
+
+
         public IActionResult UniversityOnlineTutorRegister()
         {
             return View("University/OnlineTutorRegister");
