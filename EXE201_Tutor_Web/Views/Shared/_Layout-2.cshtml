@@ -130,7 +130,7 @@
                     <a href="@Url.Action("Profile", "User")" class="button"><span class="user">Người Dùng</span></a>
                 </div>
                 <div class="button-2">
-                    <form>
+                    <form asp-action="SearchProcess" asp-controller="Course">
                         <button type="submit" class="rectangle-3"><span class="search">Tìm kiếm</span></button>
                         <input class="tim-kiem-mon-hoc" placeholder="Tìm kiếm môn học" style="background: transparent;" />
                         <div class="vector"></div>
