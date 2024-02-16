@@ -132,9 +132,12 @@
 
     .flex-row-ff {
         position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
         width: calc(1440 * var(--rpx));
         height: calc(341 * var(--rpx));
-        margin: calc(38 * var(--rpx)) 0 0 calc(2 * var(--rpx));
+        margin: calc(38 * var(--rpx)) 0 calc(20 * var(--rpx)) calc(2 * var(--rpx));
         z-index: 40;
     }
 
@@ -142,7 +145,7 @@
         position: absolute;
         width: calc(236 * var(--rpx));
         height: calc(264 * var(--rpx));
-        top: 0;
+        top: calc(30 * var(--rpx));
         left: calc(92 * var(--rpx));
         background: url(./assets/images/3bb3a2f5595668b366994461aa93a474014fe617.png) no-repeat center;
         background-size: cover;
@@ -173,7 +176,7 @@
     }
 
     .rectangle-d {
-        position: absolute;
+        position: relative;
         width: calc(1440 * var(--rpx));
         height: calc(310 * var(--rpx));
         top: 0;
@@ -406,6 +409,28 @@
         white-space: nowrap;
         z-index: 42;
     }
+
+    .video {
+        width: calc(100% / 2); /* Độ rộng của video là 1/3 của rectangle-d */
+        margin-top: 15%; /* Margin top là 10% của rectangle-d */
+    }
+
+    .flex-row {
+        display: flex;
+        align-items: center;
+    }
+
+        .flex-row > span {
+            margin-right: 10px;
+        }
+
+    .element-course {
+        position: relative;
+        width: calc(33.33% - 20px); /* Chiếm 1/3 chiều rộng của flex container và cách nhau 20px */
+        margin-right: 20px; /* Khoảng cách giữa các element-course */
+        margin-bottom: calc(400 * var(--rpx)); /* Khoảng cách giữa các dòng */
+    }
+
 </style>
 <div class="material-symbols-search-rounded"></div>
 <div class="rectangle-7">
@@ -418,43 +443,91 @@
             Giảm 20% cho khóa học đầu tiên
         </button>
     </div>
-    <span class="software-engineer">#Software engineer</span><span class="graphic-design">#Graphic Design</span><span class="language">#Language</span>
+    <span class="software-engineer">#Software engineer</span>
+    <span class="graphic-design">#Graphic Design</span>
+    <span class="language">#Language</span>
 </div>
 <div class="flex-row-ff">
-    <div class="rectangle-a">
-        <img src="./img/course/cpp_icon.png"/>
-    </div>
-    <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course")" class="rectangle-b">
-        <img src="./img/course/English teacher-pana.png" />
-    </a>
-    <div class="rectangle-c">
-        <div class="rectangle-d">
-            <span class="tinh-nang-dang-phat-trien">Tính năng đang phát triển</span>
-            <div class="flex-row">
-                <span class="c-basic">C+++ Cơ Bản</span><span class="tieng-anh-co-ban">Tiếng anh cơ bản</span>
-            </div>
-            <div class="flex-row-aa">
-                <span class="time">Time: 02/Th09 - 02/Th10 </span><span class="time-e">Time: 07/Th06 - 07/Th07</span>
-            </div>
-            <div class="flex-row-c">
-                <span class="mo-ta">
-                    Mô tả: 4 tuần học cơ bản.<br />Có bài test giữa khóa và cuối
-                    khóa.
-                </span><span class="mo-ta-tuan-hoc">
-                    Mô tả: 4 tuần học cơ bản.<br />Có bài test giữa khóa và cuối
-                    khóa.
-                </span>
-            </div>
-            <div class="flex-row-cb">
-                <span class="software-engineer-f">#Software Engineer </span>
-                <span class="fundamental-of-english-grammar">
-                    #Fundamental Of English Grammar
-                </span>
-            </div>
-            <div class="flex-row-b">
-                <span class="ky-thuat-phan-mem">#Kỹ Thuật Phần Mềm </span>
-                <span class="ngon-ngu-anh">#Ngôn Ngữ Anh </span>
+    <div class="element-course">
+        <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course")" class="rectangle-a">
+            <img src="./img/course/cpp_icon.png" />
+        </a>
+        <div class="rectangle-c">
+            <div class="rectangle-d">
+                <span class="tinh-nang-dang-phat-trien">Tính năng đang phát triển</span>
+                <div class="flex-row">
+                    <span class="c-basic">C+++ Cơ Bản</span>
+                    <video class="video" controls loop>
+                        <source src="../video/english/week_1/Family.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="flex-row-aa">
+                    <span class="time">Time: 02/Th09 - 02/Th10 </span>
+                </div>
+                <div class="flex-row-c">
+                    <span class="mo-ta">
+                        Mô tả: 4 tuần học cơ bản.<br />Có bài test giữa khóa và cuối
+                        khóa.
+                    </span>
+                </div>
+                <div class="flex-row-cb">
+                    <span class="software-engineer-f">#Software Engineer </span>
+                </div>
+                <div class="flex-row-b">
+                    <span class="ky-thuat-phan-mem">#Kỹ Thuật Phần Mềm </span>
+                </div>
             </div>
         </div>
     </div>
+    <div class="element-course">
+        <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course")" class="rectangle-a">
+            <img src="./img/course/English teacher-pana.png" />
+        </a>
+        <div class="rectangle-c">
+            <div class="rectangle-d">
+                <span class="tinh-nang-dang-phat-trien"></span>
+                <div class="flex-row">
+                    <span class="c-basic">Tiếng Anh Cơ Bản</span>
+                    <video class="video" controls loop>
+                        <source src="../video/english/week_1/Family.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="flex-row-aa">
+                    <span class="time">Time: 02/Th09 - 02/Th10 </span>
+                </div>
+                <div class="flex-row-c">
+                    <span class="mo-ta">
+                        Mô tả: 4 tuần học cơ bản.<br />Có bài test giữa khóa và cuối
+                        khóa.
+                    </span>
+                </div>
+                <div class="flex-row-cb">
+                    <span class="software-engineer-f">#Fundamental Of English Grammar </span>
+                </div>
+                <div class="flex-row-b">
+                    <span class="ky-thuat-phan-mem">#Ngôn Ngữ Anh</span>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<script>
+    // Lấy phần tử .main-container
+    var mainContainer = document.querySelector('.main-container');
+
+    // Lấy chiều cao ban đầu của .main-container
+    var initialHeight = mainContainer.offsetHeight;
+
+    // Lấy danh sách các phần tử .element-course
+    var elementCourses = document.querySelectorAll('.element-course');
+
+    // Tính toán và cập nhật chiều cao mới của .main-container dựa trên công thức mới
+    function updateMainContainerHeight() {
+        var newHeight = 997 + (elementCourses.length * 350); // Sử dụng công thức mới
+        mainContainer.style.height = newHeight + 'px'; // Cập nhật chiều cao mới
+    }
+
+    // Gọi hàm cập nhật chiều cao mỗi khi thêm phần tử mới
+    updateMainContainerHeight();
+
+</script>
