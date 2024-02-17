@@ -2,7 +2,7 @@
 
 namespace EXE201_Tutor_Web_API.Dto
 {
-    public class OnCourseDetailDto : OnCourseDetail
+    public class OnCourseraDetailDto : OnCourseraDetail
     {
         public List<OnMoocDto>? OnMoocDtos { get; set; }
 

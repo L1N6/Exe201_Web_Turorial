@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EXE201_Tutor_Web_API.Entites
 {
-    public class OnCourseDetail
+    public class OnCourseraDetail
     {
         [Key]
         public int OnCourseDetailId { get; set; }
@@ -19,7 +19,7 @@ namespace EXE201_Tutor_Web_API.Entites
         [ForeignKey("OnCourse")]
         public int? OnCourseId { get; set; }
 
-        public virtual OnCourse? OnCourse { get; set; }
+        public virtual OnCoursera? OnCourse { get; set; }
 
         // Add navigation properties for related entities
         public virtual ICollection<OnMooc>? OnMoocs { get; set; }

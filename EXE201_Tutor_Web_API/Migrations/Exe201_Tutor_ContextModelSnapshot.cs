@@ -34,7 +34,12 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
                     b.HasKey("CourseraId");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Coursera");
                 });
@@ -123,7 +128,7 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.ToTable("MoocDetail");
                 });
 
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourse", b =>
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCoursera", b =>
                 {
                     b.Property<int>("OnCourseId")
                         .ValueGeneratedOnAdd()
@@ -138,19 +143,19 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.HasKey("OnCourseId");
 
                     b.HasIndex("CourseraId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("StudentId");
 
-                    b.ToTable("OnCourse");
+                    b.ToTable("OnCoursera");
                 });
 
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseDetail", b =>
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseraDetail", b =>
                 {
                     b.Property<int>("OnCourseDetailId")
                         .ValueGeneratedOnAdd()
@@ -237,9 +242,9 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.ToTable("OnMoocDetail");
                 });
 
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.User", b =>
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Student", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("StudentId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -263,16 +268,57 @@ namespace EXE201_Tutor_Web_API.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Role")
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("StudentId");
+
+                    b.ToTable("Student");
+                });
+
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Teacher", b =>
+                {
+                    b.Property<int>("TeacherId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Avatar")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("UserId");
+                    b.HasKey("TeacherId");
 
-                    b.ToTable("User");
+                    b.ToTable("Teacher");
+                });
+
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Coursera", b =>
+                {
+                    b.HasOne("EXE201_Tutor_Web_API.Entites.Teacher", "Teacher")
+                        .WithMany("Courseras")
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.CourseraDetail", b =>
@@ -308,28 +354,28 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Navigation("Mooc");
                 });
 
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourse", b =>
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCoursera", b =>
                 {
                     b.HasOne("EXE201_Tutor_Web_API.Entites.Coursera", "Coursera")
                         .WithMany("OnCourses")
                         .HasForeignKey("CourseraId");
 
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("EXE201_Tutor_Web_API.Entites.Student", "Student")
+                        .WithMany("OnCourseras")
+                        .HasForeignKey("StudentId");
 
                     b.Navigation("Coursera");
 
-                    b.Navigation("User");
+                    b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseDetail", b =>
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseraDetail", b =>
                 {
                     b.HasOne("EXE201_Tutor_Web_API.Entites.CourseraDetail", "CourseraDetail")
                         .WithMany("OnCourseDetails")
                         .HasForeignKey("CourseraDetailId");
 
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.OnCourse", "OnCourse")
+                    b.HasOne("EXE201_Tutor_Web_API.Entites.OnCoursera", "OnCourse")
                         .WithMany("OnCourseDetails")
                         .HasForeignKey("OnCourseId");
 
@@ -344,7 +390,7 @@ namespace EXE201_Tutor_Web_API.Migrations
                         .WithMany("OnMoocs")
                         .HasForeignKey("MoocId");
 
-                    b.HasOne("EXE201_Tutor_Web_API.Entites.OnCourseDetail", "OnCourseDetail")
+                    b.HasOne("EXE201_Tutor_Web_API.Entites.OnCourseraDetail", "OnCourseDetail")
                         .WithMany("OnMoocs")
                         .HasForeignKey("OnCourseDetailId");
 
@@ -394,12 +440,12 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Navigation("OnMoocDetails");
                 });
 
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourse", b =>
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCoursera", b =>
                 {
                     b.Navigation("OnCourseDetails");
                 });
 
-            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseDetail", b =>
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnCourseraDetail", b =>
                 {
                     b.Navigation("OnMoocs");
                 });
@@ -407,6 +453,16 @@ namespace EXE201_Tutor_Web_API.Migrations
             modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.OnMooc", b =>
                 {
                     b.Navigation("OnMoocDetails");
+                });
+
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Student", b =>
+                {
+                    b.Navigation("OnCourseras");
+                });
+
+            modelBuilder.Entity("EXE201_Tutor_Web_API.Entites.Teacher", b =>
+                {
+                    b.Navigation("Courseras");
                 });
 #pragma warning restore 612, 618
         }
