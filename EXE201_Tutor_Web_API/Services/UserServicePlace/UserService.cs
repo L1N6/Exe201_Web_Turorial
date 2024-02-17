@@ -12,21 +12,20 @@ namespace EXE201_Tutor_Web_API.Services.UserServicePlace
 {
     public class UserService : BaseService<User, UserDto, int>
     {
-        private readonly IRepository<User, int> _userRepository;
+        private readonly UserRepository _userRepository; // Change IRepository<User, int> to UserRepository
         private readonly IMapper _mapper;
-        public UserService(IRepository<User, int> userRepository, IMapper mapper,UserRepository repository) : base(userRepository, mapper)
+
+        public UserService(UserRepository userRepository, IMapper mapper) // Change IRepository<User, int> to UserRepository
+            : base(userRepository, mapper)
         {
-            _userRepository = repository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
         public async Task<UserDto> GetUserByEmail(string email)
         {
-            var entity =  _userRepository.GetAll().Where(x=>x.Email == email).FirstOrDefault();
+            var entity = _userRepository.GetAll().Where(x => x.Email == email).FirstOrDefault(); // Call UserRepository specific method
             return _mapper.Map<UserDto>(entity);
         }
-
-      
-
     }
 }

@@ -39,7 +39,8 @@ namespace EXE201_Tutor_Web_API
             services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
             //DI Service and Repository
             //User
-            
+            services.AddScoped<UserRepository>();
+            services.AddScoped<UserService>();
 
         }
 
