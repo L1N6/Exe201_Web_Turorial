@@ -19,7 +19,7 @@ namespace EXE201_Tutor_Web_API.Controllers
             _baseservice = service;
         }
 
-        [HttpGet("{email}")]
+        [HttpGet("getbyemail/{email}")]
         public async Task<ActionResult<CommonResultDto<UserDto>>> GetByUserByEmail(string email)
         {
             try
