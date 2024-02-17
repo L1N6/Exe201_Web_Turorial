@@ -28,7 +28,7 @@ namespace EXE201_Tutor_Web_API
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddDbContext<Exe201_Tutor_Context>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString)));
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
@@ -39,8 +39,7 @@ namespace EXE201_Tutor_Web_API
             services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
             //DI Service and Repository
             //User
-            services.AddScoped<IRepository<User, int>, UserRepository>();
-            services.AddScoped<UserService>();
+            
 
         }
 
