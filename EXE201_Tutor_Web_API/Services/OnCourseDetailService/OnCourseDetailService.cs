@@ -12,7 +12,7 @@ namespace EXE201_Tutor_Web_API.Services.OnCourseDetailService
     {
         private readonly IRepository<OnCourseDetail, int> _onCourseDetailRepository;
         private readonly IMapper _mapper;
-        public OnCourseDetailService(IRepository<OnCourseDetail, int> onCourseDetailRepository, IMapper mapper, OnCourseDetailRepository repository) : base(onCourseDetailRepository, mapper)
+        public OnCourseDetailService(IRepository<OnCourseDetail, int> onCourseDetailRepository, IMapper mapper, OnCourseraDetailRepository repository) : base(onCourseDetailRepository, mapper)
         {
             _onCourseDetailRepository = repository;
             _mapper = mapper;

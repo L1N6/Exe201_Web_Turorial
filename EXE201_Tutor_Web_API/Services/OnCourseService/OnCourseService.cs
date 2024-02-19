@@ -11,7 +11,7 @@ namespace EXE201_Tutor_Web_API.Services.OnCourseService
     {
         private readonly IRepository<OnCourse, int> _onCourseRepository;
         private readonly IMapper _mapper;
-        public OnCourseService(IRepository<OnCourse, int> onCourseRepository, IMapper mapper, OnCourseRepository repository) : base(onCourseRepository, mapper)
+        public OnCourseService(IRepository<OnCourse, int> onCourseRepository, IMapper mapper, OnCourseraRepository repository) : base(onCourseRepository, mapper)
         {
             _onCourseRepository = repository;
             _mapper = mapper;
