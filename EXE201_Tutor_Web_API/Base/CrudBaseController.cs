@@ -51,6 +51,7 @@ namespace EXE201_Tutor_Web_API.Base
                 if (result == null)
                     return NotFound(new CommonResultDto<TEntityDto>("Resource not found"));
                 return Ok(new CommonResultDto<TEntityDto>(result));
+                
             }
             catch (Exception ex)
             {

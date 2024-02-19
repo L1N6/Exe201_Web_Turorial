@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using EXE201_Tutor_Web_API.Base.Repository;
+using AutoMapper.QueryableExtensions;
 
 namespace EXE201_Tutor_Web_API.Base.Service
 {
@@ -22,7 +23,7 @@ namespace EXE201_Tutor_Web_API.Base.Service
         public IQueryable<TEntityDto> GetAll()
         {
             var entities =  _repository.GetAll();
-            return _mapper.Map<IQueryable<TEntityDto>>(entities);
+            return entities.AsQueryable().ProjectTo<TEntityDto>(_mapper.ConfigurationProvider);
         }
 
         public async Task<TEntityDto> GetById(TPrimaryKey id)

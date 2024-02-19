@@ -19,7 +19,7 @@ namespace EXE201_Tutor_Web_API.Entites
 
         [ForeignKey("OnCourseDetail")]
         public int? OnCourseDetailId { get; set; }
-        public virtual OnCourseDetail? OnCourseDetail { get; set; }
+        public virtual OnCourseraDetail? OnCourseDetail { get; set; }
 
         // Add navigation properties for related entities
         public virtual ICollection<OnMoocDetail>? OnMoocDetails { get; set; }

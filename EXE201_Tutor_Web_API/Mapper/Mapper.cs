@@ -8,9 +8,13 @@ namespace EXE201_Tutor_Web_API.Mapper
     {
         public MappingProfile()
         {
-            // Configure mapping of User entity
-            CreateMap<User, UserDto>();
-            CreateMap<UserDto, User>();
+            // Configure mapping of Student entity
+            CreateMap<Student, StudentDto>();
+            CreateMap<StudentDto, Student>();
+
+            // Configure mapping of Teacher entity
+            CreateMap<Teacher, TeacherDto>();
+            CreateMap<TeacherDto, Teacher>();
 
             // Configure mapping of Coursera entity
             CreateMap<Coursera, CourseraDto>();
@@ -29,12 +33,12 @@ namespace EXE201_Tutor_Web_API.Mapper
             CreateMap<MoocDetailDto, MoocDetail>();
 
             // Configure mapping of OnCourse entity
-            CreateMap<OnCourse, OnCourseDto>();
-            CreateMap<OnCourseDto, OnCourse>();
+            CreateMap<OnCoursera, OnCourseraDto>();
+            CreateMap<OnCourseraDto, OnCoursera>();
 
             // Configure mapping of OnCourseDetail entity
-            CreateMap<OnCourseDetail, OnCourseDetailDto>();
-            CreateMap<OnCourseDetailDto, OnCourseDetail>();
+            CreateMap<OnCourseraDetail, OnCourseraDetailDto>();
+            CreateMap<OnCourseraDetailDto, OnCourseraDetail>();
 
             // Configure mapping of OnMooc entity
             CreateMap<OnMooc, OnMoocDto>();

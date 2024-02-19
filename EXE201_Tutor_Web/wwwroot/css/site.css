@@ -37,8 +37,7 @@ button {
 
 .main-container {
     position: relative;
-    width: 100vw; /* Độ rộng bằng với viewport width */
-    height: calc(997 * var(--rpx)); /* Giữ nguyên chiều cao */
+    height: calc(997 * var(--rpx)); 
     margin: 0 auto;
     background: #ffffff;
     overflow: hidden;

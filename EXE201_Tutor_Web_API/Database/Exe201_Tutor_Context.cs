@@ -10,10 +10,12 @@ namespace EXE201_Tutor_Web_API.Database
         public DbSet<CourseraDetail> CourseraDetail { get; set; }
         public DbSet<Mooc> Mooc { get; set; }
         public DbSet<MoocDetail> MoocDetail { get; set; }
-        public DbSet<OnCourseDetail> OnCourseDetail { get; set; }
+        public DbSet<OnCourseraDetail> OnCourseDetail { get; set; }
         public DbSet<OnMooc> OnMooc { get; set; }
         public DbSet<OnMoocDetail> OnMoocDetail { get; set; }
-        public DbSet<User> User { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Teacher> Teacher { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,13 +24,26 @@ namespace EXE201_Tutor_Web_API.Database
             modelBuilder.Entity<CourseraDetail>().HasKey(cd => cd.CourseraDetailId); // Primary key for CourseraDetail
             modelBuilder.Entity<Mooc>().HasKey(m => m.MoocId); // Primary key for Mooc
             modelBuilder.Entity<MoocDetail>().HasKey(md => md.MoocDetailId); // Primary key for MoocDetail
-            modelBuilder.Entity<OnCourse>().HasKey(oc => oc.OnCourseId); // Primary key for OnCourse
-            modelBuilder.Entity<OnCourseDetail>().HasKey(ocd => ocd.OnCourseDetailId); // Primary key for OnCourseDetail
+            modelBuilder.Entity<OnCoursera>().HasKey(oc => oc.OnCourseId); // Primary key for OnCourse
+            modelBuilder.Entity<OnCourseraDetail>().HasKey(ocd => ocd.OnCourseDetailId); // Primary key for OnCourseDetail
             modelBuilder.Entity<OnMooc>().HasKey(om => om.OnMoocId); // Primary key for OnMooc
             modelBuilder.Entity<OnMoocDetail>().HasKey(omd => omd.OnMoocDetailId); // Primary key for OnMoocDetail
-            modelBuilder.Entity<User>().HasKey(u => u.UserId); // Primary key for User
+            modelBuilder.Entity<Student>().HasKey(u => u.StudentId); // Primary key for Student
+            modelBuilder.Entity<Teacher>().HasKey(u => u.TeacherId); // Primary key for Teacher
 
             // Define relationships
+
+            // One-to-many relationship between Student and OnCourse
+            modelBuilder.Entity<Student>()
+                .HasMany(c => c.OnCourseras)
+                .WithOne(oc => oc.Student)
+                .HasForeignKey(oc => oc.StudentId);
+
+            // One-to-many relationship between Teacher and Course
+            modelBuilder.Entity<Teacher>()
+                .HasMany(c => c.Courseras)
+                .WithOne(oc => oc.Teacher)
+                .HasForeignKey(oc => oc.TeacherId);
 
             // One-to-many relationship between Coursera and OnCourse
             modelBuilder.Entity<Coursera>()
@@ -73,13 +88,13 @@ namespace EXE201_Tutor_Web_API.Database
                 .HasForeignKey(omd => omd.MoocDetailId);
 
             // One-to-many relationship between OnCourse and OnCourseDetail
-            modelBuilder.Entity<OnCourse>()
+            modelBuilder.Entity<OnCoursera>()
                 .HasMany(oc => oc.OnCourseDetails)
                 .WithOne(ocd => ocd.OnCourse)
                 .HasForeignKey(ocd => ocd.OnCourseId);
 
             // One-to-many relationship between OnCourseDetail and OnMooc
-            modelBuilder.Entity<OnCourseDetail>()
+            modelBuilder.Entity<OnCourseraDetail>()
                 .HasMany(ocd => ocd.OnMoocs)
                 .WithOne(om => om.OnCourseDetail)
                 .HasForeignKey(om => om.OnCourseDetailId);

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EXE201_Tutor_Web</title>
+    <link rel="icon" type="image/png" href="~/img/header/logo_with_background.png">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EXE201_Tutor_Web.styles.css" asp-append-version="true" />
@@ -138,35 +139,40 @@
             margin-top: calc(400 * var(--rpx));
             height: 400px;
         }
+
         .rectangle-6 {
-    position: relative;
-    width: calc(1440 * var(--rpx));
-    height: calc(59 * var(--rpx));
-    margin: 0 0 0 0;
-    background: #aec3fa;
-    z-index: 4;
-    overflow: hidden; /* Hide overflow to crop images */
-}
+            position: relative;
+            width: calc(1440 * var(--rpx));
+            height: calc(59 * var(--rpx));
+            margin: 0 0 0 0;
+            background: #aec3fa;
+            z-index: 4;
+            overflow: hidden; /* Hide overflow to crop images */
+        }
+
+        span {
+            margin-top: 5px;
+        }
 
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="rectangle">
-            <a href="@Url.Action("Index", "Home")" class="rectangle-1" >
+            <a href="@Url.Action("Index", "Home")" class="rectangle-1">
                 <img class="logo-image" src="../img/header/logo.png">
             </a>
             <span class="text-demo">DEMO </span>
-            <a href="@Url.Action("Index", "Home")" class="bombastic-learning-hub" >
+            <a href="@Url.Action("Index", "Home")" class="bombastic-learning-hub">
                 BOMBASTIC <br />LEARNING HUB
             </a>
-            <a href="@Url.Action("SignIn", "Access")" class="rectangle-2" >
+            <a href="@Url.Action("SignIn", "Access")" class="rectangle-2">
                 <span class="dang-nhap">Đăng nhập </span>
             </a>
-            <a href="@Url.Action("SignUp", "Access")" class="rectangle-3" >
+            <a href="@Url.Action("SignUp", "Access")" class="rectangle-3">
                 <span class="dang-ky">Đăng ký</span>
             </a>
-            <div class="rectangle-4"><img src="../img/header/avatar.jpg" alt=""></div>
+            <div class="rectangle-4"><img style="border-radius:50px" src="../img/header/avatar.jpg" alt=""></div>
             <div class="rectangle-5"><img src="../img/header/login.png" alt=""></div>
         </div>
         <div class="rectangle-6" ">
@@ -174,58 +180,47 @@
             <a href="@Url.Action("Index", "Home")" class="trang-chu">Trang chủ</a>
             <a href="@Url.Action("Detail", "Navigation")" class="thong-tin-chi-tiet">Thông tin chi tiết</a>
             <a href="@Url.Action("Student", "Navigation")" class="hoc-vien">Học viên</a>
-            <a href="@Url.Action("Job", "Navigation")" class="cong-viec">Công việc</a>   
+            <a href="@Url.Action("Job", "Navigation")" class="cong-viec">Công việc</a>
         </div>
         @RenderBody()
     </div>
     <footer>
-        <div class="chat-popup" onclick="toggleChat(event)">
-            <span>Chat with us</span>
-            <div class="chat-box" id="chatBox" onclick="stopPropagation(event)">
-                <div class="close-btn" onclick="toggleChat(event)">&times;</div>
-                <div class="chat-content">
-                    <p>Welcome! How can we assist you today?</p>
-                </div>
-                <div class="input-box">
-                    <input type="text" placeholder="Type your message..." />
-                    <button onclick="sendMessage()">Send</button>
-                </div>
-            </div>
+        <!-- Messenger Chat Plugin Code -->
+        <div id="fb-root"></div>
+
+        <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "261989540320207");
+            chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
+
+
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    xfbml: true,
+                    version: 'API-VERSION'
+                });
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+            @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
 <script>
-    function toggleChat(event) {
-        event.stopPropagation();
-        var chatBox = document.getElementById('chatBox');
-        chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'block' : 'none';
-    }
-
-    function toggleChatBox(event) {
-        event.stopPropagation();
-        var chatBox = document.getElementById('chatBox');
-        chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'block' : 'none';
-    }
-
-    function sendMessage(event) {
-        event.stopPropagation();
-        var inputBox = document.querySelector('.input-box input');
-        var message = inputBox.value.trim();
-
-        if (message !== '') {
-            var chatContent = document.querySelector('.chat-content');
-            chatContent.innerHTML += '<p>You: ' + message + '</p>';
-            inputBox.value = '';
-        }
-    }
-
-    function stopPropagation(event) {
-        event.stopPropagation();
-    }
 
     document.addEventListener("DOMContentLoaded", function () {
         let currentSlide = 0;
