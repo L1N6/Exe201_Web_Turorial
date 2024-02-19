@@ -1,6 +1,13 @@
-﻿namespace EXE201_Tutor_Web_API.Repositories.MoocDetailRepositoryPlace
+﻿using EXE201_Tutor_Web_API.Base.Repository;
+using EXE201_Tutor_Web_API.Database;
+using EXE201_Tutor_Web_API.Entites;
+
+namespace EXE201_Tutor_Web_API.Repositories.MoocDetailRepositoryPlace
 {
-    public class MoocDetailRepository
+    public class MoocDetailRepository : Repository<MoocDetail, int>
     {
+        public MoocDetailRepository(Exe201_Tutor_Context context) : base(context)
+        {
+        }
     }
 }

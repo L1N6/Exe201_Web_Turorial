@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EXE201_Tutor_Web_API.Base.Service;
 using Extension.Domain.Common;
 using Microsoft.AspNetCore.Mvc;
+using static EXE201_Tutor_Web_API.Constant.Enum;
 
 namespace EXE201_Tutor_Web_API.Base
 {
@@ -26,12 +27,18 @@ namespace EXE201_Tutor_Web_API.Base
         {
             try
             {
-                var result = await _baseService.GetAll();
+                var result =  _baseService.GetAll();
                 return Ok(new CommonResultDto<IEnumerable<TEntityDto>>(result));
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, new CommonResultDto<IEnumerable<TEntityDto>>(ex.Message));
+                return new CommonResultDto<IEnumerable<TEntityDto>>
+                {
+                    IsSuccessful = true,
+                    ErrorMessage = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    MessageCode = MessageCode.Exeption
+                };
             }
         }
 
@@ -47,7 +54,13 @@ namespace EXE201_Tutor_Web_API.Base
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, new CommonResultDto<TEntityDto>(ex.Message));
+                return new CommonResultDto<TEntityDto>
+                {
+                    IsSuccessful = true,
+                    ErrorMessage = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    MessageCode = MessageCode.Exeption
+                };
             }
         }
 
@@ -61,7 +74,13 @@ namespace EXE201_Tutor_Web_API.Base
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, new CommonResultDto<TEntityDto>(ex.Message));
+                return new CommonResultDto<TEntityDto>
+                {
+                    IsSuccessful = true,
+                    ErrorMessage = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    MessageCode = MessageCode.Exeption
+                };
             }
         }
 
@@ -75,7 +94,13 @@ namespace EXE201_Tutor_Web_API.Base
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, new CommonResultDto<TEntityDto>(ex.Message));
+                return new CommonResultDto<TEntityDto>
+                {
+                    IsSuccessful = true,
+                    ErrorMessage = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    MessageCode = MessageCode.Exeption
+                };
             }
         }
 
@@ -89,7 +114,13 @@ namespace EXE201_Tutor_Web_API.Base
             }
             catch (Exception ex)
             {
-                return StatusCode((int)HttpStatusCode.InternalServerError, new CommonResultDto<TEntityDto>(ex.Message));
+                return new CommonResultDto<TEntityDto>
+                {
+                    IsSuccessful = true,
+                    ErrorMessage = ex.Message,
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    MessageCode = MessageCode.Exeption
+                };
             }
         }
     }
