@@ -22,15 +22,18 @@ namespace EXE201_Tutor_Web_API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            
             var connectionString = Configuration.GetConnectionString("MyCnn");
             services.AddControllers();
             services.AddSwaggerGen();
+
             services.AddDbContext<Exe201_Tutor_Context>(options =>
             options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString)));
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
             });
+
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
@@ -49,7 +52,19 @@ namespace EXE201_Tutor_Web_API
                 app.UseSwaggerUI();
                 app.UseDeveloperExceptionPage();
             }
+           
+            app.UseAuthentication();
             app.UseAuthorization();
+            
+            app.UseCookiePolicy(new CookiePolicyOptions()
+            {
+                MinimumSameSitePolicy = SameSiteMode.None,
+                
+            });
+
+            app.UseCors("AllowOrigin");
+            app.UseHttpsRedirection();
+
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

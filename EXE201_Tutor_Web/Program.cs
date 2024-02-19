@@ -1,4 +1,6 @@
 using EXE201_Tutor_Web.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace EXE201_Tutor_Web
 {
@@ -7,7 +9,19 @@ namespace EXE201_Tutor_Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var services = builder.Services;
+            var configuration = builder.Configuration;
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            }).AddCookie().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            });
 
+            services.AddHttpClient();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
@@ -23,6 +37,7 @@ namespace EXE201_Tutor_Web
             app.UseSession();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
