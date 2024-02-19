@@ -4,7 +4,7 @@ using EXE201_Tutor_Web_API.Entites;
 
 namespace EXE201_Tutor_Web_API.Services.OnCourseDetailService
 {
-    public interface IOnCourseDetailService: IBaseService<OnCourseDetail, OnCourseDetailDto, int>
+    public interface IOnCourseDetailService: IBaseService<OnCourseraDetail, OnCourseraDetailDto, int>
     {
     }
 }

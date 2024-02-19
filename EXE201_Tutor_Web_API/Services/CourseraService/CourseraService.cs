@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EXE201_Tutor_Web_API.Base.Repository;
 using EXE201_Tutor_Web_API.Base.Service;
+using EXE201_Tutor_Web_API.Database;
 using EXE201_Tutor_Web_API.Dto;
 using EXE201_Tutor_Web_API.Entites;
 using EXE201_Tutor_Web_API.Repositories.CourseraRepositoryPlace;
@@ -23,6 +24,11 @@ namespace EXE201_Tutor_Web_API.Services.CourseraService
             var entities = _courseraRepository.GetAll().Include(x=>x.CourseraId);
             return _mapper.Map<IQueryable<CourseraDto>>(entities);
         }
+
+        //public List<Coursera> SearchCoursera(Exe201_Tutor_Context context, string name)
+        //{
+        //    return context.Coursera.Include(c => c.Teacher).Where(c => c.Name != null && c.Name.Contains(name)).ToList();    
+        //}
 
     }
 }

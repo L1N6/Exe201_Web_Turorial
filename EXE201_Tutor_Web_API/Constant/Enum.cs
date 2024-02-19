@@ -23,14 +23,7 @@ namespace EXE201_Tutor_Web_API.Constant
 
             [Description("Unexpected")]
             Exeption = 500,
-        }
-            Teacher = 1,
-            [Description("Student")]
-            Student = 2,
-
-        }
-     
-
+        }            
 
     }
 }
