@@ -8,7 +8,7 @@ namespace EXE201_Tutor_Web_API.Repositories.CourseraRepositoryPlace
     {
         private readonly Exe201_Tutor_Context _context;
         public CourseraRepository(Exe201_Tutor_Context context) : base(context)
-    {
+        {
             _context = context;
         }
     }

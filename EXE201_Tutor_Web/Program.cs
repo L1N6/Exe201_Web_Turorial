@@ -11,15 +11,15 @@ namespace EXE201_Tutor_Web
             var builder = WebApplication.CreateBuilder(args);
             var services = builder.Services;
             var configuration = builder.Configuration;
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            }).AddCookie().AddGoogle(googleOptions =>
-            {
-                googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-                googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
-            });
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            //}).AddCookie().AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            //});
 
             services.AddHttpClient();
             // Add services to the container.
