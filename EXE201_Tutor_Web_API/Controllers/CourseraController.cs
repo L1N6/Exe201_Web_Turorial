@@ -17,6 +17,7 @@ using System.Text.Json;
 using static EXE201_Tutor_Web_API.Constant.Enum;
 using System.Net;
 using Newtonsoft.Json;
+using EXE201_Tutor_Web_API.Dto.FilterDto;
 
 namespace EXE201_Tutor_Web_API.Controllers
 {
@@ -33,7 +34,7 @@ namespace EXE201_Tutor_Web_API.Controllers
 
 
         [HttpGet("GetAllCoursera")]
-        public async Task<ActionResult<CommonResultDto<IEnumerable<CourseraDto>>>> GetAllCoursera()
+        public async Task<ActionResult<CommonResultDto<List<CourseraDto>>>> GetAllCoursera()
         {
             try
             {
@@ -42,6 +43,48 @@ namespace EXE201_Tutor_Web_API.Controllers
                         .ThenInclude(cd => cd.Moocs)
                             .ThenInclude(m => m.MoocDetails)
                     .ToListAsync();
+                var courserasDto = _mapper.Map<List<CourseraDto>>(courserasWithDetails);
+                
+                // Configure JsonSerializerOptions to handle object cycles
+                var options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.Preserve
+                };
+
+                // Serialize the result using JsonSerializerOptions
+                var result = System.Text.Json.JsonSerializer.Serialize(courserasDto, options);
+                return Ok(result);
+
+            }
+            catch (Exception ex)
+            {
+                return new CommonResultDto<List<CourseraDto>>
+                {
+                    IsSuccessful = false,
+                    ErrorMessage = ex.Message,
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    MessageCode = MessageCode.Exeption
+                };
+            }
+        }
+
+        [HttpPost("GetCourseraBySearch")]
+        public async Task<ActionResult<CommonResultDto<IEnumerable<CourseraDto>>>> GetCourseraBySearch(CourseraFilterDto filter)
+        {
+            try
+            {
+                var courserasWithDetails = await _courseRepository.GetAll()
+                    .Include(c => c.CourseraDetails)
+                        .ThenInclude(cd => cd.Moocs)
+                            .ThenInclude(m => m.MoocDetails)
+                    .Where(x =>
+                        (filter.CourseraId == null || x.CourseraId == filter.CourseraId) &&
+                        (string.IsNullOrEmpty(filter.Name) || x.Name.Contains(filter.Name)) &&
+                        (filter.Date == null || x.Date == filter.Date) &&
+                        (string.IsNullOrEmpty(filter.Description) || x.Description.Contains(filter.Description)))
+                    .ToListAsync();
+                var courserasDto = _mapper.Map<List<CourseraDto>>(courserasWithDetails);
+                // Your other logic here
 
                 // Configure JsonSerializerOptions to handle object cycles
                 var options = new JsonSerializerOptions
@@ -50,23 +93,13 @@ namespace EXE201_Tutor_Web_API.Controllers
                 };
 
                 // Serialize the result using JsonSerializerOptions
-                var result = System.Text.Json.JsonSerializer.Serialize(courserasWithDetails, options);
-
-                // Deserialize using Newtonsoft.Json instead of System.Text.Json
-                List<CourseraDto> courseraDtos = JsonConvert.DeserializeObject<List<CourseraDto>>(result);
-
+                var result = System.Text.Json.JsonSerializer.Serialize(courserasDto, options);
                 return Ok(result);
-
             }
             catch (Exception ex)
             {
-                return new CommonResultDto<IEnumerable<CourseraDto>>
-                {
-                    IsSuccessful = false,
-                    ErrorMessage = ex.Message,
-                    StatusCode = HttpStatusCode.InternalServerError,
-                    MessageCode = MessageCode.Exeption
-                };
+                // Handle exceptions
+                return StatusCode(500, "Internal server error");
             }
         }
 
