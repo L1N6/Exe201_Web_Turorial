@@ -10,6 +10,7 @@ using EXE201_Tutor_Web_API.Database;
 using Microsoft.EntityFrameworkCore;
 using EXE201_Tutor_Web_API.Dto;
 using EXE201_Tutor_Web_API.Entites;
+using EXE201_Tutor_Web_API.Services.StudentService;
 
 namespace EXE201_Tutor_Web_API.Controllers
 {
@@ -90,6 +91,23 @@ namespace EXE201_Tutor_Web_API.Controllers
             else
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStudent(Student student)
+        {
+            try
+            {
+                
+                StudentService stdsv = new StudentService(Student, StudentDto, iny);
+                // Lưu thay đổi vào cơ sở dữ liệu
+                await _context.SaveChangesAsync();
+                return Ok(_context.Student.ToList()); // Trả về mã 200 OK nếu thành công
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }
