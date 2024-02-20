@@ -8,7 +8,6 @@
         Task<TEntity> AddAsync(TEntity entity); // Change return type to Task<TEntity>
         Task<TEntity> UpdateAsync(TEntity entity); // Change return type to Task<TEntity>
         Task DeleteByIdAsync(TPrimaryKey id); // Change parameter type to TPrimaryKey
-        Task<int> SaveChangesAsync(); // Change return type to Task<int>
     }
 }
 

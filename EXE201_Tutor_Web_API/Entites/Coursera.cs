@@ -11,7 +11,10 @@ namespace EXE201_Tutor_Web_API.Entites
         public DateTime? Date { get; set; }
         public string? Description { get; set; }
 
-        public virtual ICollection<OnCourse>? OnCourses { get; set; }
+        [ForeignKey("Teacher")]
+        public int? TeacherId { get; set; }
+        public virtual Teacher? Teacher { get; set; }
+        public virtual ICollection<OnCoursera>? OnCourses { get; set; }
         public virtual ICollection<CourseraDetail>? CourseraDetails { get; set; }
     }
 }

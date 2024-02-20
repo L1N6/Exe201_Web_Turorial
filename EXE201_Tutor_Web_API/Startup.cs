@@ -6,8 +6,6 @@ using EXE201_Tutor_Web_API.Database;
 using EXE201_Tutor_Web_API.Dto;
 using EXE201_Tutor_Web_API.Entites;
 using EXE201_Tutor_Web_API.Mapper;
-using EXE201_Tutor_Web_API.Repositories.UserRepositoryPlace;
-using EXE201_Tutor_Web_API.Services.UserServicePlace;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -24,23 +22,25 @@ namespace EXE201_Tutor_Web_API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            
             var connectionString = Configuration.GetConnectionString("MyCnn");
             services.AddControllers();
             services.AddSwaggerGen();
+
             services.AddDbContext<Exe201_Tutor_Context>(options =>
-            options.UseSqlServer(connectionString));
+            options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString)));
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
             });
+
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
             //DI Service and Repository
-            //User
-            services.AddScoped<IRepository<User, int>, UserRepository>();
-            services.AddScoped<UserService>();
+            //Student
+            
 
         }
 
@@ -52,7 +52,19 @@ namespace EXE201_Tutor_Web_API
                 app.UseSwaggerUI();
                 app.UseDeveloperExceptionPage();
             }
+           
+            app.UseAuthentication();
             app.UseAuthorization();
+            
+            app.UseCookiePolicy(new CookiePolicyOptions()
+            {
+                MinimumSameSitePolicy = SameSiteMode.None,
+                
+            });
+
+            app.UseCors("AllowOrigin");
+            app.UseHttpsRedirection();
+
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
