@@ -154,6 +154,7 @@
             margin-top: 5px;
         }
 
+
     </style>
 </head>
 <body>
@@ -166,13 +167,30 @@
             <a href="@Url.Action("Index", "Home")" class="bombastic-learning-hub">
                 BOMBASTIC <br />LEARNING HUB
             </a>
-            <a href="@Url.Action("SignIn", "Access")" class="rectangle-2">
-                <span class="dang-nhap">Đăng nhập </span>
-            </a>
-            <a href="@Url.Action("SignUp", "Access")" class="rectangle-3">
-                <span class="dang-ky">Đăng ký</span>
-            </a>
-            <div class="rectangle-4"><img style="border-radius:50px" src="../img/header/avatar.jpg" alt=""></div>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a href="@Url.Action("SignIn", "Access")" class="rectangle-2">
+                    <span class="dang-nhap">Đăng nhập </span>
+                </a>
+                <a href="@Url.Action("SignUp", "Access")" class="rectangle-3">
+                    <span class="dang-ky">Đăng ký</span>
+                </a>
+            }
+            else
+            {
+
+                <a href="@Url.Action("Logout", "User")" class="rectangle-2">
+                    <span class="dang-nhap">Log out </span>
+                </a>
+            }
+
+            <div class="rectangle-4" >
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <img style="border-radius: 50px;" src="../img/header/avatar.jpg" alt="">
+                    <p style="margin-left: 5px;">@User.Identity.Name!</p>
+                }
+            </div>
             <div class="rectangle-5"><img src="../img/header/login.png" alt=""></div>
         </div>
         <div class="rectangle-6" ">
