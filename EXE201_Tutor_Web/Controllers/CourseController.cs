@@ -145,5 +145,14 @@ namespace EXE201_Tutor_Web.Controllers
             TempData["LayoutType"] = "Layout_2";
             return View("University/English/FourthWeek/Discussion/Index");
         }
+        public IActionResult UniversityEnglishCourseFourthWeekAssignmentSubmit(IFormFile docxFile)
+        {
+            if (docxFile != null && docxFile.Length > 0)
+            {
+
+            }
+            TempData["LayoutType"] = "Layout_2";
+            return View("University/English/FourthWeek/Assignment/Index");
+        }
     }
 }

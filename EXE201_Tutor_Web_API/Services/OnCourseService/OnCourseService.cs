@@ -7,11 +7,11 @@ using EXE201_Tutor_Web_API.Repositories.OnCourseRepositoryPlace;
 
 namespace EXE201_Tutor_Web_API.Services.OnCourseService
 {
-    public class OnCourseService : BaseService<OnCourse, OnCourseDto, int>
+    public class OnCourseService : BaseService<OnCoursera, OnCourseraDto, int>
     {
-        private readonly IRepository<OnCourse, int> _onCourseRepository;
+        private readonly IRepository<OnCoursera, int> _onCourseRepository;
         private readonly IMapper _mapper;
-        public OnCourseService(IRepository<OnCourse, int> onCourseRepository, IMapper mapper, OnCourseRepository repository) : base(onCourseRepository, mapper)
+        public OnCourseService(IRepository<OnCoursera, int> onCourseRepository, IMapper mapper, OnCourseRepository repository) : base(onCourseRepository, mapper)
         {
             _onCourseRepository = repository;
             _mapper = mapper;

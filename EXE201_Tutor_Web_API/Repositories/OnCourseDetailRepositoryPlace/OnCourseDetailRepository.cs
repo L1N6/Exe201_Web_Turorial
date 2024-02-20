@@ -4,7 +4,7 @@ using EXE201_Tutor_Web_API.Entites;
 
 namespace EXE201_Tutor_Web_API.Repositories.OnCourseDetailRepositoryPlace
 {
-    public class OnCourseDetailRepository : Repository<OnCourseDetail, int>
+    public class OnCourseDetailRepository : Repository<OnCourseraDetail, int>
     {
         public OnCourseDetailRepository(Exe201_Tutor_Context context) : base(context)
         {

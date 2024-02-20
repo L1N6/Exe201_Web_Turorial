@@ -6,6 +6,7 @@ using EXE201_Tutor_Web_API.Database;
 using EXE201_Tutor_Web_API.Dto;
 using EXE201_Tutor_Web_API.Entites;
 using EXE201_Tutor_Web_API.Mapper;
+using EXE201_Tutor_Web_API.Services.MailService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -26,6 +27,11 @@ namespace EXE201_Tutor_Web_API
             var connectionString = Configuration.GetConnectionString("MyCnn");
             services.AddControllers();
             services.AddSwaggerGen();
+            services.AddOptions();
+
+            services.AddTransient<ISendMailService, SendMailService>();
+            var mailsettings = Configuration.GetSection("MailSettings");  
+            services.Configure<MailSettingDto>(mailsettings);
 
             services.AddDbContext<Exe201_Tutor_Context>(options =>
             options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString)));
@@ -69,7 +75,22 @@ namespace EXE201_Tutor_Web_API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGet("/testmail", async context => {
+
+                    var sendmailservice = context.RequestServices.GetService<ISendMailService>();
+
+                    MailContentDto content = new MailContentDto
+                    {
+                        To = "quanglinhta186@gmail.com",
+                        Subject = "Kiểm tra thử",
+                        Body = "<p><strong>Xin chào xuanthulab.net</strong></p>"
+                    };
+
+                    await sendmailservice.SendMail(content);
+                    await context.Response.WriteAsync("Send mail");
+                });
             });
+
         }
     }
 }

@@ -22,5 +22,9 @@ namespace EXE201_Tutor_Web.Controllers
         {
             return View();
         }
+        public IActionResult ForgotPasswordProcess(string email)
+        {
+            return View();
+        }
     }
 }
