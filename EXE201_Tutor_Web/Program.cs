@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.Extensions.Configuration;
 
-namespace EXE201_Tutor_Web
+
+using EXE201_Tutor_Web;
+
+namespace Extension
 {
     public class Program
     {
@@ -48,5 +51,14 @@ namespace EXE201_Tutor_Web
 
             app.Run();
         }
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }

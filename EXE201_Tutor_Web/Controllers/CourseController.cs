@@ -1,12 +1,21 @@
 ﻿using EXE201_Tutor_Web.Models;
+using EXE201_Tutor_Web_API.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EXE201_Tutor_Web.Controllers
 {
     public class CourseController : Controller
     {
+
+        public readonly Exe201_Tutor_Context _context;
+        public CourseController(Exe201_Tutor_Context context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            var x = _context.Coursera.ToList();
             return View();
         }
 

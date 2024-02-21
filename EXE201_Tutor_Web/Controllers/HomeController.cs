@@ -15,6 +15,8 @@ namespace EXE201_Tutor_Web.Controllers
 
         public IActionResult Index()
         {
+
+
             return View();
         }
 

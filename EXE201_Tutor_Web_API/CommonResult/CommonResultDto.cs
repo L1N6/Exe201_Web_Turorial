@@ -19,12 +19,6 @@ namespace Extension.Domain.Common
     {
         public T DataResult { get; set; }
 
-        public CommonResultDto(string errorMessage)
-        {
-            IsSuccessful = false;
-            ErrorMessage = errorMessage;
-        }
-       
         public CommonResultDto(T dataSuccess)
         {
             DataResult = dataSuccess;
@@ -32,6 +26,13 @@ namespace Extension.Domain.Common
             StatusCode = HttpStatusCode.OK;
             ErrorMessage = string.Empty;
         }
+        public CommonResultDto(string errorMessage)
+        {
+            IsSuccessful = false;
+            ErrorMessage = errorMessage;
+        }
+       
+       
 
         
 
