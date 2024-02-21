@@ -99,8 +99,17 @@ namespace EXE201_Tutor_Web_API.Controllers
         {
             try
             {
-                
-                StudentService stdsv = new StudentService(Student, StudentDto, iny);
+
+                Student stu = new Student()
+                {
+                    Name = student.Name,
+                    UserName = student.UserName,
+                    Email = student.Email,
+                    Password = student.Password,
+                    Address = student.Address,
+                    Avatar = student.Avatar,
+                    OnCourseras = new List<OnCoursera>()
+                };
                 // Lưu thay đổi vào cơ sở dữ liệu
                 await _context.SaveChangesAsync();
                 return Ok(_context.Student.ToList()); // Trả về mã 200 OK nếu thành công

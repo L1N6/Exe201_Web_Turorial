@@ -6,6 +6,7 @@ using EXE201_Tutor_Web_API.Database;
 using EXE201_Tutor_Web_API.Dto;
 using EXE201_Tutor_Web_API.Entites;
 using EXE201_Tutor_Web_API.Mapper;
+using EXE201_Tutor_Web_API.Repositories.StudentRepositoryPlace;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
@@ -50,9 +51,11 @@ namespace EXE201_Tutor_Web_API
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
+            services.AddScoped<Repository<Student, int>, StudentRepository>();
+            services.AddScoped<StudentRepository>();
             //DI Service and Repository
             //Student
-            
+
 
         }
 

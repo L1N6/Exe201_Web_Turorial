@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace EXE201_Tutor_Web_API.Entites
 {
@@ -12,8 +13,9 @@ namespace EXE201_Tutor_Web_API.Entites
         public string? Email { get; set; }
         public string? Password { get; set; }
         public string? Address { get; set; }
+
         public string? Avatar { get; set; }
-        [JsonIgnore]
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual ICollection<OnCoursera>? OnCourseras { get; set; }
     }
 }
