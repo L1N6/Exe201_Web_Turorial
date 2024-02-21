@@ -277,59 +277,97 @@
     
 
 </style>
-<form asp-action="SignUpProcess" asp-controller="Access">
+<form asp-controller="Access" asp-action="SignUpProcess" method="post" onsubmit="return validatePassword()">
     <div class="material-symbols-search"></div>
     <span class="dang-ky-7">ĐĂNG KÝ</span>
 
     <span class="e-mail">E-mail</span>
     <div class="rectangle-8">
-        <input type="text"/>
+        <input name="Email" required type="email" />
     </div>
 
     <span class="ho-va-ten">Họ và tên</span>
     <div class="rectangle-a">
-        <input type="text" />
+        <input name="Name" required type="text" />
     </div>
 
     <span class="ten-dang-nhap">Tên đăng nhập</span>
     <div class="rectangle-b">
-        <input type="text" />
+        <input name="UserName" required type="text" />
     </div>
 
     <span class="mat-khau">Mật khẩu</span>
     <div class="rectangle-c">
-        <input type="password" />
+        <input id="password" name="Password" required type="password" />
     </div>
 
     <span class="xac-nhan-mat-khau">Xác nhận mật khẩu</span>
     <div class="rectangle-d">
-        <input type="password" />
+        <input id="confirmPassword" name="ConfirmPassword" required type="password" />
     </div>
 
     <div class="rectangle-9">
-        <img src="~/img/tutor/desktop-computer-pana.jpg" />
-        <input type="file" id="fileInput" style="display: none;" onchange="displaySelectedFileName()" />
+        <img id="avatarImage" src="~/img/tutor/desktop-computer-pana.jpg" />
+        <input name="Avatar" type="file" id="fileInput" style="display: none;" onchange="displaySelectedFileName()" />
     </div>
 
-    <span class="cap-nhat-anh-dai-dien" onclick="openFileInput()">Cập nhật ảnh đại diện</span>
+    <span id="avatarLabel" class="cap-nhat-anh-dai-dien" onclick="openFileInput()">Cập nhật ảnh đại diện</span>
 
     <button type="submit" class="rectangle-e">
         <span class="dang-ky-f">Đăng ký</span>
+        
     </button>
+    <div id="confirmPasswordError" style="color: red;display: none ">Mật khẩu không khớp.</div>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+   
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var confirmPasswordError = document.getElementById("confirmPasswordError");
+
+            if (password !== confirmPassword) {
+                confirmPasswordError.style.display = "block";
+                return false;
+            } else {
+                confirmPasswordError.style.display = "none";
+                return true;
+            }
+        }
+    </script>
 </form>
 
 <script>
     function openFileInput() {
         document.getElementById('fileInput').click();
     }
-    function displaySelectedFileName() {
+
+    async function displaySelectedFileName() {
         const fileInput = document.getElementById('fileInput');
-        const fileNameSpan = document.querySelector('.cap-nhat-anh-dai-dien');
+        const avatarImage = document.getElementById('avatarImage');
+        const avatarLabel = document.getElementById('avatarLabel');
 
         if (fileInput.files.length > 0) {
-            fileNameSpan.textContent = `${fileInput.files[0].name}`;
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                avatarImage.src = e.target.result;
+                avatarLabel.textContent = file.name; // Update label text with file name
+            };
+
+            reader.readAsDataURL(file);
         } else {
-            fileNameSpan.textContent = 'Cập nhật ảnh đại diện';
+            avatarImage.src = "~/img/tutor/desktop-computer-pana.jpg";
+            avatarLabel.textContent = "Cập nhật ảnh đại diện"; // Revert label text
         }
     }
+    
 </script>
+

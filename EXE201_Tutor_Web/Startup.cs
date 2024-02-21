@@ -41,6 +41,7 @@ namespace EXE201_Tutor_Web
             services.AddTransient<ISendMailService, SendMailService>();
             var mailsettings = Configuration.GetSection("MailSettings");
             services.Configure<MailSetting>(mailsettings);
+            services.AddHttpClient();
             // Configure MVC
             services.AddControllersWithViews();
 

@@ -32,4 +32,8 @@
     <Folder Include="wwwroot\img\avatar_account\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\student\" />
+  </ItemGroup>
+
 </Project>
