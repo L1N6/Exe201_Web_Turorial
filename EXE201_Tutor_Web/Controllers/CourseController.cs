@@ -1,6 +1,9 @@
 ﻿using EXE201_Tutor_Web.Models;
 using EXE201_Tutor_Web.Database;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting.Internal;
+using MailKit;
+using EXE201_Tutor_Web_API.Services.MailService;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -8,14 +11,17 @@ namespace EXE201_Tutor_Web.Controllers
     {
 
         public readonly Exe201_Tutor_Context _context;
-        public CourseController(Exe201_Tutor_Context context)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly ISendMailService _mailService;
+        public CourseController(Exe201_Tutor_Context context, IWebHostEnvironment hostingEnvironment, ISendMailService mailService)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
+            _mailService = mailService;
         }
 
         public IActionResult Index()
         {
-            var x = _context.Coursera.ToList();
             return View();
         }
 
@@ -96,6 +102,7 @@ namespace EXE201_Tutor_Web.Controllers
         public IActionResult UniversityEnglishCourseSecondWeekLessonVideo(string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
+            ViewData["VideoName"] = videoName;
             return View("University/English/SecondWeek/Video/LessonVideo");
         }
 
@@ -124,6 +131,7 @@ namespace EXE201_Tutor_Web.Controllers
         public IActionResult UniversityEnglishCourseThirdWeekLessonVideo(string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
+            ViewData["VideoName"] = videoName;
             return View("University/English/ThirdWeek/Video/LessonVideo");
         }
 
@@ -158,10 +166,47 @@ namespace EXE201_Tutor_Web.Controllers
         {
             if (docxFile != null && docxFile.Length > 0)
             {
+                try
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "doc");
 
+                    string uniqueFileName = docxFile.FileName;
+
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        docxFile.CopyTo(fileStream);
+                    }
+                    MailContent content = new MailContent
+                    {
+                        To = "quanglinhta186@gmail.com",
+                        Subject = "Assigment Submit",
+                        Body = GenerateEmailBody("English", "Fourth Week", "Assignment", "Discuss the impact of technology on modern education"),
+                        fileName = uniqueFileName
+                    };
+                    _mailService.SendMail(content);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
             TempData["LayoutType"] = "Layout_2";
             return View("University/English/FourthWeek/Assignment/Index");
+        }
+
+        private string GenerateEmailBody(string courseName, string week, string assignmentType, string assignmentTopic)
+        {
+            string body = $@"
+            <p><strong>Xin chào,</strong></p>
+            <p>Dưới đây là thông tin về bài tập của khoá học {courseName}, tuần {week}.</p>
+            <p>Loại bài tập: {assignmentType}</p>
+            <p>Chủ đề bài tập: {assignmentTopic}</p>
+            <p>Vui lòng xem tệp đính kèm để tham khảo chi tiết.</p>
+            <p>Trân trọng,</p>";
+
+            return body;
         }
     }
 }

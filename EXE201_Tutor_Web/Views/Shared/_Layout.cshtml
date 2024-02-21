@@ -157,6 +157,10 @@
     </style>
 </head>
 <body>
+    @using Microsoft.AspNetCore.Http
+    @{
+        string studentEmail = Context.Session.GetString("AccountValid");
+    }
     <div class="main-container">
         <div class="rectangle">
             <a href="@Url.Action("Index", "Home")" class="rectangle-1">
@@ -166,12 +170,24 @@
             <a href="@Url.Action("Index", "Home")" class="bombastic-learning-hub">
                 BOMBASTIC <br />LEARNING HUB
             </a>
-            <a href="@Url.Action("SignIn", "Access")" class="rectangle-2">
-                <span class="dang-nhap">Đăng nhập </span>
-            </a>
-            <a href="@Url.Action("SignUp", "Access")" class="rectangle-3">
-                <span class="dang-ky">Đăng ký</span>
-            </a>
+            @if (studentEmail != null)
+            {
+                <a href="@Url.Action("Logout", "Access")" class="rectangle-2">
+                    <span class="dang-nhap">Đăng Xuất</span>
+                </a>
+                <a href="@Url.Action("Profile", "User")" class="rectangle-3">
+                    <span class="dang-ky">Người Dùng</span>
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("SignIn", "Access")" class="rectangle-2">
+                    <span class="dang-nhap">Đăng nhập </span>
+                </a>
+                <a href="@Url.Action("SignUp", "Access")" class="rectangle-3">
+                    <span class="dang-ky">Đăng ký</span>
+                </a>
+            }
             <div class="rectangle-4"><img style="border-radius:50px" src="../img/header/avatar.jpg" alt=""></div>
             <div class="rectangle-5"><img src="../img/header/login.png" alt=""></div>
         </div>
