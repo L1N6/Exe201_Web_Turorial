@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EXE201_Tutor_Web_API.Entites
+namespace EXE201_Tutor_Web.Entites
 {
     public class MoocDetail
     {
         [Key] // Primary Key
+
         public int MoocDetailId { get; set; }
 
         [ForeignKey("Mooc")]

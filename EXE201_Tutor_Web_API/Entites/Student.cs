@@ -5,6 +5,7 @@ namespace EXE201_Tutor_Web_API.Entites
     public class Student
     {
         [Key]
+
         public int StudentId { get; set; }
         public string Name { get; set; }
         public string UserName { get; set; }

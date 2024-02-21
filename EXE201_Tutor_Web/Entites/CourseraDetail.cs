@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EXE201_Tutor_Web_API.Entites
+namespace EXE201_Tutor_Web.Entites
 {
     public class CourseraDetail
     {
         [Key] // Primary Key
+
         public int CourseraDetailId { get; set; }
 
         [ForeignKey("Coursera")] // Foreign Key
