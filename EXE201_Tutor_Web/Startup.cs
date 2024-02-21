@@ -36,7 +36,7 @@ namespace EXE201_Tutor_Web
 
             // Configure authorization
             services.AddAuthorization();
-
+            services.AddHttpClient();
             // Configure MVC
             services.AddControllersWithViews();
 
