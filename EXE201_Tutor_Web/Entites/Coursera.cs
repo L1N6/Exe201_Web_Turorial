@@ -6,6 +6,7 @@ namespace EXE201_Tutor_Web.Entites
     public class Coursera
     {
         [Key]
+
         public int CourseraId { get; set; }
         public string? Name { get; set; }
         public DateTime? Date { get; set; }

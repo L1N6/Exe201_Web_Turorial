@@ -6,6 +6,7 @@ namespace EXE201_Tutor_Web_API.Entites
     public class OnMoocDetail
     {
         [Key]
+
         public int OnMoocDetailId { get; set; }
         public int? Score { get; set; }
         public string? Answer { get; set; }

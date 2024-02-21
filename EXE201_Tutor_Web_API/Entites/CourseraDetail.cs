@@ -6,6 +6,7 @@ namespace EXE201_Tutor_Web_API.Entites
     public class CourseraDetail
     {
         [Key] // Primary Key
+
         public int CourseraDetailId { get; set; }
 
         [ForeignKey("Coursera")] // Foreign Key

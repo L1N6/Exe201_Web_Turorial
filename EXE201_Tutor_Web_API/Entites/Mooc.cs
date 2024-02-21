@@ -6,6 +6,7 @@ namespace EXE201_Tutor_Web_API.Entites
     public class Mooc
     {
         [Key] // Primary Key
+
         public int MoocId { get; set; }
 
         [ForeignKey("CourseraDetail")]

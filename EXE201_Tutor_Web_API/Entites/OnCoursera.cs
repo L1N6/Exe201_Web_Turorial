@@ -6,6 +6,7 @@ namespace EXE201_Tutor_Web_API.Entites
     public class OnCoursera
     {
         [Key]
+
         public int OnCourseId { get; set; }
         public DateTime? Date { get; set; }
         public string? Status { get; set; }
