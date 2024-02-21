@@ -1,8 +1,8 @@
 ﻿
-using EXE201_Tutor_Web_API.Entites;
+using EXE201_Tutor_Web.Entites;
 using Microsoft.EntityFrameworkCore;
 
-namespace EXE201_Tutor_Web_API.Database
+namespace EXE201_Tutor_Web.Database
 {
     public class Exe201_Tutor_Context : DbContext
     {

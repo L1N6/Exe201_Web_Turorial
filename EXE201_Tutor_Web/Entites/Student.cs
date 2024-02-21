@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EXE201_Tutor_Web_API.Entites
+namespace EXE201_Tutor_Web.Entites
 {
     public class Student
     {

@@ -26,7 +26,7 @@ namespace Extension
             //});
 
             services.AddHttpClient();
-            services.AddOptions();                                         
+            services.AddOptions();
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();
             var app = builder.Build();
@@ -50,15 +50,13 @@ namespace Extension
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
-        }
             CreateHostBuilder(args).Build().Run();
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
     }
 }

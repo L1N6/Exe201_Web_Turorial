@@ -1,5 +1,5 @@
 ﻿using EXE201_Tutor_Web.Models;
-using EXE201_Tutor_Web_API.Database;
+using EXE201_Tutor_Web.Database;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EXE201_Tutor_Web.Controllers
