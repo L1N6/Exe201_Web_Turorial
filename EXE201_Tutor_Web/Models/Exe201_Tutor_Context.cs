@@ -6,6 +6,10 @@ namespace EXE201_Tutor_Web.Database
 {
     public class Exe201_Tutor_Context : DbContext
     {
+        public Exe201_Tutor_Context()
+        {
+        }
+
         public Exe201_Tutor_Context(DbContextOptions options) : base(options) { }
         public DbSet<Coursera> Coursera { get; set; }
         public DbSet<CourseraDetail> CourseraDetail { get; set; }

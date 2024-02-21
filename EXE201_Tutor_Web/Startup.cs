@@ -6,6 +6,8 @@ using Microsoft.Extensions.Hosting;
 using EXE201_Tutor_Web.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using EXE201_Tutor_Web_API.Services.MailService;
+using EXE201_Tutor_Web.Models;
 
 namespace EXE201_Tutor_Web
 {
@@ -22,7 +24,7 @@ namespace EXE201_Tutor_Web
         {
             // Configure session
             services.AddSession();
-
+            services.AddHttpClient();
             // Configure authentication
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
@@ -33,9 +35,12 @@ namespace EXE201_Tutor_Web
                     options.LoginPath = "/Account/Login";
                     options.AccessDeniedPath = "/Account/AccessDenied";
                 });
-
+            services.AddSession();
             // Configure authorization
             services.AddAuthorization();
+            services.AddTransient<ISendMailService, SendMailService>();
+            var mailsettings = Configuration.GetSection("MailSettings");
+            services.Configure<MailSetting>(mailsettings);
             services.AddHttpClient();
             // Configure MVC
             services.AddControllersWithViews();
@@ -64,12 +69,12 @@ namespace EXE201_Tutor_Web
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Course}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

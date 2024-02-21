@@ -25,6 +25,11 @@ namespace EXE201_Tutor_Web_API.Constant
             Exeption = 500,
         }
 
+        public enum SendMailResult
+        {
+            Success,
+            Failed
+        }
         public enum MoocDetailType
         {
             [Description("Quiz")]

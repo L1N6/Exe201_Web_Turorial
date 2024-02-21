@@ -36,5 +36,7 @@ namespace EXE201_Tutor_Web_API.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new CommonResultDto<IEnumerable<string>>(ex.Message));
             }
         }
+
+
     }
 }
