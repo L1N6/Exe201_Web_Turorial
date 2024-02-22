@@ -1,8 +1,6 @@
 ﻿using EXE201_Tutor_Web.Database;
 using EXE201_Tutor_Web.Entites;
 using Microsoft.AspNetCore.Hosting;
-using EXE201_Tutor_Web.Database;
-using EXE201_Tutor_Web.Entites;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,12 +14,6 @@ namespace EXE201_Tutor_Web.Controllers
 
         public AccessController(Exe201_Tutor_Context context, IWebHostEnvironment hostingEnvironment)
         {
-            _context = context;
-            _hostingEnvironment = hostingEnvironment;
-        }
-        public readonly Exe201_Tutor_Context _context;
-        private readonly IWebHostEnvironment _hostingEnvironment;
-        public AccessController(Exe201_Tutor_Context context, IWebHostEnvironment hostingEnvironment) { 
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
