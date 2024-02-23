@@ -80,7 +80,7 @@ namespace EXE201_Tutor_Web_API.Controllers
                     .Where(x =>
                         (filter.CourseraId == null || x.CourseraId == filter.CourseraId) &&
                         (string.IsNullOrEmpty(filter.Name) || x.Name.Contains(filter.Name)) &&
-                        (filter.Date == null || x.Date == filter.Date) &&
+                        (filter.Date == null || x.StartDate == filter.Date) &&
                         (string.IsNullOrEmpty(filter.Description) || x.Description.Contains(filter.Description)))
                     .ToListAsync();
                 var courserasDto = _mapper.Map<List<CourseraDto>>(courserasWithDetails);

@@ -9,8 +9,14 @@ namespace EXE201_Tutor_Web_API.Entites
 
         public int CourseraId { get; set; }
         public string? Name { get; set; }
-        public DateTime? Date { get; set; }
+        public string? CodeName { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public int TotalDate { get; set; }
         public string? Description { get; set; }
+        public string? Major { get; set; }
+        public string? HashTag { get; set; }
+        public string? Image { get; set; }
 
         [ForeignKey("Teacher")]
         public int? TeacherId { get; set; }
