@@ -16,6 +16,7 @@ namespace EXE201_Tutor_Web_API.Entites
         public virtual Coursera? Coursera { get; set; }
 
         public string? Name { get; set; }
+        public string? CodeName { get; set; }
         public DateTime? Date { get; set; }
         public string? Description { get; set; }
 

@@ -15,6 +15,7 @@ namespace EXE201_Tutor_Web_API.Entites
         // Navigation property for related Mooc
         public virtual Mooc? Mooc { get; set; }
         public string? Name { get; set; }
+        public string? CodeName { get; set; }
         public DateTime? Date { get; set; }
         public string? Content { get; set; }
         public int? TypeId { get; set; }

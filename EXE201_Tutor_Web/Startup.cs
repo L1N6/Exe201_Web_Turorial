@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using EXE201_Tutor_Web.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using EXE201_Tutor_Web_API.Services.MailService;
 using EXE201_Tutor_Web.Models;
+using EXE201_Tutor_Web.Entities;
 
 namespace EXE201_Tutor_Web
 {
@@ -45,9 +45,9 @@ namespace EXE201_Tutor_Web
             // Configure MVC
             services.AddControllersWithViews();
 
-            // Configure Entity Framework Core
+            //// Configure Entity Framework Core
             var connectionString = Configuration.GetConnectionString("MyCnn");
-            services.AddDbContext<Exe201_Tutor_Context>(options =>
+            services.AddDbContext<EXE_DataBaseContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
         }
 

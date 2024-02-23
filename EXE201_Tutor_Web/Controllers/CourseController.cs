@@ -1,27 +1,28 @@
 ﻿using EXE201_Tutor_Web.Models;
-using EXE201_Tutor_Web.Database;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting.Internal;
 using MailKit;
 using EXE201_Tutor_Web_API.Services.MailService;
+using EXE201_Tutor_Web.Entities;
 
 namespace EXE201_Tutor_Web.Controllers
 {
     public class CourseController : Controller
     {
 
-        public readonly Exe201_Tutor_Context _context;
+        public readonly EXE_DataBaseContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ISendMailService _mailService;
-        public CourseController(Exe201_Tutor_Context context, IWebHostEnvironment hostingEnvironment, ISendMailService mailService)
+        public CourseController(EXE_DataBaseContext context, IWebHostEnvironment hostingEnvironment, ISendMailService mailService)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
             _mailService = mailService;
         }
-
         public IActionResult Index()
         {
+            List<Coursera> courseras = _context.Courseras.ToList();
+            TempData["ListCoursera"] = courseras;
             return View();
         }
 

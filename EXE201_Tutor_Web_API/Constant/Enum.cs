@@ -33,13 +33,13 @@ namespace EXE201_Tutor_Web_API.Constant
         public enum MoocDetailType
         {
             [Description("Quiz")]
-            IsValid = 1,
+            IsQuiz = 1,
 
             [Description("Document")]
-            Success = 2,
+            IsDocument = 2,
 
             [Description("Video")]
-            NoContent = 3,
+            IsVideo = 3,
 
           
         }

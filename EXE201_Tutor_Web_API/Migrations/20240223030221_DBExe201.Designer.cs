@@ -3,6 +3,7 @@ using System;
 using EXE201_Tutor_Web_API.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EXE201_Tutor_Web_API.Migrations
 {
     [DbContext(typeof(Exe201_Tutor_Context))]
-    partial class Exe201_Tutor_ContextModelSnapshot : ModelSnapshot
+    [Migration("20240223030221_DBExe201")]
+    partial class DBExe201
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,9 +26,6 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Property<int>("CourseraId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("CodeName")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
@@ -68,9 +67,6 @@ namespace EXE201_Tutor_Web_API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("CodeName")
-                        .HasColumnType("longtext");
-
                     b.Property<int>("CourseraId")
                         .HasColumnType("int");
 
@@ -95,9 +91,6 @@ namespace EXE201_Tutor_Web_API.Migrations
                     b.Property<int>("MoocId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("CodeName")
-                        .HasColumnType("longtext");
 
                     b.Property<int>("CourseraDetailId")
                         .HasColumnType("int");
@@ -125,9 +118,6 @@ namespace EXE201_Tutor_Web_API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Answer")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("CodeName")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Content")
