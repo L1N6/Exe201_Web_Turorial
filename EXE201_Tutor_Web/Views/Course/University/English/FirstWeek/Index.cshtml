@@ -13,8 +13,7 @@
         height: calc(800 * var(--rpx));
         top: 0;
         left: calc(610.5 * var(--rpx));
-        background: linear-gradient(to top, rgba(23, 0, 168, 0.5), #A69FD400 60%), 
-        linear-gradient(to right, rgba(23, 0, 168, 0.5), #A69FD400 50%);
+        background: linear-gradient(to top, rgba(23, 0, 168, 0.5), #A69FD400 60%), linear-gradient(to right, rgba(23, 0, 168, 0.5), #A69FD400 50%);
         z-index: 16;
     }
 
@@ -526,6 +525,9 @@
         color: #E6EDFF;
     }
 </style>
+@{
+    int courseId = int.Parse(TempData["CourseId"] as string);
+}
 <div class="flex-row-a-div">
     <div class="line-div"></div>
     <div class="group-div-1">
@@ -564,7 +566,7 @@
     </div>
     <div class="button-group-9">
     </div>
-    <a href="@Url.Action("UniversityEnglishCourseFirstWeekVideo", "Course")" class="bat-dau">Bắt đầu</a>
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeekVideo", "Course", new { courseraId = courseId })" class="bat-dau">Bắt đầu</a>
 </div>
 <div class="flex-row-b">
     <div class="group-e"></div>

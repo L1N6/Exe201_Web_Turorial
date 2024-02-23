@@ -53,19 +53,23 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/CourseList");
         }
 
-        public IActionResult UniversityEnglishCourseSchedule()
+        public IActionResult UniversityEnglishCourseSchedule(int courseraId)
         {
             TempData["LayoutType"] = "Layout_2";
+            Coursera coursera = _context.Courseras.FirstOrDefault(c => c.CourseraId == courseraId);
+            TempData["Coursera"] = coursera;
             return View("University/English/Schedule");
         }
 
         //FirstWeek
-        public IActionResult UniversityEnglishCourseFirstWeek()
+        public IActionResult UniversityEnglishCourseFirstWeek(int courseraId, int courseraDetailId)
         {
             TempData["LayoutType"] = "Layout_2";
+            Coursera coursera = _context.Courseras.FirstOrDefault(c => c.CourseraId == courseraId);
+            TempData["Coursera"] = coursera;
             return View("University/English/FirstWeek/Index");
         }
-        public IActionResult UniversityEnglishCourseFirstWeekVideo()
+        public IActionResult UniversityEnglishCourseFirstWeekVideo(int courseraDetailId, int typeId)
         {
             TempData["LayoutType"] = "Layout_2";
             return View("University/English/FirstWeek/Video/Index");

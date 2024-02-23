@@ -497,7 +497,7 @@
     @foreach (var course in courseras)
     {
         <div class="element-course">
-            <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course")" class="rectangle-a">
+            <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course", new { courseraId = course.CourseraId })" class="rectangle-a">
                 <img src="~/img/course/@course.CodeName/@course.Image" />
             </a>
             <div class="rectangle-c">
