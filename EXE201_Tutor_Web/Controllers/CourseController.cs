@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting.Internal;
 using MailKit;
 using EXE201_Tutor_Web_API.Services.MailService;
 using EXE201_Tutor_Web.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -53,10 +54,13 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/CourseList");
         }
 
+        [HttpGet]
         public IActionResult UniversityEnglishCourseSchedule(int courseraId)
         {
             TempData["LayoutType"] = "Layout_2";
-            Coursera coursera = _context.Courseras.FirstOrDefault(c => c.CourseraId == courseraId);
+            Coursera coursera = _context.Courseras
+                        .Include(c => c.Courseradetails)
+                        .FirstOrDefault(c => c.CourseraId == courseraId);
             TempData["Coursera"] = coursera;
             return View("University/English/Schedule");
         }
@@ -65,13 +69,20 @@ namespace EXE201_Tutor_Web.Controllers
         public IActionResult UniversityEnglishCourseFirstWeek(int courseraId, int courseraDetailId)
         {
             TempData["LayoutType"] = "Layout_2";
-            Coursera coursera = _context.Courseras.FirstOrDefault(c => c.CourseraId == courseraId);
-            TempData["Coursera"] = coursera;
+            TempData["CourseraId"] = courseraId;
+            TempData["CourseraDetailId"] = courseraDetailId;
             return View("University/English/FirstWeek/Index");
         }
-        public IActionResult UniversityEnglishCourseFirstWeekVideo(int courseraDetailId, int typeId)
+        public IActionResult UniversityEnglishCourseFirstWeekVideo(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.Moocdetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.Onmoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/FirstWeek/Video/Index");
         }
 

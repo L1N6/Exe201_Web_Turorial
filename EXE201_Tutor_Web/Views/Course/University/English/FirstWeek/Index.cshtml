@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities;
+<style>
     .flex-row-a-div {
         position: absolute;
         width: calc(1356 * var(--rpx));
@@ -526,7 +527,14 @@
     }
 </style>
 @{
-    int courseId = int.Parse(TempData["CourseId"] as string);
+    int courseId = 0;
+    int courseDetailId = 0;
+
+    if (TempData["CourseraId"] != null && TempData["CourseraDetailId"] != null)
+    {
+        courseId = int.Parse(TempData["CourseraId"].ToString());
+        courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
+    }
 }
 <div class="flex-row-a-div">
     <div class="line-div"></div>
@@ -566,7 +574,7 @@
     </div>
     <div class="button-group-9">
     </div>
-    <a href="@Url.Action("UniversityEnglishCourseFirstWeekVideo", "Course", new { courseraId = courseId })" class="bat-dau">Bắt đầu</a>
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeekVideo", "Course", new {courseDetailId = courseDetailId, codeName = "video"})" class="bat-dau">Bắt đầu</a>
 </div>
 <div class="flex-row-b">
     <div class="group-e"></div>

@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities;
+<style>
     .flex-row-a {
         position: relative;
         width: calc(1210 * var(--rpx));
@@ -538,7 +539,19 @@
         z-index: 53;
     }
 </style>
+@{
+    Coursera coursera;
 
+    if (TempData.ContainsKey("Coursera"))
+    {
+        coursera = TempData["Coursera"] as Coursera;
+    }
+    else
+    {
+        coursera = null;
+    }
+    int courseraDetailId = coursera.Courseradetails.Where(cd => cd.CodeName.Equals("week_1")).FirstOrDefault().CourseraDetailId;
+}
 <div class="flex-row-a">
     <div class="rectangle-4">
         <span class="time">Time: 07/Th06 - 07/Th07</span>
@@ -592,7 +605,8 @@
     <span class="quiz">Quiz</span>
 </div>
 <div class="flex-row-16">
-    <a href="@Url.Action("UniversityEnglishCourseFirstWeek", "Course")" class="group-17">
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeek","Course",
+    new { courseraId = coursera.CourseraId, courseraDetailId = courseraDetailId })" class="group-17">
         <span class="bat-dau">Bắt đầu</span>
     </a>
 </div>
