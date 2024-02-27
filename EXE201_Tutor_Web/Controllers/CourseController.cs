@@ -59,7 +59,7 @@ namespace EXE201_Tutor_Web.Controllers
         {
             TempData["LayoutType"] = "Layout_2";
             Coursera coursera = _context.Courseras
-                        .Include(c => c.Courseradetails)
+                        .Include(c => c.CourseraDetails)
                         .FirstOrDefault(c => c.CourseraId == courseraId);
             TempData["Coursera"] = coursera;
             return View("University/English/Schedule");
@@ -77,9 +77,9 @@ namespace EXE201_Tutor_Web.Controllers
         {
             TempData["LayoutType"] = "Layout_2";
             Mooc mooc = _context.Moocs
-                .Include(m => m.Moocdetails)
+                .Include(m => m.MoocDetails)
                 .Include(m => m.CourseraDetail)
-                .Include(m => m.Onmoocs)
+                .Include(m => m.OnMoocs)
                 .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
             TempData["Mooc"] = mooc;
             TempData["CourseraDetailId"] = courseDetailId;

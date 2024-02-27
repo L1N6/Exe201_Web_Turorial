@@ -550,7 +550,7 @@
     {
         coursera = null;
     }
-    int courseraDetailId = coursera.Courseradetails.Where(cd => cd.CodeName.Equals("week_1")).FirstOrDefault().CourseraDetailId;
+    int courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals("week_1")).FirstOrDefault().CourseraDetailId;
 }
 <div class="flex-row-a">
     <div class="rectangle-4">

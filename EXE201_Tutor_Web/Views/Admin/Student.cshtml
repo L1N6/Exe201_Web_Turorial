@@ -1,0 +1,86 @@
+﻿@model List<EXE201_Tutor_Web.Entities.Student>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quản lý Sinh viên</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Background đẹp cho trang admin */
+        body {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHZsHA8laY6bpt5w5pjVdxEIrEKwhLqhT3cvenNdArMA&s'); /* Đường dẫn đến hình nền */
+            background-size: cover; /* Phủ đầy phần tử cha */
+            background-repeat: no-repeat; /* Không lặp lại hình ảnh */
+            background-position: center center; /* Canh giữa */
+            background-attachment: fixed; /* Giữ ảnh nền cố định khi cuộn trang */
+            height: 100vh; /* Đảm bảo chiều cao của body bằng với trình duyệt */
+            margin: 0; /* Loại bỏ khoảng trắng */
+            padding: 0; /* Loại bỏ khoảng trắng */
+        }
+
+        /* Định dạng cho ảnh avatar */
+        .avatar {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 50%; /* Bo tròn ảnh avatar */
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Dashboard -->
+        <div class="row mt-3 mb-3">
+            <div class="col-md-3">
+                <div class="bg-light p-3 rounded">
+                    <h1 class="text-primary mb-3">Admin</h1>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="#" class="text-dark">Trang chủ</a></li>
+                        <li class="list-group-item"><a href="#" class="text-dark">Quản lý Khóa học</a></li>
+                        <li class="list-group-item"><a href="#" class="text-dark">Quản lý Sinh viên</a></li>
+                        <li class="list-group-item"><a href="#" class="text-dark">Quản lý Giáo viên</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-9 mb-3" style="height: 80vh; overflow-y: auto;">
+                <div class="bg-light p-3 rounded h-100">
+                    <h2 class="text-dark mb-3">Quản lý Sinh viên</h2>
+                    <table class="table table-bordered table-striped">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>StudentID</th>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>UserName</th>
+                                <th>Avatar</th>
+                                <th>Address</th>
+                                <th>Số lượng Coursera đã đăng ký</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var student in Model)
+                            {
+                                <tr>
+                                    <td>@student.StudentId</td>
+                                    <td>@student.Email</td>
+                                    <td>@student.Name</td>
+                                    <td>@student.UserName</td>
+                                    <td style="text-align: center;"><img src="@(!string.IsNullOrEmpty(student.Avatar) ? student.Avatar : "/img/header/avatar.jpg")" alt="Avatar" class="avatar" style="max-width: 30px; max-height: 30px; display: block; margin: auto;" /></td>
+                                    <td>@(student.Address != null ? student.Address : "Chưa điền")</td>
+                                    <td class="text-success" style="text-align: center;">@(student.OnCourseras != null ? student.OnCourseras.Count : 0)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</body>
+</html>

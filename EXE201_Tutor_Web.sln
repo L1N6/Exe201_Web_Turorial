@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EXE201_Tutor_Web", "EXE201_Tutor_Web\EXE201_Tutor_Web.csproj", "{8967DB5A-8561-43FA-A07C-F4F8C4F0986B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXE201_Tutor_Web_API", "EXE201_Tutor_Web_API\EXE201_Tutor_Web_API.csproj", "{2DE4068D-DB61-4110-BD9B-6B2C93664865}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EXE201_Tutor_Web_API", "EXE201_Tutor_Web_API\EXE201_Tutor_Web_API.csproj", "{2DE4068D-DB61-4110-BD9B-6B2C93664865}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

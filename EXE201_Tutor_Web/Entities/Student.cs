@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿    using Newtonsoft.Json;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text.Json.Serialization;
 
-namespace EXE201_Tutor_Web.Entities
-{
-    public partial class Student
+    namespace EXE201_Tutor_Web.Entities
     {
-        public Student()
+        public class Student
         {
-            Oncourseras = new HashSet<Oncoursera>();
+            [Key]
+
+            public int StudentId { get; set; }
+            public string Name { get; set; }
+            public string UserName { get; set; }
+            public string Email { get; set; }
+            public string Password { get; set; }
+            public string? Address { get; set; }
+            public string? Avatar { get; set; }
+            public virtual ICollection<OnCoursera>? OnCourseras { get; set; }
         }
-
-        public int StudentId { get; set; }
-        public string Name { get; set; } = null!;
-        public string UserName { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string Password { get; set; } = null!;
-        public string? Address { get; set; }
-        public string? Avatar { get; set; }
-
-        public virtual ICollection<Oncoursera> Oncourseras { get; set; }
     }
-}

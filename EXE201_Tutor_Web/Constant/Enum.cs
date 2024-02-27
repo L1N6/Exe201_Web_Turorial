@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace EXE201_Tutor_Web_API.Constant
+namespace EXE201_Tutor_Web.Constant
 {
     public class Enum
     {
@@ -33,16 +33,15 @@ namespace EXE201_Tutor_Web_API.Constant
         public enum MoocDetailType
         {
             [Description("Quiz")]
-            Quiz = 1,
+            IsQuiz = 1,
 
             [Description("Document")]
-            Document = 2,
+            IsDocument = 2,
 
             [Description("Video")]
-            Video = 3,
-            [Description("Test")]
-            Test = 4,
+            IsVideo = 3,
 
+          
         }
 
 

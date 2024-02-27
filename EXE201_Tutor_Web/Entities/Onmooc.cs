@@ -1,24 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EXE201_Tutor_Web.Entities
 {
-    public partial class Onmooc
+    public class OnMooc
     {
-        public Onmooc()
-        {
-            Onmoocdetails = new HashSet<Onmoocdetail>();
-        }
+        [Key]
 
         public int OnMoocId { get; set; }
         public int? TotalScore { get; set; }
         public DateTime? DateSuccess { get; set; }
         public string? Status { get; set; }
-        public int? MoocId { get; set; }
-        public int? OnCourseDetailId { get; set; }
 
+        [ForeignKey("Mooc")]
+        public int? MoocId { get; set; }
         public virtual Mooc? Mooc { get; set; }
-        public virtual Oncoursedetail? OnCourseDetail { get; set; }
-        public virtual ICollection<Onmoocdetail> Onmoocdetails { get; set; }
+
+        [ForeignKey("OnCourseDetail")]
+        public int? OnCourseDetailId { get; set; }
+        public virtual OnCourseraDetail? OnCourseDetail { get; set; }
+
+        // Add navigation properties for related entities
+        public virtual ICollection<OnMoocDetail>? OnMoocDetails { get; set; }
+
     }
 }

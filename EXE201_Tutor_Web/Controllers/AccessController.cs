@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using EXE201_Tutor_Web_API.Entites;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -138,7 +137,7 @@ namespace EXE201_Tutor_Web.Controllers
             return View("SignUpSuccess");
         } 
 
-        }
+        
         public IActionResult ForgotPassword()
         {
             return View();

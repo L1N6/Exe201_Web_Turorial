@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EXE201_Tutor_Web.Entities
 {
-    public partial class Oncoursera
+    public class OnCoursera
     {
-        public Oncoursera()
-        {
-            Oncoursedetails = new HashSet<Oncoursedetail>();
-        }
+        [Key]
 
         public int OnCourseId { get; set; }
         public DateTime? Date { get; set; }
         public string? Status { get; set; }
-        public int? StudentId { get; set; }
-        public int? CourseraId { get; set; }
 
-        public virtual Coursera? Coursera { get; set; }
+        [ForeignKey("Student")]
+        public int? StudentId { get; set; }
         public virtual Student? Student { get; set; }
-        public virtual ICollection<Oncoursedetail> Oncoursedetails { get; set; }
+
+        [ForeignKey("Coursera")]
+        public int? CourseraId { get; set; }
+        public virtual Coursera? Coursera { get; set; }
+
+        // Navigation properties for related entities
+        public virtual ICollection<OnCourseraDetail>? OnCourseDetails { get; set; }
+
     }
 }

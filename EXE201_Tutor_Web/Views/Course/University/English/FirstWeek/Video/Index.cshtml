@@ -644,7 +644,7 @@
     <button class="group-button-12"></button><span class="quiz-span">Quiz</span>
 </div>
 <div class="flex-row-ddc">
-    @foreach (var item in mooc.Moocdetails)
+    @foreach (var item in mooc.MoocDetails)
     {
         <a href="@Url.Action("UniversityEnglishCourseFirstWeekLessonVideo", "Course", new { videoName = @item.Name })" class="rectangle-13"
            style="background: url(../img/course/english/w1/@item.CodeName) no-repeat center;background-size:cover"></a>
@@ -652,7 +652,7 @@
     }
 </div>
 <div class="flex-row-b">
-    @foreach (var item in mooc.Moocdetails)
+    @foreach (var item in mooc.MoocDetails)
     {
         <span class="content-span">@item.Name</span>
     }

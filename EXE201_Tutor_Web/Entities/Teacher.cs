@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EXE201_Tutor_Web.Entities
 {
-    public partial class Teacher
+    public class Teacher
     {
-        public Teacher()
-        {
-            Courseras = new HashSet<Coursera>();
-        }
+        [Key]
 
         public int TeacherId { get; set; }
-        public string Name { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string Address { get; set; } = null!;
-        public string Avatar { get; set; } = null!;
-
-        public virtual ICollection<Coursera> Courseras { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string Avatar { get; set; }
+        public virtual ICollection<Coursera>? Courseras { get; set; }
     }
 }
