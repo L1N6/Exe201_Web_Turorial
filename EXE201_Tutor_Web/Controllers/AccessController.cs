@@ -1,5 +1,5 @@
-﻿using EXE201_Tutor_Web.Database;
-using EXE201_Tutor_Web.Entites;
+﻿
+using EXE201_Tutor_Web.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

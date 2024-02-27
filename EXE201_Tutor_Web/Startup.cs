@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using EXE201_Tutor_Web_API.Services.MailService;
 using EXE201_Tutor_Web.Models;
 using EXE201_Tutor_Web.Service.VnPayService;
+using EXE201_Tutor_Web.Entities;
 
 namespace EXE201_Tutor_Web
 {
