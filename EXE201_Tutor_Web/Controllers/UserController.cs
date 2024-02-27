@@ -1,6 +1,4 @@
 ﻿using EXE201_Tutor_Web.Models;
-using EXE201_Tutor_Web_API.Dto;
-using EXE201_Tutor_Web_API.Entites;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
