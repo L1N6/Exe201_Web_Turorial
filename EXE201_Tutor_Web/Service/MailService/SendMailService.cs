@@ -1,6 +1,8 @@
 ﻿using EXE201_Tutor_Web.Models;
 using MailKit.Security;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
@@ -16,11 +18,13 @@ namespace EXE201_Tutor_Web_API.Services.MailService
         private readonly MailSetting mailSettings;
 
         private readonly ILogger<SendMailService> logger;
-        public SendMailService(IOptions<MailSetting> _mailSettings, ILogger<SendMailService> _logger)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public SendMailService(IOptions<MailSetting> _mailSettings, ILogger<SendMailService> _logger, IWebHostEnvironment webHostEnvironment)
         {
             mailSettings = _mailSettings.Value;
             logger = _logger;
             logger.LogInformation("Create SendMailService");
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // Gửi email, theo nội dung trong mailContent
@@ -34,20 +38,21 @@ namespace EXE201_Tutor_Web_API.Services.MailService
 
             var builder = new BodyBuilder();
             builder.HtmlBody = mailContent.Body;
-            
 
-            string filePath = "D:\\FBT_DaiHocDauHangCongNghe\\SPRING24\\PRN231\\Code\\EXE201_Tutor_Web\\EXE201_Tutor_Web\\wwwroot\\doc\\" + mailContent.fileName;
+
+            string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, "doc");
+            string filePath = Path.Combine(folderPath, mailContent.fileName);
             byte[] fileBytes;
-            
+
             if (System.IO.File.Exists(filePath))
             {
                 FileStream file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                using(var ms = new MemoryStream())
+                using (var ms = new MemoryStream())
                 {
                     file.CopyTo(ms);
-                    fileBytes= ms.ToArray();
+                    fileBytes = ms.ToArray();
                 }
-                builder.Attachments.Add("attachment.docx", fileBytes, ContentType.Parse("application/octet-stream"));
+                builder.Attachments.Add(mailContent.fileName, fileBytes, ContentType.Parse("application/octet-stream"));
             }
             email.Body = builder.ToMessageBody();
 

@@ -114,17 +114,18 @@ namespace EXE201_Tutor_Web.Controllers
             HttpContext.Session.Remove("AccountValid");
             return RedirectToAction("Index", "Home");
         }
-        //public IActionResult SignInProcess(string email, string password)
-        //{
-        //    Student student = _context.Student.Where(s => s.Email.Contains(email) && s.Password.Contains(password)).FirstOrDefault();
-        //    if (student == null)
-        //    {
-        //        TempData["InvalidAccountMessage"] = "Tài khoản không hợp lệ";
-        //        return RedirectToAction("SignIn");
-        //    }
-        //    HttpContext.Session.SetString("AccountValid", student.Email);
-        //    return RedirectToAction("Index", "Home");
-        //}
+
+        public IActionResult SignInProcess(string email, string password)
+        {
+            Student student = _context.Students.Where(s => s.Email.Contains(email) && s.Password.Contains(password)).FirstOrDefault();
+            if (student == null)
+            {
+                TempData["InvalidAccountMessage"] = "Tài khoản không hợp lệ";
+                return RedirectToAction("SignIn");
+            }
+            HttpContext.Session.SetString("AccountValid", student.Email);
+            return RedirectToAction("Index", "Home");
+        }
 
         public IActionResult SignUpProcess()
         {

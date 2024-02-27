@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\course\english\w1\video\" />
     <Folder Include="wwwroot\img\student\" />
   </ItemGroup>
 
