@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using EXE201_Tutor_Web_API.Services.MailService;
 using EXE201_Tutor_Web.Models;
+using EXE201_Tutor_Web.Service.VnPayService;
 
 namespace EXE201_Tutor_Web
 {
@@ -49,6 +50,8 @@ namespace EXE201_Tutor_Web
             var connectionString = Configuration.GetConnectionString("MyCnn");
             services.AddDbContext<Exe201_Tutor_Context>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            // 
+            services.AddScoped<VnPayService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
