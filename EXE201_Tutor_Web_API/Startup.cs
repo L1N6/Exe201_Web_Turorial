@@ -9,6 +9,9 @@ using EXE201_Tutor_Web_API.Mapper;
 using EXE201_Tutor_Web_API.Repositories.CourseraRepositoryPlace;
 using EXE201_Tutor_Web_API.Repositories.OnCoursereRepositoryPlace;
 using EXE201_Tutor_Web_API.Services.MailService;
+using EXE201_Tutor_Web_API.Repositories.StudentRepositoryPlace;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -42,13 +45,27 @@ namespace EXE201_Tutor_Web_API
                 mc.AddProfile(new MappingProfile());
             });
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            }).AddCookie().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
             services.AddScoped(typeof(IBaseService<,,>), typeof(BaseService<,,>));
+            services.AddScoped<Repository<Student, int>, StudentRepository>();
+            services.AddScoped<StudentRepository>();
             //DI Service and Repository
             //Student
             services.AddScoped<CourseraRepository>();
+
+
 
         }
 
