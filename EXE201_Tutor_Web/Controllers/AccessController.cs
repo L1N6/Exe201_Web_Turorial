@@ -8,10 +8,10 @@ namespace EXE201_Tutor_Web.Controllers
     public class AccessController : Controller
     {
 
-        public readonly Exe201_Tutor_Context _context;
+        public readonly EXE_DataBaseContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public AccessController(Exe201_Tutor_Context context, IWebHostEnvironment hostingEnvironment)
+        public AccessController(EXE_DataBaseContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
@@ -31,14 +31,15 @@ namespace EXE201_Tutor_Web.Controllers
         public async Task<IActionResult> SignUpProcess(Student student, IFormFile avatarFile)
         {
 
-            var existingStudent = await _context.Student.FirstOrDefaultAsync(s =>s.Email.Equals(student.Email));
+            var existingStudent = await _context.Students.FirstOrDefaultAsync(s => s.Email.Equals(student.Email));
             if (existingStudent != null)
             {
                 // Email already exists, set error message in TempData and redirect back to registration page
                 TempData["ErrorMessage"] = "Email already exists.";
                 return RedirectToAction("SignUp");
             }
-            else {
+            else
+            {
 
                 // Save the filename to the student object
                 if (avatarFile != null)
@@ -49,7 +50,7 @@ namespace EXE201_Tutor_Web.Controllers
                 }
 
                 // Save the student details to the database
-                _context.Student.Add(student);
+                _context.Students.Add(student);
                 await _context.SaveChangesAsync();
 
                 // Redirect to a success page or perform any other action
@@ -113,17 +114,17 @@ namespace EXE201_Tutor_Web.Controllers
             HttpContext.Session.Remove("AccountValid");
             return RedirectToAction("Index", "Home");
         }
-        public IActionResult SignInProcess(string email, string password)
-        {
-            Student student = _context.Student.Where(s => s.Email.Contains(email) && s.Password.Contains(password)).FirstOrDefault();
-            if (student == null)
-            {
-                TempData["InvalidAccountMessage"] = "Tài khoản không hợp lệ";
-                return RedirectToAction("SignIn");
-            }
-            HttpContext.Session.SetString("AccountValid", student.Email);
-            return RedirectToAction("Index", "Home");
-        }
+        //public IActionResult SignInProcess(string email, string password)
+        //{
+        //    Student student = _context.Student.Where(s => s.Email.Contains(email) && s.Password.Contains(password)).FirstOrDefault();
+        //    if (student == null)
+        //    {
+        //        TempData["InvalidAccountMessage"] = "Tài khoản không hợp lệ";
+        //        return RedirectToAction("SignIn");
+        //    }
+        //    HttpContext.Session.SetString("AccountValid", student.Email);
+        //    return RedirectToAction("Index", "Home");
+        //}
 
         public IActionResult SignUpProcess()
         {

@@ -1,4 +1,5 @@
-﻿
+﻿@using EXE201_Tutor_Web.Entities;
+
 <style>
     .material-symbols-search-rounded {
         position: relative;
@@ -215,6 +216,7 @@
     .c-basic {
         flex-shrink: 0;
         position: relative;
+        width: calc(500 * var(--rpx));
         height: calc(40 * var(--rpx));
         color: #614ce0;
         font-family: Inter, var(--default-font-family);
@@ -222,9 +224,10 @@
         font-weight: 700;
         line-height: calc(40 * var(--rpx));
         text-align: left;
-        white-space: nowrap;
         z-index: 26;
+        overflow-wrap: break-word;
     }
+    
 
     .tieng-anh-co-ban {
         flex-shrink: 0;
@@ -432,6 +435,18 @@
     }
 
 </style>
+@{
+    List<Coursera> courseras = null; // Khai báo ở ngoài phạm vi của block if và else
+
+    if (TempData.ContainsKey("ListCoursera"))
+    {
+        courseras = TempData["ListCoursera"] as List<Coursera>;
+    }
+    else
+    {
+        courseras = null;
+    }
+}
 <div class="material-symbols-search-rounded"></div>
 <div class="rectangle-7">
     <div class="rectangle-8">
@@ -456,7 +471,7 @@
             <div class="rectangle-d">
                 <span class="tinh-nang-dang-phat-trien">Tính năng đang phát triển</span>
                 <div class="flex-row">
-                    <span class="c-basic">C+++ Cơ Bản</span>
+                    <span class="c-basic">C++ Cơ Bản</span>
                     <video class="video" controls loop>
                         <source src="../video/english/week_1/Family.mp4" type="video/mp4">
                     </video>
@@ -471,45 +486,47 @@
                     </span>
                 </div>
                 <div class="flex-row-cb">
-                    <span class="software-engineer-f">#Software Engineer </span>
+                    <span class="software-engineer-f">#Software Engineer</span>
                 </div>
                 <div class="flex-row-b">
-                    <span class="ky-thuat-phan-mem">#Kỹ Thuật Phần Mềm </span>
+                    <span class="ky-thuat-phan-mem">#Kỹ Thuật Phần Mềm</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="element-course">
-        <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course")" class="rectangle-a">
-            <img src="./img/course/English teacher-pana.png" />
-        </a>
-        <div class="rectangle-c">
-            <div class="rectangle-d">
-                <span class="tinh-nang-dang-phat-trien"></span>
-                <div class="flex-row">
-                    <span class="c-basic">Tiếng Anh Cơ Bản</span>
-                    <video class="video" controls loop>
-                        <source src="../video/english/week_1/Family.mp4" type="video/mp4">
-                    </video>
-                </div>
-                <div class="flex-row-aa">
-                    <span class="time">Time: 02/Th09 - 02/Th10 </span>
-                </div>
-                <div class="flex-row-c">
-                    <span class="mo-ta">
-                        Mô tả: 4 tuần học cơ bản.<br />Có bài test giữa khóa và cuối
-                        khóa.
-                    </span>
-                </div>
-                <div class="flex-row-cb">
-                    <span class="software-engineer-f">#Fundamental Of English Grammar </span>
-                </div>
-                <div class="flex-row-b">
-                    <span class="ky-thuat-phan-mem">#Ngôn Ngữ Anh</span>
+    @foreach (var course in courseras)
+    {
+        <div class="element-course">
+            <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course")" class="rectangle-a">
+                <img src="~/img/course/@course.CodeName/@course.Image" />
+            </a>
+            <div class="rectangle-c">
+                <div class="rectangle-d">
+                    <span class="tinh-nang-dang-phat-trien"></span>
+                    <div class="flex-row">
+                        <span class="c-basic">@course.Name</span>
+                        <video class="video" controls loop>
+                            <source src="../video/english/week_1/Family.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="flex-row-aa">
+                        <span class="time">Thời gian: @course.TotalDate tuần </span>
+                    </div>
+                    <div class="flex-row-c">
+                        <span class="mo-ta">
+                            Mô tả: @course.Description
+                        </span>
+                    </div>
+                    <div class="flex-row-cb">
+                        <span class="software-engineer-f">#@course.HashTag </span>
+                    </div>
+                    <div class="flex-row-b">
+                        <span class="ky-thuat-phan-mem">#@course.Major</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
 <script>
     // Lấy phần tử .main-container
