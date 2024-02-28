@@ -77,7 +77,7 @@ namespace EXE201_Tutor_Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Admin}/{action=Login}/{id?}");
+                    pattern: "{controller=Course}/{action=Index}/{id?}");
             });
         }
     }
