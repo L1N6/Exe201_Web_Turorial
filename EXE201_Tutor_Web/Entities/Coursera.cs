@@ -22,7 +22,7 @@ namespace EXE201_Tutor_Web.Entities
         [ForeignKey("Teacher")]
         public int? TeacherId { get; set; }
         public virtual Teacher? Teacher { get; set; }
-        public virtual ICollection<OnCoursera>? OnCourses { get; set; }
+        public virtual ICollection<OnCourseras>? OnCourses { get; set; }
         public virtual ICollection<CourseraDetail>? CourseraDetails { get; set; }
     }
 }

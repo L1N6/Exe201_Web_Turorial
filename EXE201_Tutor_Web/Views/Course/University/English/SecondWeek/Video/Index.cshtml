@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities
+<style>
     .flex-row-cb {
         position: absolute;
         width: calc(1356 * var(--rpx));
@@ -610,12 +611,27 @@
         background-color: #E6EDFF;
     }
 </style>
+@{
+    int courseDetailId = 0;
+
+    if (TempData["CourseraDetailId"] != null)
+    {
+        courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
+    }
+    Mooc mooc = new Mooc();
+
+    if (TempData.ContainsKey("Mooc"))
+    {
+        mooc = TempData["Mooc"] as Mooc;
+    }
+    int courseraId = mooc.CourseraDetail.CourseraId;
+}
 <div class="flex-row-cb">
     <a href="#" class="group-8-1">
     </a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekDocument", "Course")" class="group-8-2">
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeekDocument", "Course", new {courseDetailId = courseDetailId, codeName = "doc"})" class="group-8-2">
     </a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekQuiz", "Course")" class="group-8-3">
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeekQuiz", "Course", new {courseDetailId = courseDetailId, codeName = "quiz"})" class="group-8-3">
     </a>
     <div class="line"></div>
     <div class="group" style="pointer-events: none;">
@@ -628,7 +644,7 @@
 </div>
 <div class="flex-row-a">
     <div class="regroup">
-        <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course")" class="vector-b"></a>
+        <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course", new {courseraId = courseraId})" class="vector-b"></a>
         <div class="polygon"></div>
     </div>
     <span class="tuan-1">Tuần 2</span>
@@ -646,24 +662,15 @@
     <button class="group-button-12"></button><span class="quiz-span">Quiz</span>
 </div>
 <div class="flex-row-ddc">
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekLessonVideo", "Course", new { videoName = "BASIC" })" class="rectangle-13"
-       style="background: url(../img/course/english/w2/Basic.jpg) no-repeat center;background-size:cover"></a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekLessonVideo", "Course", new { videoName = "GO" })" class="rectangle-13"
-       style="background: url(../img/course/english/w2/Go.png) no-repeat center;background-size:cover"></a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekLessonVideo", "Course", new { videoName = "COME" })" class="rectangle-13"
-       style="background: url(../img/course/english/w2/Come.jpg) no-repeat center;background-size:cover"></a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekLessonVideo", "Course", new { videoName = "GET" })" class="rectangle-13"
-       style="background: url(../img/course/english/w2/get.jpg) no-repeat center;background-size:cover"></a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekLessonVideo", "Course", new { videoName = "TAKE" })" class="rectangle-13"
-       style="background: url(../img/course/english/w2/TAke.jpg) no-repeat center;background-size:cover"></a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekLessonVideo", "Course", new { videoName = "LOOK" })" class="rectangle-13"
-       style="background: url(../img/course/english/w2/Look.png) no-repeat center;background-size:cover"></a>
+    @foreach (var item in mooc.MoocDetails)
+    {
+        <a href="@Url.Action("UniversityEnglishCourseSecondWeekLessonVideo", "Course", new {courseraId = courseraId, courseDetailId = courseDetailId, videoName = @item.Name })" class="rectangle-13"
+           style="background: url(../img/course/english/w2/@item.CodeName) no-repeat center;background-size:cover"></a>
+    }
 </div>
 <div class="flex-row-b">
-    <span class="content-span">Basic</span>
-    <span class="content-span">Go</span>
-    <span class="content-span">Come</span>
-    <span class="content-span">Get</span>
-    <span class="content-span">Take</span>
-    <span class="content-span">Look</span>
+    @foreach (var item in mooc.MoocDetails)
+    {
+        <span class="content-span">@item.Name</span>
+    }
 </div>

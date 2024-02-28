@@ -66,9 +66,13 @@ namespace EXE201_Tutor_Web.Controllers
         }
 
         //FirstWeek
-        public IActionResult UniversityEnglishCourseFirstWeek(int courseraId, int courseraDetailId)
+        public IActionResult UniversityEnglishCourseFirstWeek(int courseraId)
         {
             TempData["LayoutType"] = "Layout_2";
+            Coursera coursera = _context.Courseras
+                         .Include(c => c.CourseraDetails)
+                         .FirstOrDefault(c => c.CourseraId == courseraId);
+            int courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals("TUAN1")).FirstOrDefault().CourseraDetailId;
             TempData["CourseraId"] = courseraId;
             TempData["CourseraDetailId"] = courseraDetailId;
             return View("University/English/FirstWeek/Index");
@@ -86,61 +90,124 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/English/FirstWeek/Video/Index");
         }
 
-        public IActionResult UniversityEnglishCourseFirstWeekLessonVideo(string videoName)
+        public IActionResult UniversityEnglishCourseFirstWeekLessonVideo(int courseDetailId, int courseraId, string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
             ViewData["VideoName"] = videoName;
+            TempData["CourseraId"] = courseraId;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/FirstWeek/Video/LessonVideo");
         }
 
-        public IActionResult UniversityEnglishCourseFirstWeekDocument()
+        public IActionResult UniversityEnglishCourseFirstWeekDocument(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/FirstWeek/Document/Index");
         }
-        public IActionResult UniversityEnglishCourseFirstWeekQuiz()
+        public IActionResult UniversityEnglishCourseFirstWeekQuiz(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/FirstWeek/Quiz/Index");
         }
-        //SecondWeek
-        public IActionResult UniversityEnglishCourseSecondWeek()
+        // Tuần 2
+        public IActionResult UniversityEnglishCourseSecondWeek(int courseraId)
         {
             TempData["LayoutType"] = "Layout_2";
+            Coursera coursera = _context.Courseras
+                         .Include(c => c.CourseraDetails)
+                         .FirstOrDefault(c => c.CourseraId == courseraId);
+            int courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals("TUAN2")).FirstOrDefault().CourseraDetailId;
+            Console.WriteLine();
+            TempData["CourseraId"] = courseraId;
+            TempData["CourseraDetailId"] = courseraDetailId;
             return View("University/English/SecondWeek/Index");
         }
-        public IActionResult UniversityEnglishCourseSecondWeekVideo()
+
+        public IActionResult UniversityEnglishCourseSecondWeekVideo(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/SecondWeek/Video/Index");
         }
 
-        public IActionResult UniversityEnglishCourseSecondWeekLessonVideo(string videoName)
+        public IActionResult UniversityEnglishCourseSecondWeekLessonVideo(int courseDetailId, int courseraId, string videoName)
         {
             TempData["LayoutType"] = "Layout_2";
             ViewData["VideoName"] = videoName;
+            TempData["CourseraId"] = courseraId;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/SecondWeek/Video/LessonVideo");
         }
 
-        public IActionResult UniversityEnglishCourseSecondWeekDocument()
+        public IActionResult UniversityEnglishCourseSecondWeekDocument(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/SecondWeek/Document/Index");
         }
-        public IActionResult UniversityEnglishCourseSecondWeekQuiz()
+
+        public IActionResult UniversityEnglishCourseSecondWeekQuiz(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/SecondWeek/Quiz/Index");
         }
-        //ThirdWeek
-        public IActionResult UniversityEnglishCourseThirdWeek()
+
+        // Tuần 3
+        public IActionResult UniversityEnglishCourseThirdWeek(int courseraId)
         {
             TempData["LayoutType"] = "Layout_2";
+            Coursera coursera = _context.Courseras
+                         .Include(c => c.CourseraDetails)
+                         .FirstOrDefault(c => c.CourseraId == courseraId);
+            int courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals("TUAN3")).FirstOrDefault().CourseraDetailId;
+            TempData["CourseraId"] = courseraId;
+            TempData["CourseraDetailId"] = courseraDetailId;
             return View("University/English/ThirdWeek/Index");
         }
-        public IActionResult UniversityEnglishCourseThirdWeekVideo()
+
+        public IActionResult UniversityEnglishCourseThirdWeekVideo(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/ThirdWeek/Video/Index");
         }
 
@@ -151,21 +218,43 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/English/ThirdWeek/Video/LessonVideo");
         }
 
-        public IActionResult UniversityEnglishCourseThirdWeekDocument()
+        public IActionResult UniversityEnglishCourseThirdWeekDocument(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/ThirdWeek/Document/Index");
         }
-        public IActionResult UniversityEnglishCourseThirdWeekQuiz()
+
+        public IActionResult UniversityEnglishCourseThirdWeekQuiz(int courseDetailId, string codeName)
         {
             TempData["LayoutType"] = "Layout_2";
+            Mooc mooc = _context.Moocs
+                .Include(m => m.MoocDetails)
+                .Include(m => m.CourseraDetail)
+                .Include(m => m.OnMoocs)
+                .Where(m => m.CourseraDetailId == courseDetailId && m.CodeName.Equals(codeName)).FirstOrDefault();
+            TempData["Mooc"] = mooc;
+            TempData["CourseraDetailId"] = courseDetailId;
             return View("University/English/ThirdWeek/Quiz/Index");
         }
 
+
         //FourthWeek
-        public IActionResult UniversityEnglishCourseFourthWeek()
+        public IActionResult UniversityEnglishCourseFourthWeek(int courseraId)
         {
             TempData["LayoutType"] = "Layout_2";
+            Coursera coursera = _context.Courseras
+                         .Include(c => c.CourseraDetails)
+                         .FirstOrDefault(c => c.CourseraId == courseraId);
+            int courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals("TUAN4")).FirstOrDefault().CourseraDetailId;
+            TempData["CourseraId"] = courseraId;
+            TempData["CourseraDetailId"] = courseraDetailId;
             return View("University/English/FourthWeek/Index");
         }
         public IActionResult UniversityEnglishCourseFourthWeekAssignment()

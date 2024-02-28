@@ -666,12 +666,22 @@
         color: #614ce0;
     }
 </style>
+@{
+    int courseraId = 0;
+    int courseDetailId = 0;
+
+    if (TempData["CourseraId"] != null && TempData["CourseraDetailId"] != null)
+    {
+        courseraId = int.Parse(TempData["CourseraId"].ToString());
+        courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
+    }
+}
 <div class="flex-row-cb">
-    <a href="#" class="group-8-1">
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeekVideo", "Course", new {courseDetailId = courseDetailId, codeName = "video"})" class="group-8-1">
     </a>
-    <a href="@Url.Action("UniversityEnglishCourseFirstWeekDocument", "Course")" class="group-8-2">
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeekDocument", "Course", new {courseDetailId = courseDetailId, codeName = "doc"})" class="group-8-2">
     </a>
-    <a href="@Url.Action("UniversityEnglishCourseFirstWeekQuiz", "Course")" class="group-8-3">
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeekQuiz", "Course", new {courseDetailId = courseDetailId, codeName = "quiz"})" class="group-8-3">
     </a>
     <div class="line"></div>
     <div class="group" style="pointer-events: none;">
@@ -684,7 +694,7 @@
 </div>
 <div class="flex-row-a">
     <div class="regroup">
-        <a href="@Url.Action("UniversityEnglishCourseFirstWeek", "Course")" class="vector-b"></a>
+        <a href="@Url.Action("UniversityEnglishCourseFirstWeek", "Course", new {courseraId = courseraId})" class="vector-b"></a>
         <div class="polygon"></div>
     </div>
     <span class="tuan-1">Tuần 1</span>
