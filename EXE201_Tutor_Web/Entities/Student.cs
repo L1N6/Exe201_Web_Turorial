@@ -16,5 +16,5 @@
             public string? Address { get; set; }
             public string? Avatar { get; set; }
             public virtual ICollection<OnCoursera>? OnCourseras { get; set; }
-        }
+        }   
     }

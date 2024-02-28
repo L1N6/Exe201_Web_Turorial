@@ -277,7 +277,7 @@
     
 
 </style>
-<form asp-controller="Access" asp-action="SignUpProcess" method="post" onsubmit="return validatePassword()">
+<form asp-controller="Access" asp-action="SignUpProcess" enctype="multipart/form-data" method="post" onsubmit="return validatePassword()">
     <div class="material-symbols-search"></div>
     <span class="dang-ky-7">ĐĂNG KÝ</span>
 
@@ -308,7 +308,7 @@
 
     <div class="rectangle-9">
         <img id="avatarImage" src="~/img/tutor/desktop-computer-pana.jpg" />
-        <input name="Avatar" type="file" id="fileInput" style="display: none;" onchange="displaySelectedFileName()" />
+        <input name="avatarFile" type="file" id="fileInput" style="display: none;" onchange="displaySelectedFileName()" />
     </div>
 
     <span id="avatarLabel" class="cap-nhat-anh-dai-dien" onclick="openFileInput()">Cập nhật ảnh đại diện</span>
@@ -343,9 +343,7 @@
 
 </form>
 
-<a href="@Url.Action("RegisterWithGoogle", "Access")" class="mt-xxl-2">
-    <button class="btn-primary">Đăng ký</button>
-</a>
+
 
 
 <script>
