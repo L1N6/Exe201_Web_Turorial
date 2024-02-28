@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities
+<style>
     .flex-row-cb {
         position: absolute;
         width: calc(1356 * var(--rpx));
@@ -693,10 +694,25 @@
         background-color: #AEC3FA;
     }
 </style>
+@{
+    int courseDetailId = 0;
+
+    if (TempData["CourseraDetailId"] != null)
+    {
+        courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
+    }
+    Mooc mooc = new Mooc();
+
+    if (TempData.ContainsKey("Mooc"))
+    {
+        mooc = TempData["Mooc"] as Mooc;
+    }
+    int courseraId = mooc.CourseraDetail.CourseraId;
+}
 <div class="flex-row-cb">
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekVideo", "Course")" class="group-8-1">
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeekVideo", "Course", new {courseDetailId = courseDetailId, codeName = "video"})" class="group-8-1">
     </a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekDocument", "Course")" class="group-8-2">
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeekDocument", "Course", new {courseDetailId = courseDetailId, codeName = "doc"})" class="group-8-2">
     </a>
     <a href="#" class="group-8-3">
     </a>
@@ -711,7 +727,7 @@
 </div>
 <div class="flex-row-a">
     <div class="regroup">
-        <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course")" class="vector-b"></a>
+        <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course", new {courseraId = courseraId})" class="vector-b"></a>
         <div class="polygon"></div>
     </div>
     <span class="tuan-1">Tuần 2</span>
@@ -736,5 +752,10 @@
 <div class="rectangle-7">
     <div class="content-text">10 câu hỏi - 30 phút</div>
     <div class="line-"></div>
-    <a href="https://forms.gle/9n6xcNkiCBVCTwnq6" target="_blank" class="singular-and-plural-nouns">https://forms.gle/9n6xcNkiCBVCTwnq6</a>
+    <@foreach (var item in mooc.MoocDetails)
+    {
+            <a href="@item.CodeName" target="_blank" class="singular-and-plural-nouns">
+            @item.Name
+            </a>
+    }
 </div>

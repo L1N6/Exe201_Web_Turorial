@@ -550,7 +550,6 @@
     {
         coursera = null;
     }
-    int courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals("week_1")).FirstOrDefault().CourseraDetailId;
 }
 <div class="flex-row-a">
     <div class="rectangle-4">
@@ -606,7 +605,7 @@
 </div>
 <div class="flex-row-16">
     <a href="@Url.Action("UniversityEnglishCourseFirstWeek","Course",
-    new { courseraId = coursera.CourseraId, courseraDetailId = courseraDetailId })" class="group-17">
+    new { courseraId = coursera.CourseraId})" class="group-17">
         <span class="bat-dau">Bắt đầu</span>
     </a>
 </div>

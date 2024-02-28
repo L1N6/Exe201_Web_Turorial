@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities
+<style>
     .flex-row-cb {
         position: absolute;
         width: calc(1356 * var(--rpx));
@@ -654,12 +655,27 @@
         background-color: #E6EDFF;
     }
 </style>
+@{
+    int courseDetailId = 0;
+
+    if (TempData["CourseraDetailId"] != null)
+    {
+        courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
+    }
+    Mooc mooc = new Mooc();
+
+    if (TempData.ContainsKey("Mooc"))
+    {
+        mooc = TempData["Mooc"] as Mooc;
+    }
+    int courseraId = mooc.CourseraDetail.CourseraId;
+}
 <div class="flex-row-cb">
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekVideo", "Course")" class="group-8-1">
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeekVideo", "Course", new {courseDetailId = courseDetailId, codeName = "video"})" class="group-8-1">
     </a>
     <a href="#" class="group-8-2">
     </a>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekQuiz", "Course")" class="group-8-3">
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeekQuiz", "Course", new {courseDetailId = courseDetailId, codeName = "quiz"})" class="group-8-3">
     </a>
     <div class="line"></div>
     <div class="group" style="pointer-events: none;">
@@ -672,7 +688,7 @@
 </div>
 <div class="flex-row-a">
     <div class="regroup">
-        <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course")" class="vector-b"></a>
+        <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course", new {courseraId = courseraId})" class="vector-b"></a>
         <div class="polygon"></div>
     </div>
     <span class="tuan-1">Tuần 2</span>
@@ -694,5 +710,10 @@
     <span class="quiz-span">Quiz</span>
 </div>
 <div class="rectangle-7">
-    <a href="https://docs.google.com/document/d/1pwz_23RRZA4soQ7H2mb-r716kdt5ixJs04QKDN7Vnis/edit#heading=h.dv82oefgs55z" target="_blank" class="singular-and-plural-nouns">Countable and Uncountable Nouns</a>
+    @foreach (var item in mooc.MoocDetails)
+    {
+        <a href="@item.CodeName" target="_blank" class="singular-and-plural-nouns">
+            @item.Name
+        </a>
+    }
 </div>

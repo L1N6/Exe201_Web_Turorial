@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities
+<style>
     .flex-row-a-div {
         position: absolute;
         width: calc(1356 * var(--rpx));
@@ -524,9 +525,19 @@
         color: #E6EDFF; 
     }
 </style>
+@{
+    int courseraId = 0;
+    int courseDetailId = 0;
+
+    if (TempData["CourseraId"] != null && TempData["CourseraDetailId"] != null)
+    {
+        courseraId = int.Parse(TempData["CourseraId"].ToString());
+        courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
+    }
+}
 <div class="flex-row-a-div">
     <div class="line-div"></div>
-    <a href="@Url.Action("UniversityEnglishCourseFirstWeek", "Course")" class="group-div-1">
+    <a href="@Url.Action("UniversityEnglishCourseFirstWeek", "Course", new { courseraId = courseraId })" class="group-div-1">
         <div class="group-div-0"></div>
         <div class="rectangle-div"></div>
         <span class="tuan-span">Tuần 1</span>
@@ -545,8 +556,8 @@
     <span class="span-week">Tuần 2</span>
     <div class="line-7"></div>
     <a class="group-div-2"></a>
-    <a href="@Url.Action("UniversityEnglishCourseThirdWeek", "Course")" class="group-div-3"></a>
-    <a href="@Url.Action("UniversityEnglishCourseFourthWeek", "Course")" class="group-div-4"></a>
+    <a href="@Url.Action("UniversityEnglishCourseThirdWeek", "Course", new { courseraId = courseraId })" class="group-div-3"></a>
+    <a href="@Url.Action("UniversityEnglishCourseFourthWeek", "Course", new { courseraId = courseraId })" class="group-div-4"></a>
 </div>
 <div class="line-8"></div>
 <div class="flex-row">
@@ -561,8 +572,7 @@
     </div>
     <div class="button-group-9">
     </div>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeekVideo", "Course")" class="bat-dau">Bắt đầu</a>
-
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeekVideo", "Course", new { courseDetailId = courseDetailId, codeName = "video" })" class="bat-dau">Bắt đầu</a>
 </div>
 <div class="flex-row-b">
     <div class="group-e"></div>

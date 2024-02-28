@@ -527,12 +527,12 @@
     }
 </style>
 @{
-    int courseId = 0;
+    int courseraId = 0;
     int courseDetailId = 0;
 
     if (TempData["CourseraId"] != null && TempData["CourseraDetailId"] != null)
     {
-        courseId = int.Parse(TempData["CourseraId"].ToString());
+        courseraId = int.Parse(TempData["CourseraId"].ToString());
         courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
     }
 }
@@ -557,9 +557,9 @@
     </div>
     <span class="span-week">Tuần 2</span>
     <div class="line-7"></div>
-    <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course")" class="group-div-2"></a>
-    <a href="@Url.Action("UniversityEnglishCourseThirdWeek", "Course")" class="group-div-3"></a>
-    <a href="@Url.Action("UniversityEnglishCourseFourthWeek", "Course")" class="group-div-4"></a>
+    <a href="@Url.Action("UniversityEnglishCourseSecondWeek", "Course", new { courseraId = courseraId })" class="group-div-2"></a>
+    <a href="@Url.Action("UniversityEnglishCourseThirdWeek", "Course", new { courseraId = courseraId })" class="group-div-3"></a>
+    <a href="@Url.Action("UniversityEnglishCourseFourthWeek", "Course", new { courseraId = courseraId })" class="group-div-4"></a>
 </div>
 <div class="line-8"></div>
 <div class="flex-row">
