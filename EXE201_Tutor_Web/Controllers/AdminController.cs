@@ -1,5 +1,6 @@
 ﻿using EXE201_Tutor_Web.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -13,8 +14,40 @@ namespace EXE201_Tutor_Web.Controllers
 
         public IActionResult Student()
         {
-            List<Student> students = _context.Students.ToList();
+            List<Student> students = _context.Students.Include(x => x.OnCoursera).ToList();
             return View(students);
+        }
+
+        public IActionResult StudentDetail(int id)
+        {
+
+            var student = _context.Students.Where(x => x.StudentId == id).Include(x => x.OnCoursera).ThenInclude(x => x.Coursera).FirstOrDefault();
+
+            if (student == null)
+            {
+                return NotFound(); // Return a 404 Not Found response if the student is not found
+            }
+
+            return View(student);
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string email, string password)
+        {
+
+            if (email == "admin" &&  password == "123")
+            {
+                return RedirectToAction("Student", "Admin");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Fail";
+                return View();
+            }
         }
     }
 }

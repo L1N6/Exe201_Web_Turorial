@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EXE201_Tutor_Web.Entities
 {
-    public class OnCourseras
+    public class OnCoursera
     {
         [Key]
 

@@ -22,7 +22,7 @@ namespace EXE201_Tutor_Web.Entities
 
         // Navigation property for related Moocs
         public virtual ICollection<Mooc>? Moocs { get; set; }
-        public virtual ICollection<OnCourseraDetail>? OnCourseDetails { get; set; }
+        public virtual ICollection<OnCourseraDetail>? OnCourseraDetails { get; set; }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<EXE201_Tutor_Web.Entities.Student>
+﻿@model EXE201_Tutor_Web.Entities.Student
 @{
     Layout = null;
 }
@@ -43,46 +43,39 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="col-md-9 mb-3" >
+            <div class="col-md-9 mb-3" style="height: 80vh; overflow-y: auto;">
                 <div class="bg-light p-3 rounded h-100">
-                    <h2 class="text-dark mb-3">Quản lý Sinh viên</h2>
+                    <h2 class="text-info mb-3">Thông tin khóa học của sinh viên @Model.Name</h2>
                     <table class="table table-bordered table-striped">
                         <thead class="thead-light">
                             <tr>
-                                <th>ID</th>
-                                <th>Email</th>
-                                <th>Name</th>
-                                <th>UserName</th>
-                                <th>Avatar</th>
-                                <th>Address</th>
-                                <th>Số lượng Coursera đã đăng ký</th>
-                               
+                                <th>Coursera ID</th>
+                                <th>Coursera Name</th>
+                                <th>CodeName</th>
+                                <th>Money</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var student in Model)
+
+                            @foreach (var onCoursera in Model.OnCoursera)
                             {
                                 <tr>
-                                    <td>@student.StudentId</td>
-                                    <td>@student.Email</td>
-                                    <td>@student.Name</td>
-                                    <td>@student.UserName</td>
-                                    <td style="text-align: center;"><img src="@(!string.IsNullOrEmpty(student.Avatar) ? "/img/student/" + student.Avatar : "/img/header/avatar.jpg")" alt="Avatar" class="avatar" style="max-width: 30px; max-height: 30px; display: block; margin: auto;" /></td>
-                                    <td>@(student.Address != null ? student.Address : "Chưa điền")</td>
-                                    <td style="text-align: center;">
-                                        <a asp-controller="Admin" asp-action="StudentDetail" asp-route-id="@student.StudentId" class="text-success">
-                                            @(student.OnCoursera != null ? student.OnCoursera.Count : 0)
-                                        </a>
-                                    </td>
+                                    <td>@onCoursera.Coursera.CourseraId</td>
+                                    <td>@onCoursera.Coursera.Name</td>
+                                    <td>@onCoursera.Coursera.CodeName</td>
+                                    <td>@onCoursera.Coursera.Money</td>
+                                    <td>@onCoursera.Date</td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-            
             </div>
+
+
         </div>
+    </div>
     </div>
 </body>
 </html>
