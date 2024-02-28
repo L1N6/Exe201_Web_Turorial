@@ -7,6 +7,7 @@ namespace EXE201_Tutor_Web.Entities
     {
         public EXE_DataBaseContext(DbContextOptions options) : base(options) { }
         public DbSet<Coursera> Courseras { get; set; }
+        public DbSet<OnCoursera> OnCoursera { get; set; }
         public DbSet<CourseraDetail> CourseraDetails { get; set; }
         public DbSet<Mooc> Moocs { get; set; }
         public DbSet<MoocDetail> MoocDetails { get; set; }
@@ -24,7 +25,7 @@ namespace EXE201_Tutor_Web.Entities
             modelBuilder.Entity<CourseraDetail>().HasKey(cd => cd.CourseraDetailId); // Primary key for CourseraDetail
             modelBuilder.Entity<Mooc>().HasKey(m => m.MoocId); // Primary key for Mooc
             modelBuilder.Entity<MoocDetail>().HasKey(md => md.MoocDetailId); // Primary key for MoocDetail
-            modelBuilder.Entity<OnCourseras>().HasKey(oc => oc.OnCourseId); // Primary key for OnCourse
+            modelBuilder.Entity<OnCoursera>().HasKey(oc => oc.OnCourseId); // Primary key for OnCourse
             modelBuilder.Entity<OnCourseraDetail>().HasKey(ocd => ocd.OnCourseDetailId); // Primary key for OnCourseDetail
             modelBuilder.Entity<OnMooc>().HasKey(om => om.OnMoocId); // Primary key for OnMooc
             modelBuilder.Entity<OnMoocDetail>().HasKey(omd => omd.OnMoocDetailId); // Primary key for OnMoocDetail
@@ -35,7 +36,7 @@ namespace EXE201_Tutor_Web.Entities
 
             // One-to-many relationship between Student and OnCourse
             modelBuilder.Entity<Student>()
-                .HasMany(c => c.OnCourseras)
+                .HasMany(c => c.OnCoursera)
                 .WithOne(oc => oc.Student)
                 .HasForeignKey(oc => oc.StudentId);
 
@@ -47,7 +48,7 @@ namespace EXE201_Tutor_Web.Entities
 
             // One-to-many relationship between Coursera and OnCourse
             modelBuilder.Entity<Coursera>()
-                .HasMany(c => c.OnCourses)
+                .HasMany(c => c.OnCoursera)
                 .WithOne(oc => oc.Coursera)
                 .HasForeignKey(oc => oc.CourseraId);
 
@@ -59,7 +60,7 @@ namespace EXE201_Tutor_Web.Entities
 
             // One-to-many relationship between CourseraDetail and OnCourseDetail
             modelBuilder.Entity<CourseraDetail>()
-                .HasMany(cd => cd.OnCourseDetails)
+                .HasMany(cd => cd.OnCourseraDetails)
                 .WithOne(ocd => ocd.CourseraDetail)
                 .HasForeignKey(ocd => ocd.CourseraDetailId);
 
@@ -88,9 +89,9 @@ namespace EXE201_Tutor_Web.Entities
                 .HasForeignKey(omd => omd.MoocDetailId);
 
             // One-to-many relationship between OnCourse and OnCourseDetail
-            modelBuilder.Entity<OnCourseras>()
+            modelBuilder.Entity<OnCoursera>()
                 .HasMany(oc => oc.OnCourseDetails)
-                .WithOne(ocd => ocd.OnCourse)
+                .WithOne(ocd => ocd.OnCoursera)
                 .HasForeignKey(ocd => ocd.OnCourseId);
 
             // One-to-many relationship between OnCourseDetail and OnMooc

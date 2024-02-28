@@ -72,7 +72,7 @@
                                     <td>@(student.Address != null ? student.Address : "Chưa điền")</td>
                                     <td style="text-align: center;">
                                         <a asp-controller="Admin" asp-action="StudentDetail" asp-route-id="@student.StudentId" class="text-success">
-                                            @(student.OnCourseras != null ? student.OnCourseras.Count : 0)
+                                            @(student.OnCoursera != null ? student.OnCoursera.Count : 0)
                                         </a>
                                     </td>
                                 </tr>

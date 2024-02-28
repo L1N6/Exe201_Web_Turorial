@@ -14,14 +14,14 @@ namespace EXE201_Tutor_Web.Controllers
 
         public IActionResult Student()
         {
-            List<Student> students = _context.Students.Include(x => x.OnCourseras).ToList();
+            List<Student> students = _context.Students.Include(x => x.OnCoursera).ToList();
             return View(students);
         }
 
         public IActionResult StudentDetail(int id)
         {
 
-            var student = _context.Students.Where(x=>x.StudentId == id).Include(x => x.OnCourseras).ThenInclude(x => x.Coursera).FirstOrDefault();
+            var student = _context.Students.Where(x => x.StudentId == id).Include(x => x.OnCoursera).ThenInclude(x => x.Coursera).FirstOrDefault();
 
             if (student == null)
             {
@@ -29,6 +29,25 @@ namespace EXE201_Tutor_Web.Controllers
             }
 
             return View(student);
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(string email, string password)
+        {
+
+            if (email == "admin" &&  password == "123")
+            {
+                return RedirectToAction("Student", "Admin");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Fail";
+                return View();
+            }
         }
     }
 }

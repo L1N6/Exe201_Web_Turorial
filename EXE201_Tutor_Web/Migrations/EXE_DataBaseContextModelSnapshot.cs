@@ -381,7 +381,7 @@ namespace EXE201_Tutor_Web.Migrations
                         .HasForeignKey("CourseraId");
 
                     b.HasOne("EXE201_Tutor_Web.Entities.Student", "Student")
-                        .WithMany("OnCourseras")
+                        .WithMany("OnCoursera")
                         .HasForeignKey("StudentId");
 
                     b.Navigation("Coursera");
@@ -477,7 +477,7 @@ namespace EXE201_Tutor_Web.Migrations
 
             modelBuilder.Entity("EXE201_Tutor_Web.Entities.Student", b =>
                 {
-                    b.Navigation("OnCourseras");
+                    b.Navigation("OnCoursera");
                 });
 
             modelBuilder.Entity("EXE201_Tutor_Web.Entities.Teacher", b =>
