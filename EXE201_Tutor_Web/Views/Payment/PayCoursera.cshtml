@@ -8,7 +8,7 @@
     else
     {
         var action = "Index";
-        var controller = "Coursera";
+        var controller = "Course";
         var url = Url.Action(action, controller);
         <script type="text/javascript">
             window.location.href = '@url';
@@ -25,7 +25,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <input type="text" value="@id" name="courseraId" />
+                <input type="hidden" readonly value="@id" name="courseraId" />
                 <h5 class="card-title">Thanh toán online bằng thẻ ngân hàng nội địa</h5>
                 <ul class="list-group">
                     <li class="list-group-item">
