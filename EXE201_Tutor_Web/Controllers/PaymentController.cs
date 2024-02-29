@@ -1,6 +1,7 @@
 ﻿using API_NganLuong;
 using EXE201_Tutor_Web.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -13,58 +14,56 @@ namespace EXE201_Tutor_Web.Controllers
         }
         public IActionResult PayCoursera(int id)
         {
-            //string payment_method = Request.Form["option_payment"];
-            //string str_bankcode = Request.Form["bankcode"];
-
-
-            //RequestInfo info = new RequestInfo();
-
-            //info.Merchant_id = "67905";
-            //info.Merchant_password = "92e7ba12d95eaf88b697949a78c2b277";
-            //info.Receiver_email = "thanhdq2302@gmail.com";
-
-
-
-            //info.cur_code = "vnd";
-            //info.bank_code = str_bankcode;
-
-            //info.Order_code = "ma_don_hang01";
-            //info.Total_amount = "10000";
-            //info.fee_shipping = "0";
-            //info.Discount_amount = "0";
-            //info.order_description = "Thanh toan tes thu dong hang";
-            //info.return_url = "http://localhost";
-            //info.cancel_url = "http://localhost";
-
-            //info.Buyer_fullname = buyer_fullname.Value;
-            //info.Buyer_email = buyer_email.Value;
-            //info.Buyer_mobile = buyer_mobile.Value;
-
-            //APICheckoutV3 objNLChecout = new APICheckoutV3();
-            //ResponseInfo result = objNLChecout.GetUrlCheckout(info, payment_method);
-
-            //if (result.Error_code == "00")
-            //{
-            //    Response.Redirect(result.Checkout_url);
-            //}
-            //else
-            //    txtserverkt.InnerHtml = result.Description;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Payed(string email, string password)
+        public IActionResult Payed(string bankcode, string buyer_fullname, string buyer_email, string buyer_mobile, int courseraId)
         {
 
-            if (email == "admin" && password == "123")
+            
+            string payment_method = "ATM_ONLINE";
+            string str_bankcode = bankcode;
+            RequestInfo info = new RequestInfo();
+
+            info.Merchant_id = "67905";
+            info.Merchant_password = "92e7ba12d95eaf88b697949a78c2b277";
+            info.Receiver_email = "thanhdq2302@gmail.com";
+            info.cur_code = "vnd";
+            info.bank_code = str_bankcode;
+            info.Order_code = GenerateRandomString(10);
+            info.Total_amount = _context.Courseras.FirstOrDefault(x => x.CourseraId == courseraId).Money.ToString();
+            info.fee_shipping = "0";
+            info.Discount_amount = "0";
+            info.order_description = "Thanh toan tes thu dong hang";
+            info.return_url = "http://localhost";
+            info.cancel_url = "http://localhost";
+            info.Buyer_fullname = buyer_fullname;
+            info.Buyer_email = buyer_email;
+            info.Buyer_mobile = buyer_mobile;
+
+            APICheckoutV3 objNLChecout = new APICheckoutV3();
+            ResponseInfo result = objNLChecout.GetUrlCheckout(info, payment_method);
+
+            if (result.Error_code == "00")
             {
-                return RedirectToAction("Student", "Admin");
+                Response.Redirect(result.Checkout_url);
             }
-            else
+            
+            return View();
+        }
+        public string GenerateRandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            StringBuilder stringBuilder = new StringBuilder(length);
+
+            for (int i = 0; i < length; i++)
             {
-                TempData["ErrorMessage"] = "Fail";
-                return View();
+                stringBuilder.Append(chars[random.Next(chars.Length)]);
             }
+
+            return stringBuilder.ToString();
         }
     }
 }
