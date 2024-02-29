@@ -451,19 +451,19 @@
     .invalid-account-msg {
         color: red;
         margin-top: 10px;
-        text-align:center   
+        text-align: center
     }
 </style>
 
 <div class="wrapper-2"></div>
 <span class="text-9">ĐĂNG NHẬP </span>
 <div class="group-4">
-         <div class="group-5">
-            <a asp-controller="User" asp-action="ExternalLogin" asp-route-provider="Google" class="pic">
-                <img src="../img/sign_in/google_icon.png" />
-                <span class="text-a">Sign in with Google</span>
-            </a>
-        </div>
+    <div class="group-5">
+        <a asp-controller="User" asp-action="ExternalLogin" asp-route-provider="Google" class="pic">
+            <img src="../img/sign_in/google_icon.png" />
+            <span class="text-a">Sign in with Google</span>
+        </a>
+    </div>
     <form asp-action="SignInProcess" asp-controller="Access">
         <span class="text-b">Email</span>
         <div class="group-6">
