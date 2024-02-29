@@ -1,0 +1,81 @@
+﻿<div class="container">
+    <h3>Chọn phương thức thanh toán</h3>
+    <div id="txtserverkt" name="txtserverkt"> </div>
+
+    <form name="NLpayBank">
+        <div class="alert alert-warning" role="alert">
+            Lưu ý: Bạn cần đăng ký Internet-Banking hoặc dịch vụ thanh toán trực tuyến tại ngân hàng trước khi thực hiện.
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Thanh toán online bằng thẻ ngân hàng nội địa</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input type="radio" id="vcb_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng TMCP Ngoại Thương Việt Nam
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" id="vnbc_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Đông Á
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" id="tcb_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Kỹ Thương
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" id="sml_atm_mb_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Quân Đội
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" id="shb_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Sài Gòn - Hà Nội
+                    </li>
+                    <li class="list-group-item">
+                        <input type="radio" id="sml_atm_vib_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Quốc tế
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container mb-3">
+            <h4 class="text-danger">Lưu ý</h4>
+            <p>Bạn nhập đầy đủ thông tin sau:</p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="buyer_fullname">Họ Tên:</label>
+                        <input type="text" class="form-control" id="buyer_fullname" name="buyer_fullname" placeholder="Nhập họ tên">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="buyer_email">Email:</label>
+                        <input type="email" class="form-control" id="buyer_email" name="buyer_email" placeholder="Nhập email">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="buyer_mobile">Số Điện thoại:</label>
+                        <input type="tel" class="form-control" id="buyer_mobile" name="buyer_mobile" placeholder="Nhập số điện thoại">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 ">
+                    <button type="button" class="btn btn-primary" onclick="button1_click()">Thanh toán</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
