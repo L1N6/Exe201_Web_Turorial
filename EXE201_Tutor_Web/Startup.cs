@@ -82,7 +82,7 @@ namespace EXE201_Tutor_Web
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Course}/{action=Index}/{id?}");
+                    pattern: "{controller=PayMent}/{action=PayCoursera}/{id?}");
             });
         }
     }
