@@ -201,7 +201,6 @@
             }
             else
             {
-
                 <a href="@Url.Action("Logout", "User")" class="rectangle-2">
                     <span class="dang-nhap">Log out </span>
                 </a>
@@ -211,7 +210,6 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <img style="border-radius: 50px;" src="../img/header/avatar.jpg" alt="">
-                    <p style="margin-left: 5px;">@User.Identity.Name!</p>
                 }
             </div>
             <div class="rectangle-5"><img src="../img/header/login.png" alt=""></div>
