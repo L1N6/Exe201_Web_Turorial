@@ -9,6 +9,7 @@ using EXE201_Tutor_Web_API.Services.MailService;
 using EXE201_Tutor_Web.Models;
 using EXE201_Tutor_Web.Service.VnPayService;
 using EXE201_Tutor_Web.Entities;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace EXE201_Tutor_Web
 {
@@ -26,23 +27,27 @@ namespace EXE201_Tutor_Web
             // Configure session
             services.AddSession();
             services.AddHttpClient();
-            // Configure authentication
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.Cookie.HttpOnly = true;
-                    options.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.Always;
-                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
-                    options.LoginPath = "/Account/Login";
-                    options.AccessDeniedPath = "/Account/AccessDenied";
-                });
             services.AddSession();
             // Configure authorization
+            services.AddAuthentication(option =>
+            {
+                option.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+            .AddGoogle(GoogleDefaults.AuthenticationScheme, option =>
+            {
+                option.ClientId = Configuration.GetSection("GoogleKeys:ClientId").Value;
+                option.ClientSecret = Configuration.GetSection("GoogleKeys:ClientSecret").Value;
+
+            });
             services.AddAuthorization();
+
+            // Configure Mail
             services.AddTransient<ISendMailService, SendMailService>();
             var mailsettings = Configuration.GetSection("MailSettings");
             services.Configure<MailSetting>(mailsettings);
-            services.AddHttpClient();
+
             // Configure MVC
             services.AddControllersWithViews();
 
