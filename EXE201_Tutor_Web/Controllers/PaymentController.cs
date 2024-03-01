@@ -38,7 +38,6 @@ namespace EXE201_Tutor_Web.Controllers
             info.order_description = courseraId.ToString();
             info.fee_shipping = "0";
             info.Discount_amount = "0";
-            info.order_description = "Thanh toan tes thu dong hang";
             info.return_url = "https://localhost:7084/Payment/PayedReturn";
             info.cancel_url = "http://localhost";
             info.Buyer_fullname = buyer_fullname;
