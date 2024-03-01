@@ -144,14 +144,13 @@ namespace API_NganLuong
 
         private static String HttpPost(string postData)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
 
             ASCIIEncoding encoding = new ASCIIEncoding();
             byte[] data = encoding.GetBytes(postData);
 
             // Prepare web request...
-            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://www.nganluong.vn/checkout.api.nganluong.post.php");
+            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://sandbox.nganluong.vn/nl35/checkout.api.nganluong.post.php");
             myRequest.Method = "POST";
             myRequest.ContentType = "application/x-www-form-urlencoded";
             myRequest.ContentLength = data.Length;
