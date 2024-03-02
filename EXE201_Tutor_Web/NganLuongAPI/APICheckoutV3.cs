@@ -13,7 +13,6 @@ namespace API_NganLuong
 {
     public class APICheckoutV3
     {
-
         public ResponseInfo GetUrlCheckout(RequestInfo requestContent, string payment_method = "NL")
         {
 

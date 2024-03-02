@@ -34,8 +34,4 @@
     <Folder Include="wwwroot\img\avatar_account\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\img\course\english\w1\video\" />
-  </ItemGroup>
-
 </Project>

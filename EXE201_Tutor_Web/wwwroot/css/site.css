@@ -37,10 +37,9 @@ button {
 
 .main-container {
     position: relative;
-    height: calc(997 * var(--rpx)); 
+    height: calc(1200 * var(--rpx));
     margin: 0 auto;
     background: #ffffff;
-    overflow: hidden;
 }
 
 .rectangle {

@@ -539,38 +539,49 @@
     }
 </style>
 @{
-    int courseraId = 0;
-    int courseDetailId = 0;
+    int courseDetailIdCheck = 0;
 
-    if (TempData["CourseraId"] != null && TempData["CourseraDetailId"] != null)
+    if (TempData["CourseraDetailId"] != null)
     {
-        courseraId = int.Parse(TempData["CourseraId"].ToString());
-        courseDetailId = int.Parse(TempData["CourseraDetailId"].ToString());
+        courseDetailIdCheck = int.Parse(TempData["CourseraDetailId"].ToString());
+    }
+    Coursera coursera;
+    List<CourseraDetail> courseraDetail = new List<CourseraDetail>();
+    List<Mooc> moocs = new List<Mooc>();
+
+    if (TempData.ContainsKey("Coursera"))
+    {
+        coursera = TempData["Coursera"] as Coursera;
+        courseraDetail = coursera.CourseraDetails.ToList();
+        moocs = TempData["ListMooc"] as List<Mooc>;
+    }
+    else
+    {
+        coursera = null;
     }
 }
 <div class="flex-row-a-div">
     <div class="line-div"></div>
     <div class="group-week">
-        <div class="group-div-1">
-            <div class="group-div-0"></div>
-            <div class="rectangle-div"></div>
-            <span class="tuan-span">Tuần 1</span>
-        </div>
-        <div class="group-div-1">
-            <div class="group-div-0"></div>
-            <div class="rectangle-div"></div>
-            <span class="tuan-span">Tuần 1</span>
-        </div>
-        <div class="group-div-1">
-            <div class="group-div-0"></div>
-            <div class="rectangle-div"></div>
-            <span class="tuan-span">Tuần 1</span>
-        </div>
-        <div class="group-div-1">
-            <div class="group-div-0"></div>
-            <div class="rectangle-div"></div>
-            <span class="tuan-span">Tuần 1</span>
-        </div>
+        @foreach (var item in courseraDetail)
+        {
+            if (item.CourseraDetailId == courseDetailIdCheck)
+            {
+                <a href="@Url.Action("UniversityEnglishCourseMoocWeek", "Course", new {courseraId = coursera.CourseraId, week = item.CodeName})" class="group-div-1">
+                    <div class="group-div-0"></div>
+                    <div class="rectangle-div"></div>
+                    <span class="tuan-span">@item.Name</span>
+                </a>
+            }
+            else
+            {
+                <a style="background-color:#E6EDFF" href="@Url.Action("UniversityEnglishCourseMoocWeek", "Course", new {courseraId = coursera.CourseraId, week = item.CodeName})" class="group-div-1">
+                    <div class="group-div-0"></div>
+                    <div class="rectangle-div"></div>
+                    <span class="tuan-span">@item.Name</span>
+                </a>
+            }
+        }
     </div>
     <div class="rectangle-5">
         <div class="div-topic">
@@ -586,21 +597,34 @@
 <div class="line-8">
     <div class="button-group-9">
     </div>
-    <a href="@Url.Action("UniversityEnglishCourseFirstWeekVideo", "Course", new {courseDetailId = courseDetailId, codeName = "video"})" class="bat-dau">Bắt đầu</a>
+    <a href="@Url.Action("UniversityEnglishCourseMoocWeekRedirect", "Course", new {courseDetailId = courseDetailIdCheck})" class="bat-dau">Bắt đầu</a>
 </div>
 <div class="group-mooc">
-    <div class="flex-row">
-        <div class="group-a"></div>
-        <span class="video">Video</span>
-    </div>
-    <div class="flex-row">
-        <div class="group-a"></div>
-        <span class="video">Document</span>
-    </div>
-    <div class="flex-row">
-        <div class="group-a"></div>
-        <span class="video">Quiz</span>
-    </div>
+    @foreach (var item in moocs)
+    {
+        <div class="flex-row">
+            <div class="group-a"></div>
+            @if(@item.CodeName.Equals("video")){
+                <span class="video">Video</span>
+            }
+            else if (@item.CodeName.Equals("doc"))
+            {
+                <span class="video">Document</span>
+            }
+            else if (@item.CodeName.Equals("quiz"))
+            {
+                <span class="video">Quiz</span>
+            }
+            else if (@item.CodeName.Equals("ass"))
+            {
+                <span class="video">Assignment</span>
+            }
+            else if (@item.CodeName.Equals("discuss"))
+            {
+                <span class="video">Discuss</span>
+            }
+        </div>
+    }
 </div>
 
 <script>
