@@ -443,7 +443,7 @@
         courseras = TempData["ListCoursera"] as List<Coursera>;
     }
     else
-    {
+    {   
         courseras = null;
     }
 }
@@ -515,6 +515,8 @@
                     <div class="flex-row-c">
                         <span class="mo-ta">
                             Mô tả: @course.Description
+                            <a asp-controller="Payment" asp-action="PayCoursera" asp-route-id="@course.CourseraId" class="text-success">Thanh toán
+                            </a>
                         </span>
                     </div>
                     <div class="flex-row-cb">
@@ -523,8 +525,7 @@
                     <div class="flex-row-b">
                         <span class="ky-thuat-phan-mem">#@course.Major</span>
                     </div>
-                    <a asp-controller="Payment" asp-action="PayCoursera" asp-route-id="@course.CourseraId" class="text-success">
-                    </a>
+                    
                 </div>
             </div>
         </div>

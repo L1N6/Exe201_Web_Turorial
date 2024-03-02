@@ -1,41 +1,46 @@
-﻿<div class="container">
+﻿@{
+    int id = 1; // Khai báo ở ngoài phạm vi của block if và else
+    string errorMessage = "";
+    if (TempData.ContainsKey("ErrorMessage"))
+    {
+        errorMessage = TempData["ErrorMessage"].ToString();
+    }
+    if (TempData.ContainsKey("CourseraId"))
+    {
+        string courseraId = TempData["CourseraId"].ToString();
+        id = Int32.Parse(TempData["CourseraId"].ToString());
+    }
+    else
+    {
+        var action = "Index";
+        var controller = "Course";
+        var url = Url.Action(action, controller);
+        <script type="text/javascript">
+            window.location.href = '@url';
+        </script>
+    }
+}
+<div class="container">
     <h3>Chọn phương thức thanh toán</h3>
     <div id="txtserverkt" name="txtserverkt"> </div>
 
-    <form name="NLpayBank">
+    <form method="post">
         <div class="alert alert-warning" role="alert">
             Lưu ý: Bạn cần đăng ký Internet-Banking hoặc dịch vụ thanh toán trực tuyến tại ngân hàng trước khi thực hiện.
+            <p class="text-danger">@errorMessage</p>
         </div>
-
         <div class="card">
             <div class="card-body">
+                <input type="hidden" readonly value="@id" name="courseraId" />
                 <h5 class="card-title">Thanh toán online bằng thẻ ngân hàng nội địa</h5>
-                <ul class="list-group">
+                <ul class="list-group mb-3">
                     <li class="list-group-item">
-                        <input type="radio" id="vcb_ck_on" name="bankcode" />
-                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng TMCP Ngoại Thương Việt Nam
-                    </li>
-                    <li class="list-group-item">
-                        <input type="radio" id="vnbc_ck_on" name="bankcode" />
-                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Đông Á
-                    </li>
-                    <li class="list-group-item">
-                        <input type="radio" id="tcb_ck_on" name="bankcode" />
-                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Kỹ Thương
-                    </li>
-                    <li class="list-group-item">
-                        <input type="radio" id="sml_atm_mb_ck_on" name="bankcode" />
-                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Quân Đội
-                    </li>
-                    <li class="list-group-item">
-                        <input type="radio" id="shb_ck_on" name="bankcode" />
-                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Sài Gòn - Hà Nội
-                    </li>
-                    <li class="list-group-item">
-                        <input type="radio" id="sml_atm_vib_ck_on" name="bankcode" />
-                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng Quốc tế
+                        <input type="radio" value="EXB" id="exb_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng thương mại cổ phần Xuất Nhập khẩu Việt Nam
                     </li>
                 </ul>
+
+                
             </div>
         </div>
 
@@ -72,7 +77,7 @@
 
             <div class="row">
                 <div class="col-md-6 ">
-                    <button type="button" class="btn btn-primary" onclick="button1_click()">Thanh toán</button>
+                    <button type="submit" class="btn btn-primary" >Thanh toán</button>
                 </div>
             </div>
         </div>

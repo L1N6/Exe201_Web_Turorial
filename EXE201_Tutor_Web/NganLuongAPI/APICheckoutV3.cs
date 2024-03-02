@@ -54,7 +54,7 @@ namespace API_NganLuong
 
             objResult.errorCode = root.Item(0).InnerText;
             objResult.token = root.Item(1).InnerText;
-            objResult.description = root.Item(2).InnerText;
+  
             objResult.transactionStatus = root.Item(3).InnerText;
             //objResult.receiver_email = root.Item(4).InnerText; //receiver_email
             objResult.order_code = root.Item(5).InnerText;
@@ -62,7 +62,7 @@ namespace API_NganLuong
             //objResult.payment_method = root.Item(7).InnerText; //payment_method
             //objResult.bank_code = root.Item(8).InnerText; //bank_code
             //objResult.payment_type = root.Item(9).InnerText; //payment_type
-            //objResult.description = root.Item(10).InnerText; //order_description
+            objResult.description = root.Item(10).InnerText; //order_description
             //objResult.tax_amount = root.Item(11).InnerText; //tax_amount
             //objResult.discount_amount = root.Item(12).InnerText; //discount_amount
             //objResult.fee_shipping = root.Item(13).InnerText; //fee_shipping
@@ -78,11 +78,11 @@ namespace API_NganLuong
 
             objResult.errorCode = root.Item(0).InnerText;
             objResult.token = root.Item(1).InnerText;
-            objResult.description = root.Item(2).InnerText;
+     
             objResult.transactionStatus = root.Item(3).InnerText;
             objResult.order_code = root.Item(5).InnerText;
             objResult.paymentAmount = root.Item(6).InnerText;
-            objResult.transactionId = root.Item(21).InnerText;
+ 
 
             /*
             String error_code =root.Item(0).InnerText;
@@ -143,14 +143,13 @@ namespace API_NganLuong
 
         private static String HttpPost(string postData)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
 
             ASCIIEncoding encoding = new ASCIIEncoding();
             byte[] data = encoding.GetBytes(postData);
 
             // Prepare web request...
-            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://www.nganluong.vn/checkout.api.nganluong.post.php");
+            HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("https://sandbox.nganluong.vn/nl35/checkout.api.nganluong.post.php");
             myRequest.Method = "POST";
             myRequest.ContentType = "application/x-www-form-urlencoded";
             myRequest.ContentLength = data.Length;
