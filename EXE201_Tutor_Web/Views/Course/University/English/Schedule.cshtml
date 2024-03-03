@@ -561,7 +561,18 @@
         <span class="time">Thời gian học: @coursera.TotalDate Ngày</span>
     </div>
     <span class="khoa-hoc-bao-gom">
-        @coursera.Description<br />
+        Khoá học bao gồm @courseraDetail.Count tuần học: 
+        @foreach (var item in courseraDetail)
+        {
+            if (!item.Equals(courseraDetail.Last()))
+            {
+                @(item.Description + " => ")
+            }
+            else
+            {
+                @(item.Description + ".")
+            }
+        }
     </span>
 </div>
 <div class="flex-row-ef">
@@ -579,7 +590,18 @@
 </div>
 <div class="rectangle-c">
     <span class="span">
-        @coursera.Description <br />
+        Khoá học bao gồm @courseraDetail.Count tuần học:
+        @foreach (var item in courseraDetail)
+        {
+            if (!item.Equals(courseraDetail.Last()))
+            {
+                @(item.Description + " => ")
+            }
+            else
+            {
+                @(item.Description + ".")
+            }
+        }
     </span>
 </div>
 <div class="flex-row-cc">

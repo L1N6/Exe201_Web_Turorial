@@ -37,7 +37,7 @@ button {
 
 .main-container {
     position: relative;
-    height: calc(1200 * var(--rpx));
+    height: calc(1500 * var(--rpx));
     margin: 0 auto;
     background: #ffffff;
 }

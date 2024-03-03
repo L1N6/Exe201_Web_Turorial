@@ -59,8 +59,8 @@
     .rectangle-9 {
         position: absolute;
         width: calc(385 * var(--rpx));
-        height: calc(466 * var(--rpx));
-        top: calc(419 * var(--rpx));
+        height: calc(400 * var(--rpx));
+        top: calc(450 * var(--rpx));
         left: calc(79 * var(--rpx));
         background: #aec3fa;
         z-index: 20;
@@ -274,8 +274,14 @@
         display: none; /* Ẩn input kiểu file mặc định */
     }
 
-    
-
+    .error-message {
+        position: absolute;
+        top: calc(906 * var(--rpx)); /* Thay đổi tùy theo vị trí mong muốn */
+        left: calc(610 * var(--rpx)); /* Thay đổi tùy theo vị trí mong muốn */
+        color: red;
+        font-size: calc(24 * var(--rpx)); /* Thay đổi tùy theo kích thước mong muốn */
+        display: none;
+    }
 </style>
 <form asp-controller="Access" asp-action="SignUpProcess" enctype="multipart/form-data" method="post" onsubmit="return validatePassword()">
     <div class="material-symbols-search"></div>
@@ -317,34 +323,14 @@
         <span class="dang-ky-f">Đăng ký</span>
         
     </button>
-    <div id="confirmPasswordError" style="color: red;display: none ">Mật khẩu không khớp.</div>
+    <div id="confirmPasswordError" class="error-message">Mật khẩu không khớp.</div>
     @if (TempData["ErrorMessage"] != null)
     {
-        <div class="alert alert-danger">
+        <div class="error-message" style="display:unset">
             @TempData["ErrorMessage"]
         </div>
     }
-
-    <script>
-        function validatePassword() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-            var confirmPasswordError = document.getElementById("confirmPasswordError");
-
-            if (password !== confirmPassword) {
-                confirmPasswordError.style.display = "block";
-                return false;
-            } else {
-                confirmPasswordError.style.display = "none";
-                return true;
-            }
-        }
-    </script>
-
 </form>
-
-
-
 
 <script>
     function openFileInput() {
@@ -372,5 +358,18 @@
         }
     }
     
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var confirmPasswordError = document.getElementById("confirmPasswordError");
+
+        if (password !== confirmPassword) {
+            confirmPasswordError.style.display = "block";
+            return false;
+        } else {
+            confirmPasswordError.style.display = "none";
+            return true;
+        }
+    }
 </script>
 

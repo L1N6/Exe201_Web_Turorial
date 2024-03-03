@@ -135,6 +135,10 @@ namespace EXE201_Tutor_Web.Controllers
             {
                 return View("University/English/MoocWeek/Document/Index");
             }
+            else if (mooc.CodeName.Equals("ass") || mooc.CodeName.Equals("discuss"))
+            {
+                return UniversityEnglishCourseMoocWeekFinalTest(moocId);
+            }
             return View("University/English/MoocWeek/Quiz/Index");
         }
 
@@ -176,7 +180,7 @@ namespace EXE201_Tutor_Web.Controllers
             return View("University/English/MoocWeek/Discussion/Index");
 
         }
-        public IActionResult UniversityEnglishCourseFourthWeekAssignmentSubmit(IFormFile docxFile)
+        public IActionResult UniversityEnglishCourseAssignmentSubmit(IFormFile docxFile, string moocId)
         {
             if (docxFile != null && docxFile.Length > 0)
             {
@@ -207,7 +211,7 @@ namespace EXE201_Tutor_Web.Controllers
                 }
             }
             TempData["LayoutType"] = "Layout_2";
-            return View("University/English/FourthWeek/Assignment/Index");
+            return UniversityEnglishCourseMoocWeekFinalTest(int.Parse(moocId));
         }
 
         private string GenerateEmailBody(string courseName, string week, string assignmentType, string assignmentTopic)

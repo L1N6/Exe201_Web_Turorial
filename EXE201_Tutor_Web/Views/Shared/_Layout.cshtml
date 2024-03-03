@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EXE201_Tutor_Web.styles.css" asp-append-version="true" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Paytone+One:wght@400&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" />
@@ -190,7 +191,7 @@
                 </a>
             }
             <div class="rectangle-4"><img style="border-radius:50px" src="../img/header/avatar.jpg" alt=""></div>
-            @if (!User.Identity.IsAuthenticated)
+            @* @if (!User.Identity.IsAuthenticated)
             {
                 <a href="@Url.Action("SignIn", "Access")" class="rectangle-2">
                     <span class="dang-nhap">Đăng nhập </span>
@@ -204,7 +205,7 @@
                 <a href="@Url.Action("Logout", "User")" class="rectangle-2">
                     <span class="dang-nhap">Log out </span>
                 </a>
-            }
+            } *@
 
             <div class="rectangle-4" >
                 @if (User.Identity.IsAuthenticated)
@@ -223,7 +224,7 @@
         </div>
         @RenderBody()
         <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-        <div class="elfsight-app-0f31743a-7b5d-4b21-a942-0d042151e62f" data-elfsight-app-lazy></div>
+        <div class="elfsight-app-a1441e62-4bed-4101-9635-fdcc6b835b41" data-elfsight-app-lazy></div>
     </div>
     <footer>
     </footer>

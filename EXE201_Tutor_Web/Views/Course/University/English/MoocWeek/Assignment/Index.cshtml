@@ -2,7 +2,7 @@
 <style>
     .flex-row-cb {
         position: absolute;
-        width: calc(1356 * var(--rpx));
+        width: calc(368 * var(--rpx));
         top: calc(227 * var(--rpx));
         left: 0;
         z-index: 50;
@@ -29,7 +29,7 @@
         margin-bottom: calc(50 * var(--rpx));
         background: url(./assets/images/14571c0d-2747-4b27-97b4-76faf8cb6d10.png) no-repeat center;
         background-size: cover;
-        background-color: #CDD8FF;
+        background-color: #E6EDFF;
     } 
 
     .group-4 {
@@ -789,6 +789,7 @@
     .group-courseraDetail {
         display: flex;
         flex-direction: column;
+        width: calc(368 * var(--rpx));
     }
 </style>
 @{
@@ -816,8 +817,9 @@
     <div class="group-courseraDetail">
         @foreach (var item in moocs)
         {
-            <a href="@Url.Action("UniversityEnglishCourseMoocWeekFinalTest", "Course", new {moocId = item.MoocId})"
-               class="group" @(item.MoocId == mooc.MoocId ? "style=\"background-color:#CDD8FF\"" : "")>
+            var backgroundColor = item.MoocId == mooc.MoocId ? "background-color:#CDD8FF" : "";
+            <a href="@Url.Action("UniversityEnglishCourseMoocWeekPractice", "Course", new {moocId = item.MoocId})"
+               class="group" style="@backgroundColor">
                 <div class="group-4"></div>
                 @if (@item.CodeName.Equals("video"))
                 {
@@ -860,7 +862,8 @@
     <div class="polygon-f"></div>
     <div class="menu-icon"></div>
 </div>
-<form asp-action="UniversityEnglishCourseFourthWeekAssignmentSubmit" asp-controller="Course" enctype="multipart/form-data">
+<form asp-action="UniversityEnglishCourseAssignmentSubmit" asp-controller="Course" enctype="multipart/form-data">
+    <input type="hidden" name="moocId" value="@mooc.MoocId">
     <div class="rectangle-context">
         <div class="technology-education">
             <span class="technology-education-7">Write a paragraph of 200-250 words on the following topic<br /></span><span class="technology-education-8"><br />Discuss the impact of technology on modern education.</span>

@@ -128,7 +128,7 @@
 
     .main-container {
         position: relative;
-        height: calc(1550 * var(--rpx));
+        height: calc(1700 * var(--rpx));
         margin: 0 auto;
         background: #ffffff;
         overflow: hidden;
@@ -206,11 +206,6 @@
         margin: 0 5px;
         cursor: pointer;
     }
-
-        .indicator.active {
-            background-color: #614ce0;
-        }
-
     
 </style>
 <div class="carousel-container">
@@ -235,33 +230,33 @@
         <div class="indicator"></div>
     </div>
 </div>
+<div class="ellipse"></div>
+<div class="vector"></div>
+<div class="rectangle-7">
+    <img src="./img/header/grammar correction-amico (1).png" />
+</div>
+<div class="vector-8">
+    <svg class="vector-1" width="466" height="22" viewBox="0 0 466 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M444.333 11.0082C444.346 16.8992 449.133 21.6642 455.024 21.651C460.915 21.6379 465.68 16.8516 465.667 10.9606C465.653 5.06954 460.867 0.304585 454.976 0.317735C449.085 0.330884 444.32 5.11716 444.333 11.0082ZM0.00446427 14L455.004 12.9844L454.995 8.98438L-0.00446427 10L0.00446427 14Z" fill="#AEC3FA" />
+    </svg>
+</div>
+<div class="vector-9"></div>
+<div class="ellipse-a"></div>
+<span class="bombastic-learning-hub-b">BOMBASTIC <br /> LEARNING HUB </span>
 <form asp-action="Index" asp-controller="Course">
-    <div class="ellipse"></div>
-    <div class="vector"></div>
-    <div class="rectangle-7">
-        <img src="./img/header/grammar correction-amico (1).png" />
-    </div>
-    <div class="vector-8">
-        <svg class="vector-1" width="466" height="22" viewBox="0 0 466 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M444.333 11.0082C444.346 16.8992 449.133 21.6642 455.024 21.651C460.915 21.6379 465.68 16.8516 465.667 10.9606C465.653 5.06954 460.867 0.304585 454.976 0.317735C449.085 0.330884 444.32 5.11716 444.333 11.0082ZM0.00446427 14L455.004 12.9844L454.995 8.98438L-0.00446427 10L0.00446427 14Z" fill="#AEC3FA" />
-        </svg>
-    </div>
-    <div class="vector-9"></div>
-    <div class="ellipse-a"></div>
-    <span class="bombastic-learning-hub-b">BOMBASTIC <br /> LEARNING HUB </span>
     <button type="submit" class="rectangle-c">
         <span class="get-start">Get Start </span>
     </button>
-    <div class="group">
-        <svg class="group-2" width="100%" height="100%" viewBox="0 0 738 82" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 28L717 30.0843" stroke="#E3E9FF" stroke-width="4" />
-            <circle cx="722.5" cy="29.5" r="11.5" fill="white" stroke="#E3E9FF" stroke-width="8" />
-            <path d="M235 82H233V84H235V82ZM444.333 82C444.333 87.891 449.109 92.6667 455 92.6667C460.891 92.6667 465.667 87.891 465.667 82C465.667 76.109 460.891 71.3333 455 71.3333C449.109 71.3333 444.333 76.109 444.333 82ZM233 28V82H237V28H233ZM235 84H455V80H235V84Z" fill="#E3E9FF" />
-            <path d="M115 0V-2H113V0H115ZM247.333 0C247.333 5.89104 252.109 10.6667 258 10.6667C263.891 10.6667 268.667 5.89104 268.667 0C268.667 -5.89104 263.891 -10.6667 258 -10.6667C252.109 -10.6667 247.333 -5.89104 247.333 0ZM117 28V0H113V28H117ZM115 2H258V-2H115V2Z" fill="#E3E9FF" />
-        </svg>
-    </div>
-    <div class="group-d"></div>
 </form>
+<div class="group">
+    <svg class="group-2" width="100%" height="100%" viewBox="0 0 738 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 28L717 30.0843" stroke="#E3E9FF" stroke-width="4" />
+        <circle cx="722.5" cy="29.5" r="11.5" fill="white" stroke="#E3E9FF" stroke-width="8" />
+        <path d="M235 82H233V84H235V82ZM444.333 82C444.333 87.891 449.109 92.6667 455 92.6667C460.891 92.6667 465.667 87.891 465.667 82C465.667 76.109 460.891 71.3333 455 71.3333C449.109 71.3333 444.333 76.109 444.333 82ZM233 28V82H237V28H233ZM235 84H455V80H235V84Z" fill="#E3E9FF" />
+        <path d="M115 0V-2H113V0H115ZM247.333 0C247.333 5.89104 252.109 10.6667 258 10.6667C263.891 10.6667 268.667 5.89104 268.667 0C268.667 -5.89104 263.891 -10.6667 258 -10.6667C252.109 -10.6667 247.333 -5.89104 247.333 0ZM117 28V0H113V28H117ZM115 2H258V-2H115V2Z" fill="#E3E9FF" />
+    </svg>
+</div>
+<div class="group-d"></div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const carousel = document.querySelector('.carousel');
@@ -317,7 +312,7 @@
             updateIndicators();
         }
 
-        // Hàm cập nhật chỉ báo
+        // Hàm cập nhật chỉ báo 
         function updateIndicators() {
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === counter);
@@ -346,4 +341,6 @@
         // Tự động chuyển slide sau một khoảng thời gian
         setInterval(nextSlide, 5000);
     });
+
+    //------------------------
 </script>

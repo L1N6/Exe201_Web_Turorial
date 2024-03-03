@@ -2,7 +2,7 @@
 <style>
     .flex-row-cb {
         position: relative;
-        width: calc(1356 * var(--rpx));
+        width: calc(368 * var(--rpx));
         left: 0;
         z-index: 50;
     }
@@ -28,7 +28,7 @@
         margin-bottom: calc(50 * var(--rpx));
         background: url(./assets/images/14571c0d-2747-4b27-97b4-76faf8cb6d10.png) no-repeat center;
         background-size: cover;
-        background-color: #CDD8FF;
+        background-color: #E6EDFF;
     }
 
     .group-4 {
@@ -596,6 +596,7 @@
     .group-courseraDetail {
         display: flex;
         flex-direction: column;
+        width: calc(368 * var(--rpx));
     }
 </style>
 @{
@@ -624,8 +625,9 @@
     <div class="group-courseraDetail">
         @foreach (var item in moocs)
         {
+            var backgroundColor = item.MoocId == mooc.MoocId ? "background-color:#CDD8FF" : "";
             <a href="@Url.Action("UniversityEnglishCourseMoocWeekPractice", "Course", new {moocId = item.MoocId})"
-               class="group" @(item.MoocId == mooc.MoocId ? "style=\"background-color:#CDD8FF\"" : "")>
+               class="group" style="@backgroundColor">
                 <div class="group-4"></div>
                 @if (@item.CodeName.Equals("video"))
                 {
@@ -675,7 +677,7 @@
         , new {courseDetailId = courseDetailId, moocId = mooc.MoocId, moocDetailId = item.MoocDetailId})"
            class="rectangle-13"
            style="background: url(../img/course/english/mooc/@item.CodeName) no-repeat center;background-size:cover">
-       </a>
+        </a>
     }
 </div>
 <div class="flex-row-b">
