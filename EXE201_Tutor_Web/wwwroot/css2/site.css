@@ -25,7 +25,6 @@ button {
 
 .main-container-2-2 {
     position: relative;
-    width: calc(1440 * var(--rpx));
     height: calc(1024 * var(--rpx));
     margin: 0 auto;
     background: #ffffff;

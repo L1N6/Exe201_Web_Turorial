@@ -546,14 +546,18 @@
         courseDetailIdCheck = int.Parse(TempData["CourseraDetailId"].ToString());
     }
     Coursera coursera;
-    List<CourseraDetail> courseraDetail = new List<CourseraDetail>();
+    List<CourseraDetail> courseraDetails = new List<CourseraDetail>();
+    CourseraDetail courseraDetail = new CourseraDetail();
     List<Mooc> moocs = new List<Mooc>();
+    List<MoocDetail> moocDetails = new List<MoocDetail>();
 
     if (TempData.ContainsKey("Coursera"))
     {
         coursera = TempData["Coursera"] as Coursera;
-        courseraDetail = coursera.CourseraDetails.ToList();
+        courseraDetails = coursera.CourseraDetails.ToList();
+        courseraDetail = courseraDetails.FirstOrDefault(c => c.CourseraDetailId == courseDetailIdCheck);
         moocs = TempData["ListMooc"] as List<Mooc>;
+        moocDetails = moocs.SelectMany(m => m.MoocDetails).ToList();
     }
     else
     {
@@ -563,7 +567,7 @@
 <div class="flex-row-a-div">
     <div class="line-div"></div>
     <div class="group-week">
-        @foreach (var item in courseraDetail)
+        @foreach (var item in courseraDetails)
         {
             if (item.CourseraDetailId == courseDetailIdCheck)
             {
@@ -585,9 +589,30 @@
     </div>
     <div class="rectangle-5">
         <div class="div-topic">
-            <span class="span-topic">Tuần 1 gồm từ vựng xoay quanh chủ đề:<br /></span><span class="span-topic-6">
-                Gia đình - Công việc - Thời tiết <br /> Thời gian - Phương tiện giao
-                thông - Du lịch
+            <span class="span-topic">@(courseraDetail.Name) bao gồm các chủ đề:<br /></span>
+            <span class="span-topic-6">
+                @{
+                    int itemCount = 0;
+                    int halfCount = moocDetails.Where(md => md.Mooc.CodeName.Equals("video")).ToList().Count / 2;
+                }
+                @foreach (var item in moocDetails)
+                {
+                    if (!item.Equals(moocDetails.Last()) && item.Mooc.CodeName.Equals("video"))
+                    {
+                        if (itemCount == halfCount)
+                        {
+                            <br />
+                        }
+                        @(" - " + item.Name)
+                    }
+                    else if (item.Mooc.CodeName.Equals("ass"))
+                    {
+                        @(item.Name)
+                    }
+                    itemCount++;
+                }
+                <br />
+                Và các phần bài tập: Document - Quiz - Assignment
             </span>
         </div>
     </div>
@@ -604,7 +629,8 @@
     {
         <div class="flex-row">
             <div class="group-a"></div>
-            @if(@item.CodeName.Equals("video")){
+            @if (@item.CodeName.Equals("video"))
+            {
                 <span class="video">Video</span>
             }
             else if (@item.CodeName.Equals("doc"))

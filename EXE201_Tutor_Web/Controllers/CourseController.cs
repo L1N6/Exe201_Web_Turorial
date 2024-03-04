@@ -79,7 +79,8 @@ namespace EXE201_Tutor_Web.Controllers
                         .FirstOrDefault(c => c.CourseraId == courseraId);
                 courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals("TUAN1")).FirstOrDefault().CourseraDetailId;
                 moocs = _context.Moocs
-               .Where(m => m.CourseraDetailId == courseraDetailId).ToList();
+                    .Include(m => m.MoocDetails)
+                    .Where(m => m.CourseraDetailId == courseraDetailId).ToList();
 
                 TempData["Coursera"] = coursera;
                 TempData["CourseraDetailId"] = courseraDetailId;
@@ -91,6 +92,7 @@ namespace EXE201_Tutor_Web.Controllers
                         .FirstOrDefault(c => c.CourseraId == courseraId);
             courseraDetailId = coursera.CourseraDetails.Where(cd => cd.CodeName.Equals(week)).FirstOrDefault().CourseraDetailId;
             moocs = _context.Moocs
+               .Include(m => m.MoocDetails)
                .Where(m => m.CourseraDetailId == courseraDetailId).ToList();
 
             TempData["Coursera"] = coursera;
@@ -131,7 +133,8 @@ namespace EXE201_Tutor_Web.Controllers
             if (mooc.CodeName.Equals("video"))
             {
                 return View("University/English/MoocWeek/Video/Index");
-            }else if (mooc.CodeName.Equals("doc"))
+            }
+            else if (mooc.CodeName.Equals("doc"))
             {
                 return View("University/English/MoocWeek/Document/Index");
             }
