@@ -85,18 +85,26 @@ namespace EXE201_Tutor_Web.Controllers
                 };
 
                 _context.OrderCourseras.Add(order);
-                _context.SaveChanges();
+               
 
                 MailContent content = new MailContent
                 {
                     To = result.payerEmail,
                     Subject = "Order Coursera",
-                    Body = GenerateEmailBody(coursera.CodeName + coursera.Name),
+                    Body = GenerateEmailBody(coursera.Name),
 
                 };
-
-
                 _mailService.SendMail(content);
+
+                OnCoursera onCoursera = new OnCoursera
+                {
+                    CourseraId = coursera.CourseraId,
+                    StudentId = 1,
+                    Date = DateTime.Now
+                };
+                _context.OnCoursera.Add(onCoursera);
+
+                _context.SaveChanges();
                 return View();
             }
             else

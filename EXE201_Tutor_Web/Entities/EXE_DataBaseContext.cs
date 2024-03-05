@@ -33,8 +33,21 @@ namespace EXE201_Tutor_Web.Entities
             modelBuilder.Entity<Student>().HasKey(u => u.StudentId); // Primary key for Student
             modelBuilder.Entity<Teacher>().HasKey(u => u.TeacherId); // Primary key for Teacher
             modelBuilder.Entity<OrderCoursera>().HasKey(u => u.OrderCourseraId); // Primary key for Teacher
+            modelBuilder.Entity<Feedback>().HasKey(u => u.FeedbackId); // Primary key for Teacher
 
             // Define relationships
+
+            // One-to-many relationship between Student and Feedback
+            modelBuilder.Entity<Student>()
+                .HasMany(c => c.Feedback)
+                .WithOne(oc => oc.Student)
+                .HasForeignKey(oc => oc.StudentId);
+
+            // One-to-many relationship between Coursera and Feedback
+            modelBuilder.Entity<Coursera>()
+                .HasMany(c => c.Feedbacks)
+                .WithOne(oc => oc.Coursera)
+                .HasForeignKey(oc => oc.CourseraId);
 
             // One-to-many relationship between Coursera and OrderCoursera
             modelBuilder.Entity<Coursera>()

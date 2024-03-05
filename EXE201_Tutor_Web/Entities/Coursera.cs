@@ -25,5 +25,7 @@ namespace EXE201_Tutor_Web.Entities
         public virtual ICollection<OnCoursera>? OnCoursera { get; set; }
         public virtual ICollection<CourseraDetail>? CourseraDetails { get; set; }
         public virtual ICollection<OrderCoursera>? OrderCourseras { get; set; }
+        public virtual ICollection<Feedback>? Feedbacks { get; set; }
+
     }
 }
