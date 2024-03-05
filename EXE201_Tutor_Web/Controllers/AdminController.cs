@@ -12,10 +12,36 @@ namespace EXE201_Tutor_Web.Controllers
             _context = context;
         }
 
-        public IActionResult Student()
+        public IActionResult Student(StudentFilterDto filter)
         {
-            List<Student> students = _context.Students.Include(x => x.OnCoursera).ToList();
-            return View(students);
+            var query = _context.Students.Include(x => x.OnCoursera).AsQueryable();
+
+            // Apply filtering
+            if (!string.IsNullOrEmpty(filter.SearchText))
+            {
+                query = query.Where(s => s.Name.Contains(filter.SearchText) || s.Email.Contains(filter.SearchText));
+            }
+
+            // Paging
+            filter.PageSize = filter.PageSize <= 0 ? 10 : filter.PageSize; // default page size
+            filter.Page = filter.Page <= 0 ? 1 : filter.Page;
+            var totalCount = query.Count();
+            var totalPages = (int)Math.Ceiling(totalCount / (double)filter.PageSize);
+            var students = query.Skip((filter.Page - 1) * filter.PageSize)
+                                .Take(filter.PageSize)
+                                .ToList();
+
+            var viewModel = new StudentViewModel
+            {
+                Students = students,
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                CurrentPage = filter.Page,
+                PageSize = filter.PageSize,
+                SearchText = filter.SearchText
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult StudentDetail(int id)
