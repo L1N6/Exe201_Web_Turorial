@@ -1,4 +1,4 @@
-﻿@model EXE201_Tutor_Web.Entities.StudentViewModel
+﻿@model EXE201_Tutor_Web.Entities.OrderCourseraViewModel
 @{
     Layout = null;
 }
@@ -41,48 +41,71 @@
                         <li class="list-group-item"><a href="#" class="text-dark">Quản lý Khóa học</a></li>
                         <li class="list-group-item"><a asp-controller="Admin" asp-action="Student" class="text-dark">Quản lý Sinh viên</a></li>
                         <li class="list-group-item"><a asp-controller="Admin" asp-action="OrderCoursera" class="text-dark">Quản lý Đơn hàng</a></li>
-
                     </ul>
                 </div>
             </div>
 
             <div class="col-md-9 mb-3">
                 <div class="bg-light p-3 rounded h-100">
-                    <h2 class="text-dark mb-3">Quản lý Sinh viên</h2>
-                    <form method="get" action="@Url.Action("Student", "Admin")">
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="searchText" value="@Model.SearchText" placeholder="Search by Name or Email">
+                    <h2>Quản lý Đơn hàng</h2>
+                    <form method="get" action="@Url.Action("OrderCoursera", "Admin")">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="searchText" value="@Model.SearchText" placeholder="Search by Student Name or Coursera Name or BankDescription">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <select class="form-control" name="status">
+                                        <option value="">-- Select Status --</option>
+                                        <option value="Accepted">Accepted</option>
+                                        <option value="Pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary mb-2">Search</button>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">Search</button>
                     </form>
                     <table class="table table-bordered table-striped">
                         <thead class="thead-light">
                             <tr>
                                 <th>ID</th>
                                 <th>Email</th>
-                                <th>Name</th>
-                                <th>UserName</th>
-                                <th>Avatar</th>
-                                <th>Address</th>
-                                <th>Số lượng Coursera đã đăng ký</th>
-
+                                <th>Student Name</th>
+                                <th>Coursera Name</th>
+                                <th>Money</th>
+                                <th>Status</th>
+                                <th>Date Accepted</th>
+                                <th>Bank Description</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var student in Model.Students)
+                            @foreach (var order in Model.OrderCourseras)
                             {
                                 <tr>
-                                    <td>@student.StudentId</td>
-                                    <td>@student.Email</td>
-                                    <td>@student.Name</td>
-                                    <td>@student.UserName</td>
-                                    <td style="text-align: center;"><img src="@(!string.IsNullOrEmpty(student.Avatar) ? "/img/student/" + student.Avatar : "/img/header/avatar.jpg")" alt="Avatar" class="avatar" style="max-width: 30px; max-height: 30px; display: block; margin: auto;" /></td>
-                                    <td>@(student.Address != null ? student.Address : "Chưa điền")</td>
-                                    <td style="text-align: center;">
-                                        <a asp-controller="Admin" asp-action="StudentDetail" asp-route-id="@student.StudentId" class="text-success">
-                                            @(student.OnCoursera != null ? student.OnCoursera.Count : 0)
-                                        </a>
-                                    </td>
+                                    <td>@order.OrderCourseraId</td>
+                                    <td>@order.Email</td>
+                                    <td>@order.Student.Name</td>
+                                    <td>@order.Coursera.Name</td>
+                                    <td>@order.Money</td>
+                                    @if (order.Status == null || !order.Status.Value)
+                                    {
+                                        <td class="text-danger">Pending</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="text-success">Accepted</td>
+                                    }
+                                    <td>@(order.DateAccepted != null ? order.DateAccepted.Value.ToShortDateString() : "N/A")</td>
+                                    <td>@(order.BankDescription != null ? order.BankDescription : "N/A")</td>
+                                    @if (order.Status == null || !order.Status.Value)
+                                    {
+                                        <td> <a asp-controller="Admin" asp-action="AcceptedOrder" asp-route-id="@order.OrderCourseraId" class="text-primary">Accept</a></td>
+                                    }
                                 </tr>
                             }
                         </tbody>
@@ -93,7 +116,7 @@
                             @for (int i = 1; i <= Model.TotalPages; i++)
                             {
                                 <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
-                                    <a class="page-link" href="@Url.Action("Student", "Admin", new { searchText = Model.SearchText, page = i })">@i</a>
+                                    <a class="page-link" href="@Url.Action("OrderCoursera", "Admin", new { searchText = Model.SearchText, page = i })">@i</a>
                                 </li>
                             }
                         </ul>

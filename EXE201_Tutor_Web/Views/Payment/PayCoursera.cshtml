@@ -39,11 +39,23 @@
                         <span class="bank-logo" style="background-color: #007bff;"></span>Ngân hàng thương mại cổ phần Xuất Nhập khẩu Việt Nam
                     </li>
                 </ul>
-
-                
             </div>
         </div>
 
+        <div class="card">
+            <div class="card-body">
+                <input type="hidden" readonly value="@id" name="courseraId" />
+                <h5 class="card-title">Thanh toán online bằng chuyển khoản</h5>
+                <ul class="list-group mb-3">
+                    <li class="list-group-item">
+                        <a asp-controller="Payment" asp-action="PayByFacebook" asp-route-id="@id" class="text-primary">
+                        <input type="radio" value="EXB" id="exb_ck_on" name="bankcode" />
+                        <span class="bank-logo" style="background-color: #007bff;"></span>
+                        Mã QR (Click vô đây)</a>
+                </ul>
+            </div>
+        </div>  
+       
         <div class="container mb-3">
             <h4 class="text-danger">Lưu ý</h4>
             <p>Bạn nhập đầy đủ thông tin sau:</p>

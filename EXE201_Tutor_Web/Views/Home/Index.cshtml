@@ -1,4 +1,8 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
     .ellipse {
         position: relative;
         width: calc(24 * var(--rpx));
@@ -27,9 +31,9 @@
     .vector {
         width: calc(113 * var(--rpx));
         height: calc(51 * var(--rpx));
-        top: calc(835 * var(--rpx));
+        top: calc(835 * var(--rpx));    
         left: calc(127 * var(--rpx));
-        background: url(./img/home/Vector.png) no-repeat center;
+        background: url(../img/home/Vector.png) no-repeat center;
         background-size: cover;
     }
 
@@ -56,7 +60,7 @@
         height: calc(47 * var(--rpx));
         top: calc(886 * var(--rpx));
         left: calc(251 * var(--rpx));
-        background: url(./img/home/Vector_9.png) no-repeat center;
+        background: url(../img/home/Vector_9.png) no-repeat center;
         background-size: cover;
     }
 
@@ -65,7 +69,7 @@
         height: calc(24 * var(--rpx));
         top: calc(919 * var(--rpx));
         left: calc(327 * var(--rpx));
-        background: url(./img/home/Ellipse_a.png) no-repeat center;
+        background: url(../img/home/Ellipse_a.png) no-repeat center;
         background-size: cover;
         border-radius: 50%;
     }
@@ -122,16 +126,15 @@
         height: calc(43 * var(--rpx));
         top: calc(1427 * var(--rpx));
         left: calc(1002 * var(--rpx));
-        background: url(./img/home/Group_1.png) no-repeat center;
+        background: url(../img/home/Group_1.png) no-repeat center;
         background-size: cover;
     }
 
     .main-container {
         position: relative;
-        height: calc(1700 * var(--rpx));
+        height: calc(2000 * var(--rpx));
         margin: 0 auto;
         background: #ffffff;
-        overflow: hidden;
     }
 
     .carousel-container {
@@ -206,8 +209,88 @@
         margin: 0 5px;
         cursor: pointer;
     }
-    
+
+    #quote-carousel {
+        padding: 0 calc(10 * var(--rpx)) calc(30 * var(--rpx)) calc(10 * var(--rpx));
+        margin-top: calc(60 * var(--rpx));
+    }
+
+        #quote-carousel .carousel-control {
+            background: none;
+            color: #614ce0;
+            font-size: 2.3em;
+            text-shadow: none;
+            margin-top: calc(30 * var(--rpx));
+        }
+
+        #quote-carousel .carousel-indicators {
+            position: absolute;
+            right: 50%;
+            top: calc(150 * var(--rpx));    
+            bottom: 0px;
+            margin-top: 20px;
+            margin-right: -19px;
+        }
+
+            #quote-carousel .carousel-indicators li {
+                width: calc(50 * var(--rpx));
+                height: calc(50 * var(--rpx));
+                cursor: pointer;
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+                border-radius: 50%;
+                opacity: 0.4;
+                overflow: hidden;
+                transition: all .4s ease-in;
+                vertical-align: middle;
+            }
+
+            #quote-carousel .carousel-indicators .active {
+                width: calc(128 * var(--rpx));
+                height: calc(128 * var(--rpx));
+                opacity: 1;
+                transition: all .2s;
+            }
+
+    .item blockquote {
+        border-left: none;
+        margin: 0;
+    }
+
+        .item blockquote p:before {
+            content: "\f10d";
+            font-family: 'Fontawesome';
+            float: left;
+            margin-right: calc(10 * var(--rpx));
+            
+        }
+
+    .customer-review {
+        position: absolute;
+        top: calc(1500 * var(--rpx));
+        width: 100%;
+        height: calc(400 * var(--rpx));
+        background-color: #cdd8ff;
+    }
+
+    .img-responsive{
+        width:100%;
+        height:100%;
+    }
+
+    a, a:hover{
+        text-decoration:none;
+    }
+
 </style>
+@{
+    List<Feedback> feedbacks = new List<Feedback>();
+
+    if (TempData.ContainsKey("listFeedBack"))
+    {
+        feedbacks = TempData["listFeedBack"] as List<Feedback>;
+    }
+}
 <div class="carousel-container">
     <div class="carousel">
         <a href="https://moji.vn/dung-cu-hoc-tap-pc158152.html" target="_blank" class="slide">
@@ -233,7 +316,7 @@
 <div class="ellipse"></div>
 <div class="vector"></div>
 <div class="rectangle-7">
-    <img src="./img/header/grammar correction-amico (1).png" />
+    <img src="../img/header/grammar correction-amico (1).png" />
 </div>
 <div class="vector-8">
     <svg class="vector-1" width="466" height="22" viewBox="0 0 466 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -257,6 +340,80 @@
     </svg>
 </div>
 <div class="group-d"></div>
+<div class="customer-review">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="carousel" data-ride="carousel" id="quote-carousel">
+                    <!-- Carousel Slides/Quotes -->
+                    <div class="carousel-inner text-center">
+                        <!-- Quote 1 -->
+                        @foreach (var item in feedbacks)
+                        {
+                            if (item.Equals(feedbacks.First()))
+                            {
+                                <div class="item active">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+                                                <p>
+                                                    @item.Review
+                                                </p>
+                                                <small>@item.Student.Name</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                            }else{
+                                <div class="item">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+                                                <p>
+                                                    @item.Review
+                                                </p>
+                                                <small>@item.Student.Name</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <!-- Bottom Carousel Indicators -->
+                    <ol class="carousel-indicators">
+                        @{
+                            int index = 0;
+                        }
+                        @foreach (var item in feedbacks)
+                        {
+                            if (item.Equals(feedbacks.First()))
+                            {
+                                <li data-target="#quote-carousel" data-slide-to="@(index++)" class="active">
+                                    <img class="img-responsive" src="~/img/student/@item.Student.Avatar" alt="">
+                                </li>
+                            }else{
+                                <li data-target="#quote-carousel" data-slide-to="@(index++)">
+                                    <img class="img-responsive" src="~/img/student/@item.Student.Avatar" alt="">
+                                </li>
+                            }
+                        }
+                    </ol>
+
+                    <!-- Carousel Buttons Next/Prev -->
+                    <a data-slide="prev" href="#quote-carousel" class="left carousel-control">
+                        <i class="fa fa-chevron-left" style="margin-top:35%"></i>
+                    </a>
+                    <a data-slide="next" href="#quote-carousel" class="right carousel-control">
+                        <i class="fa fa-chevron-right" style="margin-top:35%"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const carousel = document.querySelector('.carousel');
@@ -312,7 +469,7 @@
             updateIndicators();
         }
 
-        // Hàm cập nhật chỉ báo 
+        // Hàm cập nhật chỉ báo
         function updateIndicators() {
             indicators.forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === counter);
@@ -342,5 +499,5 @@
         setInterval(nextSlide, 5000);
     });
 
-    //------------------------
+    //------------------------slider2
 </script>

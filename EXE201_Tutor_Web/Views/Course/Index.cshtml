@@ -227,7 +227,7 @@
         z-index: 26;
         overflow-wrap: break-word;
     }
-    
+
 
     .tieng-anh-co-ban {
         flex-shrink: 0;
@@ -436,21 +436,26 @@
 
 </style>
 @{
+    int studentLogedInId = 0;
     List<Coursera> courseras = null; // Khai báo ở ngoài phạm vi của block if và else
 
+    if (Context.Session.GetString("LogedIn") != null)
+    {
+        studentLogedInId = int.Parse(Context.Session.GetString("LogedIn"));
+    }
     if (TempData.ContainsKey("ListCoursera"))
     {
         courseras = TempData["ListCoursera"] as List<Coursera>;
     }
     else
-    {   
+    {
         courseras = null;
     }
 }
 <div class="material-symbols-search-rounded"></div>
 <div class="rectangle-7">
     <div class="rectangle-8">
-        <img src="./img/course/Rectangle 25.png" />
+        <img src="../img/course/Rectangle 25.png" />
     </div>
     <span class="khoa-hoc-hang-dau">KHÓA HỌC HÀNG ĐẦU 2023</span>
     <div class="rectangle-9">
@@ -465,7 +470,7 @@
 <div class="flex-row-ff">
     <div class="element-course">
         <a class="rectangle-a">
-            <img src="./img/course/cpp_icon.png" />
+            <img src="../img/course/cpp_icon.png" />
         </a>
         <div class="rectangle-c">
             <div class="rectangle-d">
@@ -496,13 +501,52 @@
     </div>
     @foreach (var course in courseras)
     {
+        bool check = false;
+        @foreach (var item in course.OnCoursera)
+        {
+            if (item.StudentId == studentLogedInId)
+            {
+                check = true;
+            }
+        }
         <div class="element-course">
-            <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course", new { courseraId = course.CourseraId })" class="rectangle-a">
-                <img src="~/img/course/@course.Image" />
-            </a>
+            @if (studentLogedInId == 0)
+            {
+                <a href="@Url.Action("SignIn", "Access")" class="rectangle-a">
+                    <img src="~/img/course/@course.Image" />
+                </a>
+            }
+            else if(!check)
+            {
+                <a asp-controller="Payment" asp-action="PayCoursera" asp-route-id="@course.CourseraId" class="rectangle-a">
+                    <img src="~/img/course/@course.Image" />
+                </a>
+            }
+            else if(check)
+            {
+                <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course", new { courseraId = course.CourseraId })" class="rectangle-a">
+                    <img src="~/img/course/@course.Image" />
+                </a>
+            }
             <div class="rectangle-c">
                 <div class="rectangle-d">
-                    <span class="tinh-nang-dang-phat-trien"></span>
+                    @if (check)
+                    {
+                        <span class="tinh-nang-dang-phat-trien text-success">Đã đăng kí</span>
+
+                    }
+                    else
+                    {
+                        if (studentLogedInId == 0)
+                        {
+                            <a asp-controller="Access" asp-action="SignIn" class="tinh-nang-dang-phat-trien">Chưa đăng kí => Ấn để đăng kí</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Payment" asp-action="PayCoursera" asp-route-id="@course.CourseraId" class="tinh-nang-dang-phat-trien">Chưa đăng kí => Ấn để đăng kí</a>
+                        }
+
+                    }
                     <div class="flex-row">
                         <span class="c-basic">@course.Name</span>
                         <video class="video" controls loop>
@@ -515,8 +559,6 @@
                     <div class="flex-row-c">
                         <span class="mo-ta">
                             Mô tả: @course.Description
-                            <a asp-controller="Payment" asp-action="PayCoursera" asp-route-id="@course.CourseraId" class="text-success">Thanh toán
-                            </a>
                         </span>
                     </div>
                     <div class="flex-row-cb">
@@ -525,7 +567,7 @@
                     <div class="flex-row-b">
                         <span class="ky-thuat-phan-mem">#@course.Major</span>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

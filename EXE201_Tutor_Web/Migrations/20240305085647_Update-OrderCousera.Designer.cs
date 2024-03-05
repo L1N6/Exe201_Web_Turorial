@@ -3,6 +3,7 @@ using System;
 using EXE201_Tutor_Web.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EXE201_Tutor_Web.Migrations
 {
     [DbContext(typeof(EXE_DataBaseContext))]
-    partial class EXE_DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240305085647_Update-OrderCousera")]
+    partial class UpdateOrderCousera
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,30 +93,6 @@ namespace EXE201_Tutor_Web.Migrations
                     b.HasIndex("CourseraId");
 
                     b.ToTable("CourseraDetails");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web.Entities.Feedback", b =>
-                {
-                    b.Property<int>("FeedbackId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("CourseraId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Review")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FeedbackId");
-
-                    b.HasIndex("CourseraId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("EXE201_Tutor_Web.Entities.Mooc", b =>
@@ -314,12 +292,6 @@ namespace EXE201_Tutor_Web.Migrations
                     b.Property<DateTime?>("DateAccepted")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<double>("Money")
-                        .HasColumnType("double");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext");
 
@@ -416,25 +388,6 @@ namespace EXE201_Tutor_Web.Migrations
                         .IsRequired();
 
                     b.Navigation("Coursera");
-                });
-
-            modelBuilder.Entity("EXE201_Tutor_Web.Entities.Feedback", b =>
-                {
-                    b.HasOne("EXE201_Tutor_Web.Entities.Coursera", "Coursera")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("CourseraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EXE201_Tutor_Web.Entities.Student", "Student")
-                        .WithMany("Feedback")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Coursera");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("EXE201_Tutor_Web.Entities.Mooc", b =>
@@ -542,8 +495,6 @@ namespace EXE201_Tutor_Web.Migrations
                 {
                     b.Navigation("CourseraDetails");
 
-                    b.Navigation("Feedbacks");
-
                     b.Navigation("OnCoursera");
 
                     b.Navigation("OrderCourseras");
@@ -585,8 +536,6 @@ namespace EXE201_Tutor_Web.Migrations
 
             modelBuilder.Entity("EXE201_Tutor_Web.Entities.Student", b =>
                 {
-                    b.Navigation("Feedback");
-
                     b.Navigation("OnCoursera");
 
                     b.Navigation("OrderCoursera");

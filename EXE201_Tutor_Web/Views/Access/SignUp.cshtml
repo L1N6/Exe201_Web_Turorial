@@ -267,7 +267,6 @@
         font-size: calc(18 * var(--rpx));
         color: #614ce0;
         margin-left: 15px
-        
     }
 
     input[type="file"] {
@@ -281,6 +280,13 @@
         color: red;
         font-size: calc(24 * var(--rpx)); /* Thay đổi tùy theo kích thước mong muốn */
         display: none;
+    }
+
+    #avatarImage {
+        width: 100%;
+        height: 100%;
+        border: calc(1 * var(--rpx)) solid;
+        border-radius: calc(30 * var(--rpx))
     }
 </style>
 <form asp-controller="Access" asp-action="SignUpProcess" enctype="multipart/form-data" method="post" onsubmit="return validatePassword()">
@@ -321,7 +327,7 @@
 
     <button type="submit" class="rectangle-e">
         <span class="dang-ky-f">Đăng ký</span>
-        
+
     </button>
     <div id="confirmPasswordError" class="error-message">Mật khẩu không khớp.</div>
     @if (TempData["ErrorMessage"] != null)
@@ -357,7 +363,7 @@
             avatarLabel.textContent = "Cập nhật ảnh đại diện"; // Revert label text
         }
     }
-    
+
     function validatePassword() {
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirmPassword").value;

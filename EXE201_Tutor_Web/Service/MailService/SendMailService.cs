@@ -30,6 +30,7 @@ namespace EXE201_Tutor_Web_API.Services.MailService
         // Gửi email, theo nội dung trong mailContent
         public async Task<SendMailResult> SendMail(MailContent mailContent)
         {
+
             var email = new MimeMessage();
             email.Sender = new MailboxAddress(mailSettings.DisplayName, mailSettings.Mail);
             email.From.Add(new MailboxAddress(mailSettings.DisplayName, mailSettings.Mail));
@@ -38,29 +39,33 @@ namespace EXE201_Tutor_Web_API.Services.MailService
 
             var builder = new BodyBuilder();
             builder.HtmlBody = mailContent.Body;
+            using var smtp = new MailKit.Net.Smtp.SmtpClient();
 
-
-            string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, "doc");
-            string filePath = Path.Combine(folderPath, mailContent.fileName);
-            byte[] fileBytes;
-
-            if (System.IO.File.Exists(filePath))
+            if (!string.IsNullOrEmpty(mailContent.fileName))
             {
-                FileStream file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                using (var ms = new MemoryStream())
+                string folderPath = Path.Combine(_webHostEnvironment.WebRootPath, "doc");
+                string filePath = Path.Combine(folderPath, mailContent.fileName);
+                byte[] fileBytes;
+
+
+                if (System.IO.File.Exists(filePath))
                 {
-                    file.CopyTo(ms);
-                    fileBytes = ms.ToArray();
+                    FileStream file = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                    using (var ms = new MemoryStream())
+                    {
+                        file.CopyTo(ms);
+                        fileBytes = ms.ToArray();
+                    }
+                    builder.Attachments.Add(mailContent.fileName, fileBytes, ContentType.Parse("application/octet-stream"));
                 }
-                builder.Attachments.Add(mailContent.fileName, fileBytes, ContentType.Parse("application/octet-stream"));
             }
+
             email.Body = builder.ToMessageBody();
 
             // dùng SmtpClient của MailKit
-            using var smtp = new MailKit.Net.Smtp.SmtpClient();
-
             try
             {
+
                 smtp.Connect(mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls);
                 smtp.Authenticate(mailSettings.Mail, mailSettings.Password);
                 await smtp.SendAsync(email);
