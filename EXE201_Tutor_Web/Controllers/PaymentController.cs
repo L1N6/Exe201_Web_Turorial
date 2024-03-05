@@ -1,5 +1,7 @@
 ﻿using API_NganLuong;
 using EXE201_Tutor_Web.Entities;
+using EXE201_Tutor_Web.Models;
+using EXE201_Tutor_Web_API.Services.MailService;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 
@@ -8,9 +10,12 @@ namespace EXE201_Tutor_Web.Controllers
     public class PaymentController : Controller
     {
         public readonly EXE_DataBaseContext _context;
-        public PaymentController(EXE_DataBaseContext context)
+        private readonly ISendMailService _mailService;
+
+        public PaymentController(EXE_DataBaseContext context, ISendMailService mailService)
         {
             _context = context;
+            _mailService = mailService;
         }
         public IActionResult PayCoursera(int id)
         {
@@ -65,6 +70,8 @@ namespace EXE201_Tutor_Web.Controllers
             APICheckoutV3 objNLChecout = new APICheckoutV3();
             ResponseCheckOrder result = objNLChecout.GetTransactionDetail(info);
             int courseraId = Int32.Parse(result.description);
+            var coursera = _context.Courseras.FirstOrDefault(x => x.CourseraId == courseraId);
+
             if (result.errorCode == "00")
             {
                 OrderCoursera order = new OrderCoursera
@@ -76,9 +83,20 @@ namespace EXE201_Tutor_Web.Controllers
                     Email = result.payerEmail,
                     DateAccepted = DateTime.Now,
                 };
+
                 _context.OrderCourseras.Add(order);
                 _context.SaveChanges();
-               
+
+                MailContent content = new MailContent
+                {
+                    To = result.payerEmail,
+                    Subject = "Order Coursera",
+                    Body = GenerateEmailBody(coursera.CodeName + coursera.Name),
+
+                };
+
+
+                _mailService.SendMail(content);
                 return View();
             }
             else
@@ -153,6 +171,16 @@ namespace EXE201_Tutor_Web.Controllers
 
             return sb.ToString();
         }
+        private string GenerateEmailBody(string courseName)
+        {
+            string body = $@"
+            <p><strong>Xin chào,</strong></p>
+            <p>Chúc mừng! Đơn hàng của bạn cho khoá học {courseName} đã được chấp nhận.</p>
+            <p>Bây giờ bạn có thể tham gia vào khoá học và bắt đầu học ngay.</p>
+            <p>Xin cảm ơn và chúc bạn học tốt!</p>
+            <p>Trân trọng,</p>";
 
+            return body;
+        }
     }
 }

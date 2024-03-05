@@ -47,7 +47,7 @@
 
             <div class="col-md-9 mb-3">
                 <div class="bg-light p-3 rounded h-100">
-                    <h2>Manage Orders</h2>
+                    <h2>Quản lý Đơn hàng</h2>
                     <form method="get" action="@Url.Action("OrderCoursera", "Admin")">
                         <div class="form-row">
                             <div class="col-md-12">
@@ -88,7 +88,7 @@
                             {
                                 <tr>
                                     <td>@order.OrderCourseraId</td>
-                                    <td>@order.Student.Email</td>
+                                    <td>@order.Email</td>
                                     <td>@order.Student.Name</td>
                                     <td>@order.Coursera.Name</td>
                                     <td>@order.Money</td>

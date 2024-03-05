@@ -93,11 +93,11 @@ namespace EXE201_Tutor_Web.Controllers
         }
         public IActionResult AcceptedOrder(int id)
         {
-            var coursera = _context.OrderCourseras.Where(x => x.CourseraId == id).Include(x => x.Coursera).FirstOrDefault();
+            var coursera = _context.OrderCourseras.Where(x => x.OrderCourseraId == id).Include(x => x.Coursera).FirstOrDefault();
             coursera.Status = true;
             coursera.DateAccepted = DateTime.Now;
             _context.OrderCourseras.Update(coursera);
-            _context.SaveChanges();
+            
 
             MailContent content = new MailContent
             {
@@ -106,6 +106,14 @@ namespace EXE201_Tutor_Web.Controllers
                 Body = GenerateEmailBody(coursera.Coursera.Name),
 
             };
+            OnCoursera onCoursera = new OnCoursera
+            {
+                CourseraId = coursera.CourseraId,
+                StudentId = coursera.StudentId,
+                Date = DateTime.Now
+            };
+            _context.OnCoursera.Add(onCoursera);
+            _context.SaveChanges();
             _mailService.SendMail(content);
             return RedirectToAction("OrderCoursera", "Admin");
         }
