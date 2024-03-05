@@ -21,7 +21,7 @@ namespace EXE201_Tutor_Web.Controllers
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
-     
+
         public IActionResult SignIn()
         {
             return View();
@@ -100,20 +100,44 @@ namespace EXE201_Tutor_Web.Controllers
                 return RedirectToAction("SignIn");
             }
             HttpContext.Session.SetString("AccountValid", student.Email);
+            HttpContext.Session.SetString("LogedIn", student.StudentId + "");
             return RedirectToAction("Index", "Home");
         }
 
         public IActionResult SignUpProcess()
         {
             return View("SignUpSuccess");
-        } 
+        }
 
-        
+
         public IActionResult ForgotPassword()
         {
             return View();
         }
         public IActionResult ForgotPasswordProcess(string email)
+        {
+            Student studentCheck = _context.Students.FirstOrDefault(s => s.Email.Equals(email));
+            if (studentCheck == null)
+            {
+                TempData["ErrorFPwdMessage"] = "Email này chưa được đăng kí. Vui lòng kiểm tra lại!";
+            }
+
+            string newRandomPassword = GenerateRandomString(5);
+            return View();
+        }
+        public string GenerateRandomString(int length)
+        {
+            Random random = new Random();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        public IActionResult ChangePasswordProcess(int id, string newRandomPassword, string newPassword)
         {
             return View();
         }

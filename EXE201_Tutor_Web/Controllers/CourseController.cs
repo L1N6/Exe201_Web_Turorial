@@ -22,7 +22,9 @@ namespace EXE201_Tutor_Web.Controllers
         }
         public IActionResult Index()
         {
-            List<Coursera> courseras = _context.Courseras.ToList();
+            List<Coursera> courseras = _context.Courseras
+                .Include(c => c.OnCoursera)
+                .ToList();
             TempData["ListCoursera"] = courseras;
             return View();
         }

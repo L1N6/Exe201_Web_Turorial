@@ -1,4 +1,5 @@
-﻿<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+﻿@using EXE201_Tutor_Web.Entities
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
 
 <style>
@@ -225,7 +226,7 @@
         #quote-carousel .carousel-indicators {
             position: absolute;
             right: 50%;
-            top: calc(200 * var(--rpx));
+            top: calc(150 * var(--rpx));    
             bottom: 0px;
             margin-top: 20px;
             margin-right: -19px;
@@ -282,6 +283,14 @@
     }
 
 </style>
+@{
+    List<Feedback> feedbacks = new List<Feedback>();
+
+    if (TempData.ContainsKey("listFeedBack"))
+    {
+        feedbacks = TempData["listFeedBack"] as List<Feedback>;
+    }
+}
 <div class="carousel-container">
     <div class="carousel">
         <a href="https://moji.vn/dung-cu-hoc-tap-pc158152.html" target="_blank" class="slide">
@@ -339,83 +348,56 @@
                     <!-- Carousel Slides/Quotes -->
                     <div class="carousel-inner text-center">
                         <!-- Quote 1 -->
-                        <div class="item active">
-                            <blockquote>
-                                <div class="row">
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <p>Lorem ipsum dolor sit amet, 
-                                            consectetur adipiscing elit, 
-                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. !</p>
-                                        <small>Someone famous</small>
-                                    </div>
+                        @foreach (var item in feedbacks)
+                        {
+                            if (item.Equals(feedbacks.First()))
+                            {
+                                <div class="item active">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+                                                <p>
+                                                    @item.Review
+                                                </p>
+                                                <small>@item.Student.Name</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
                                 </div>
-                            </blockquote>
-                        </div>
-                        <!-- Quote 2 -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="row">
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <p>1uahduasdh adhadhuadha, háu dhau hdau há hau, dahdu ahh au háu ha dahu dha</p>
-                                        <small>Someone famous</small>
-                                    </div>
+                            }else{
+                                <div class="item">
+                                    <blockquote>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+                                                <p>
+                                                    @item.Review
+                                                </p>
+                                                <small>@item.Student.Name</small>
+                                            </div>
+                                        </div>
+                                    </blockquote>
                                 </div>
-                            </blockquote>
-                        </div>
-                        <!-- Quote 3 -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="row">
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <p>1uahduasdh adhadhuadha háu dhau hdau há hau dahdu ahh au háu ha dahu dha</p>
-                                        <small>Someone famous</small>
-                                    </div>
-                                </div>
-                            </blockquote>
-                        </div>
-                        <!-- Quote 3 -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="row">
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <p>1uahduasdh adhadhuadha háu dhau hdau há hau dahdu ahh au háu ha dahu dha</p>
-                                        <small>Someone famous</small>
-                                    </div>
-                                </div>
-                            </blockquote>
-                        </div>
-                        <!-- Quote 3 -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="row">
-                                    <div class="col-sm-8 col-sm-offset-2">
-                                        <p>1uahduasdh adhadhuadha háu dhau hdau há hau dahdu ahh au háu ha dahu dha</p>
-                                        <small>Someone famous</small>
-                                    </div>
-                                </div>
-                            </blockquote>
-                        </div>
-
+                            }
+                        }
                     </div>
                     <!-- Bottom Carousel Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#quote-carousel" data-slide-to="0" class="active">
-                            <img class="img-responsive" src="~/img/student/anh-cute-001-1-1.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="1">
-                            <img class="img-responsive" src="~/img/student/anh-cute-001-1-1.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="2">
-                            <img class="img-responsive" src="~/img/student/anh-cute-001-1-1.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="3">
-                            <img class="img-responsive" src="~/img/student/anh-cute-001-1-1.jpg" alt="">
-                        </li>
-                        <li data-target="#quote-carousel" data-slide-to="4">
-                            <img class="img-responsive" src="~/img/student/anh-cute-001-1-1.jpg" alt="">
-                        </li>
+                        @{
+                            int index = 0;
+                        }
+                        @foreach (var item in feedbacks)
+                        {
+                            if (item.Equals(feedbacks.First()))
+                            {
+                                <li data-target="#quote-carousel" data-slide-to="@(index++)" class="active">
+                                    <img class="img-responsive" src="~/img/student/@item.Student.Avatar" alt="">
+                                </li>
+                            }else{
+                                <li data-target="#quote-carousel" data-slide-to="@(index++)">
+                                    <img class="img-responsive" src="~/img/student/@item.Student.Avatar" alt="">
+                                </li>
+                            }
+                        }
                     </ol>
 
                     <!-- Carousel Buttons Next/Prev -->
