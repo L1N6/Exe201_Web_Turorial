@@ -79,6 +79,7 @@ namespace EXE201_Tutor_Web.Controllers
 
         public async Task<IActionResult> Profile()
         {
+            TempData["LayoutType"] = "Layout_2";
             var loggedInUserEmail = HttpContext.Session.GetString("AccountValid");
             if (!string.IsNullOrEmpty(loggedInUserEmail))
             {
