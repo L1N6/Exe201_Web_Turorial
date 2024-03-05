@@ -1,0 +1,73 @@
+﻿@{
+    int id = 1; // Khai báo ở ngoài phạm vi của block if và else
+    id = TempData.ContainsKey("CourseraId") && Int32.TryParse(TempData["CourseraId"].ToString(), out int tempId) ? tempId : 1;
+    string bankDescription = TempData.ContainsKey("bankDescription") ? TempData["bankDescription"].ToString() : "";
+    string amount = TempData.ContainsKey("amount") ? TempData["amount"].ToString() : "";
+}
+<title>Online Payment</title>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center text-info">Thanh toán Online</h3>
+                </div>
+                <div class="card-body">
+                    <!-- MB Bank Image -->
+                    <div class="text-center mb-4">
+                        <img src="/img/payment/mbank.jpg" alt="MB Bank Logo" class="img-fluid">
+                    </div>
+                    <!-- Voucher Input -->
+                    <form method="post" action="/Payment/PayByFacebook">
+                        <input type="hidden" readonly value="@id" name="courseraId" />
+                        <input type="hidden" readonly value="@bankDescription" name="bankDescription" />
+
+                        <div class="form-group">
+                            <h5 class="card-title text-dark">Voucher:</h5>
+                            <input type="text" class="form-control  mb-3" name="voucher">
+                            <button type="submit" class="btn btn-primary btn-block">Áp dụng Voucher</button>
+                        </div>
+                    </form>
+                    <form method="post" action="/Payment/PayedReturn" onsubmit="return confirmPayment()">
+                        <!-- Amount -->
+                        <input type="hidden" readonly value="@bankDescription" name="bankDescription" />
+                        <input type="hidden" readonly value="@id" name="courseraId" />
+                        <input type="hidden" readonly value="@amount" name="amount" />
+
+                        <div class="form-group">
+                            <h5 class="card-title text-dark">Giá: <span class="text-info">@amount</span></h5>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="card-title text-dark">Nội dung chuyển tiền: <span class="text-info"> @bankDescription</span></h5>
+                            <h5 class="card-title text-danger">(Bắt buộc phải nhập đúng nội dung chuyển tiền)</h5>
+                        </div>
+                        <div class="form-group">
+                            <h5 class="card-title text-dark">Email</h5>
+                            <input type="email" class="form-control mb-3" name="email" required>
+                        </div>
+
+                        <!-- Button for Confirmation -->
+                        <button type="submit" class="btn btn-success btn-block" id="confirmPayment">Xác nhận thanh toán</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript to show confirmation message -->
+<script>
+    function confirmPayment() {
+        // Ask for confirmation using a dialog box
+        var confirmed = confirm('Bạn đã chuyển khoản thật sự chưa ?');
+
+        // If the user confirms, return true to proceed with form submission
+        if (confirmed) {
+            return true;
+        } else {
+            // If the user cancels, return false to prevent form submission
+            return false;
+        }
+    }
+</script>
+

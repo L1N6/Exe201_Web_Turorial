@@ -16,6 +16,7 @@ namespace EXE201_Tutor_Web.Entities
         public DbSet<OnMoocDetail> OnMoocDetails { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<OrderCoursera> OrderCourseras { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,8 +32,21 @@ namespace EXE201_Tutor_Web.Entities
             modelBuilder.Entity<OnMoocDetail>().HasKey(omd => omd.OnMoocDetailId); // Primary key for OnMoocDetail
             modelBuilder.Entity<Student>().HasKey(u => u.StudentId); // Primary key for Student
             modelBuilder.Entity<Teacher>().HasKey(u => u.TeacherId); // Primary key for Teacher
+            modelBuilder.Entity<OrderCoursera>().HasKey(u => u.OrderCourseraId); // Primary key for Teacher
 
             // Define relationships
+
+            // One-to-many relationship between Coursera and OrderCoursera
+            modelBuilder.Entity<Coursera>()
+                .HasMany(c => c.OrderCourseras)
+                .WithOne(oc => oc.Coursera)
+                .HasForeignKey(oc => oc.CourseraId);
+
+            // One-to-many relationship between Student and OrderCoursera
+            modelBuilder.Entity<Student>()
+                .HasMany(c => c.OrderCoursera)
+                .WithOne(oc => oc.Student)
+                .HasForeignKey(oc => oc.StudentId);
 
             // One-to-many relationship between Student and OnCourse
             modelBuilder.Entity<Student>()

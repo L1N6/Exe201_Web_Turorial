@@ -16,6 +16,7 @@ namespace EXE201_Tutor_Web.Entities
         public string? Address { get; set; }
         public string? Avatar { get; set; }
         public virtual ICollection<OnCoursera>? OnCoursera { get; set; }
+        public virtual ICollection<OrderCoursera>? OrderCoursera { get; set; }
     }
 
     public class StudentFilterDto

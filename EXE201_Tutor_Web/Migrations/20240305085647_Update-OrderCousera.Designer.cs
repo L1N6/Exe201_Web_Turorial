@@ -3,6 +3,7 @@ using System;
 using EXE201_Tutor_Web.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EXE201_Tutor_Web.Migrations
 {
     [DbContext(typeof(EXE_DataBaseContext))]
-    partial class EXE_DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240305085647_Update-OrderCousera")]
+    partial class UpdateOrderCousera
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -289,12 +291,6 @@ namespace EXE201_Tutor_Web.Migrations
 
                     b.Property<DateTime?>("DateAccepted")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<double>("Money")
-                        .HasColumnType("double");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext");

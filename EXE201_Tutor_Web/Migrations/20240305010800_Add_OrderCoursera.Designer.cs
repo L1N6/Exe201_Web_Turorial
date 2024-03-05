@@ -3,6 +3,7 @@ using System;
 using EXE201_Tutor_Web.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EXE201_Tutor_Web.Migrations
 {
     [DbContext(typeof(EXE_DataBaseContext))]
-    partial class EXE_DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240305010800_Add_OrderCoursera")]
+    partial class Add_OrderCoursera
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -284,17 +286,8 @@ namespace EXE201_Tutor_Web.Migrations
                     b.Property<string>("BankNumber")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("CourseraId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("DateAccepted")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<double>("Money")
-                        .HasColumnType("double");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("longtext");
@@ -306,8 +299,6 @@ namespace EXE201_Tutor_Web.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("OrderCourseraId");
-
-                    b.HasIndex("CourseraId");
 
                     b.HasIndex("StudentId");
 
@@ -478,19 +469,11 @@ namespace EXE201_Tutor_Web.Migrations
 
             modelBuilder.Entity("EXE201_Tutor_Web.Entities.OrderCoursera", b =>
                 {
-                    b.HasOne("EXE201_Tutor_Web.Entities.Coursera", "Coursera")
-                        .WithMany("OrderCourseras")
-                        .HasForeignKey("CourseraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("EXE201_Tutor_Web.Entities.Student", "Student")
                         .WithMany("OrderCoursera")
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Coursera");
 
                     b.Navigation("Student");
                 });
@@ -500,8 +483,6 @@ namespace EXE201_Tutor_Web.Migrations
                     b.Navigation("CourseraDetails");
 
                     b.Navigation("OnCoursera");
-
-                    b.Navigation("OrderCourseras");
                 });
 
             modelBuilder.Entity("EXE201_Tutor_Web.Entities.CourseraDetail", b =>
