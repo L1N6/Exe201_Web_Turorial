@@ -17,6 +17,7 @@ namespace EXE201_Tutor_Web.Entities
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<OrderCoursera> OrderCourseras { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
