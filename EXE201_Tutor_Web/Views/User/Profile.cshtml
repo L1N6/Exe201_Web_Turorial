@@ -1,4 +1,5 @@
-﻿<style>
+﻿@using EXE201_Tutor_Web.Entities
+<style>
     .ellipse {
         position: absolute;
         width: calc(358 * var(--rpx));
@@ -312,7 +313,14 @@
 
 @model EXE201_Tutor_Web.Entities.Student
 
+@{
+    List<OnCoursera> onCourseras = new List<OnCoursera>(); 
 
+    if (TempData.ContainsKey("ListOnCoursera"))
+    {
+        onCourseras = TempData["ListOnCoursera"] as List<OnCoursera>;
+    }
+}
 <div class="ellipse">
     <img src="~/img/student/@Model.Avatar" />
 </div>
@@ -337,47 +345,19 @@
 <span class="thanh-tuu">THÀNH TỰU</span>
 <div class="rectangle-5" id="rectangle-5">
     <div class="container-flex-row-cb">
-        <div class="flex-row-cb">
-            <a href="#" class="rectangle-6">
-                <img src="~/img/course/english.png" />
-            </a>
-            <div class="rectangle-7">
-                <span class="time">Time: 07/Th06 - 07/Th07</span>
+        @foreach (var item in onCourseras)
+        {
+            <div class="flex-row-cb">
+                <a href="@Url.Action("UniversityEnglishCourseSchedule", "Course", new { courseraId = @item.Coursera.CourseraId })" class="rectangle-6">
+                    <img src="~/img/course/@item.Coursera.Image" />
+                </a>
+                <div class="rectangle-7">
+                    <span class="time">Thời gian: @item.Coursera.TotalDate Tuần</span>
+                </div>
+                <span class="ngu-phap-tieng-anh-co-ban">@item.Coursera.Name</span>
+                <div class="line"></div>
             </div>
-            <span class="ngu-phap-tieng-anh-co-ban">Ngữ Pháp <br />Tiếng Anh Cơ Bản</span>
-            <div class="line"></div>
-        </div>
-        <div class="flex-row-cb">
-            <a href="#" class="rectangle-6">
-                <img src="~/img/course/english.png" />
-
-            </a>
-            <div class="rectangle-7">
-                <span class="time">Time: 07/Th06 - 07/Th07</span>
-            </div>
-            <span class="ngu-phap-tieng-anh-co-ban">Ngữ Pháp <br />Tiếng Anh Cơ Bản</span>
-            <div class="line"></div>    
-        </div>
-        <div class="flex-row-cb">
-            <a href="#" class="rectangle-6">
-                <img src="~/img/course/english.png" />
-            </a>
-            <div class="rectangle-7">
-                <span class="time">Time: 07/Th06 - 07/Th07</span>
-            </div>
-            <span class="ngu-phap-tieng-anh-co-ban">Ngữ Pháp <br />Tiếng Anh Cơ Bản</span>
-            <div class="line"></div>
-        </div>
-        <div class="flex-row-cb">
-            <a href="#" class="rectangle-6">
-                <img src="~/img/course/english.png" />
-            </a>
-            <div class="rectangle-7">
-                <span class="time">Time: 07/Th06 - 07/Th07</span>
-            </div>
-            <span class="ngu-phap-tieng-anh-co-ban">Ngữ Pháp <br />Tiếng Anh Cơ Bản</span>
-            <div class="line"></div>
-        </div>
+        }
     </div>
 </div>
 <script>
@@ -387,7 +367,7 @@
         var line = document.querySelector(mainSelector);
 
         var numberOfItems = elements.length;
-        var lineLength = heightPerItem * (numberOfItems);
+        var lineLength = (heightPerItem * (numberOfItems)) + 500;
 
         line.style.height = "calc(" + lineLength + " * var(--rpx))";
     }

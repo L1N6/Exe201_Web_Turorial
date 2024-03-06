@@ -84,9 +84,16 @@ namespace EXE201_Tutor_Web.Controllers
             if (!string.IsNullOrEmpty(loggedInUserEmail))
             {
                 // Truy vấn thông tin người dùng từ cơ sở dữ liệu
-                var user = await _context.Students.FirstOrDefaultAsync(s => s.Email == loggedInUserEmail);
+                var user = await _context.Students
+                    .Include(s => s.OnCoursera)
+                    .FirstOrDefaultAsync(s => s.Email == loggedInUserEmail);
                 if (user != null)
                 {
+                    List<OnCoursera> onCourseras = _context.OnCoursera
+                        .Include(on => on.Coursera)
+                        .Where(oc => oc.StudentId == user.StudentId)
+                        .ToList();
+                    TempData["ListOnCoursera"] = onCourseras;
                     return View("Profile", user);
                 }
                 else

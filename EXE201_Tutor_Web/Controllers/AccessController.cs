@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using EXE201_Tutor_Web_API.Services.MailService;
+using EXE201_Tutor_Web.Models;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -15,11 +17,13 @@ namespace EXE201_Tutor_Web.Controllers
 
         public readonly EXE_DataBaseContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly ISendMailService _mailService;
 
-        public AccessController(EXE_DataBaseContext context, IWebHostEnvironment hostingEnvironment)
+        public AccessController(EXE_DataBaseContext context, IWebHostEnvironment hostingEnvironment, ISendMailService mailService)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
+            _mailService = mailService;
         }
 
         public IActionResult SignIn()
@@ -93,6 +97,8 @@ namespace EXE201_Tutor_Web.Controllers
 
         public IActionResult SignInProcess(string email, string password)
         {
+            email = email.Trim();
+            password = password.Trim();
             Student student = _context.Students.Where(s => s.Email.Contains(email) && s.Password.Contains(password)).FirstOrDefault();
             if (student == null)
             {
@@ -116,15 +122,41 @@ namespace EXE201_Tutor_Web.Controllers
         }
         public IActionResult ForgotPasswordProcess(string email)
         {
-            Student studentCheck = _context.Students.FirstOrDefault(s => s.Email.Equals(email));
-            if (studentCheck == null)
+            try
             {
-                TempData["ErrorFPwdMessage"] = "Email này chưa được đăng kí. Vui lòng kiểm tra lại!";
-            }
+                Student studentCheck = _context.Students.FirstOrDefault(s => s.Email.Equals(email));
 
-            string newRandomPassword = GenerateRandomString(5);
-            return View();
+                if (studentCheck == null)
+                {
+                    TempData["FPwdMessage"] = "Email này chưa được đăng ký. Vui lòng kiểm tra lại!";
+                    return RedirectToAction("ForgotPassword");
+                }
+
+                string newRandomPassword = GenerateRandomString(5);
+                studentCheck.Password = newRandomPassword;
+
+                _context.Students.Update(studentCheck);
+                _context.SaveChanges();
+
+                MailContent content = new MailContent
+                {
+                    To = email,
+                    Subject = "Reset Password",
+                    Body = GenerateEmailBody(newRandomPassword)
+                };
+
+                _mailService.SendMail(content);
+                TempData["FPwdMessage"] = "Vui lòng kiểm tra email để lấy mật khẩu mới.";
+                return RedirectToAction("SignIn", "Access");
+            }
+            catch (Exception ex)
+            {
+
+                TempData["FPwdMessage"] = "Đã xảy ra lỗi khi cập nhật mật khẩu. Vui lòng thử lại sau.";
+                return RedirectToAction("ForgotPassword");
+            }
         }
+
         public string GenerateRandomString(int length)
         {
             Random random = new Random();
@@ -132,6 +164,20 @@ namespace EXE201_Tutor_Web.Controllers
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+        private string GenerateEmailBody(string newRandomPassword)
+        {
+            string body = $@"
+            <p><strong>Xin chào,</strong></p>
+            <p>Bạn đã yêu cầu đặt lại mật khẩu cho tài khoản của mình.</p>
+            <p>Mật khẩu mới của bạn là: <strong>{newRandomPassword}</strong></p>
+            <p>Vui lòng đăng nhập bằng mật khẩu mới này và đổi mật khẩu sau khi đăng nhập thành công.</p>
+            <p>Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email này.</p>
+            <p>Xin cảm ơn và chúc bạn một ngày tốt lành!</p>
+            <p>Trân trọng,</p>";
+
+            return body;
+        }
+
         public IActionResult ChangePassword()
         {
             return View();
