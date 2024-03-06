@@ -161,7 +161,7 @@ namespace EXE201_Tutor_Web.Controllers
 
             var email = authenticateResult.Principal.FindFirst(ClaimTypes.Email)?.Value;
             var name = authenticateResult.Principal.FindFirst(ClaimTypes.Name)?.Value;
-            var newUser = new Student { Email = email, Name = name, UserName = "string", Password = "string", Address = "string", Avatar = "string" };
+            var newUser = new Student { Email = email, Name = name };
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             using (HttpClient client = new HttpClient())

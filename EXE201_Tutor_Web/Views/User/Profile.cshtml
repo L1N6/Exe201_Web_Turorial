@@ -299,7 +299,7 @@
     img {
         width: 100%;
         height: 100%;
-        border-radius: 88px;
+        border-radius: 50%;
         position: relative;
         object-fit: cover;
     }
@@ -309,31 +309,28 @@
         margin-bottom: calc(30 * var(--rpx));
     }
 </style>
+
+@model EXE201_Tutor_Web.Entities.Student
+
+
 <div class="ellipse">
-    <img src="../img/header/avatar.jpg" />
+    <img src="~/img/student/@Model.Avatar" />
 </div>
+
 <div class="flex-row-cc">
     <div class="group-information">
         <span class="ho-va-ten">Họ và tên</span>
-        <input class="rectangle-div"/>
+        <input id="nameInput" class="rectangle-div" value="@((Model != null) ? Model.Name : "")" readonly />
     </div>
     <div class="group-information">
-        <span class="ho-va-ten">Họ và tên</span>
-        <input class="rectangle-div"/>
+        <span class="ho-va-ten">Email</span>
+        <input id="emailInput" class="rectangle-div" value="@((Model != null) ? Model.Email : "")" readonly />
     </div>
     <div class="group-information">
-        <span class="ho-va-ten">Họ và tên</span>
-        <input class="rectangle-div"/>
+        <span class="ho-va-ten">Địa chỉ</span>
+        <input id="addressInput" class="rectangle-div" value="@((Model != null) ? Model.Address : "")" readonly />
     </div>
-    <div class="group-information">
-        <span class="ho-va-ten">Họ và tên</span>
-        <input class="rectangle-div" />
-    </div>
-    <div class="group-information">
-        <span class="ho-va-ten">Họ và tên</span>
-        <input class="rectangle-div" />
-    </div>
-    <button class="rectangle-button">
+    <button id="editButton" class="rectangle-button" onclick="toggleEdit()">
         <span class="change-span">Thay đổi</span>
     </button>
 </div>
@@ -414,6 +411,60 @@
         }
     });
 
+    function toggleEdit() {
+        var nameInput = document.getElementById('nameInput');
+        var emailInput = document.getElementById('emailInput');
+        var addressInput = document.getElementById('addressInput');
+        var editButton = document.getElementById('editButton');
+
+        if (nameInput.readOnly) {
+            // Nếu trường đang ở chế độ chỉ đọc, chuyển sang chế độ chỉnh sửa
+            nameInput.readOnly = false;
+            emailInput.readOnly = false;
+            addressInput.readOnly = false;
+            editButton.innerHTML = '<span class="change-span">Lưu</span>';
+        } else {
+            // Nếu trường đang ở chế độ chỉnh sửa, kiểm tra dữ liệu và thực hiện cập nhật
+            var newName = nameInput.value.trim();
+            var newEmail = emailInput.value.trim();
+            var newAddress = addressInput.value.trim();
+
+            if (newName === "" || newEmail === "" || newAddress === "") {
+                alert("Vui lòng nhập đầy đủ thông tin.");
+                return;
+            }
+
+            // Gửi dữ liệu cập nhật đến controller và thực hiện cập nhật trong cơ sở dữ liệu
+            fetch('/User/UpdateProfile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Name: newName,
+                    Email: newEmail,
+                    Address: newAddress
+                })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Cập nhật thông tin người dùng thành công.");
+                        location.reload(); // Tải lại trang để hiển thị thông tin mới
+                    } else {
+                        alert("Có lỗi xảy ra khi cập nhật thông tin người dùng.");
+                    }
+                })
+                .catch(error => {
+                    alert("Có lỗi xảy ra khi gửi dữ liệu.");
+                });
+
+            // Chuyển trở lại chế độ chỉ đọc sau khi đã cập nhật thành công
+            nameInput.readOnly = true;
+            emailInput.readOnly = true;
+            addressInput.readOnly = true;
+            editButton.innerHTML = '<span class="change-span">Thay đổi</span>';
+        }
+    }
 </script>
 
 

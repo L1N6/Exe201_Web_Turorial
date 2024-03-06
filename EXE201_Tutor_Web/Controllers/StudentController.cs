@@ -2,6 +2,7 @@
 using EXE201_Tutor_Web.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EXE201_Tutor_Web.Controllers
 {
@@ -20,5 +21,7 @@ namespace EXE201_Tutor_Web.Controllers
             // You can return a view confirming successful registration
             return View();
         }
+
+        
     }
 }
